@@ -1,21 +1,32 @@
 package com.example.propertymaintenance;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.os.Vibrator;
 
 public class MainActivity extends AppCompatActivity {
     GridView gridView;
+    private Vibrator hapticFeedback;
+
+    static final int HOUSING_ID = 666;
+    static final int FIX_ID = 777;
+    static final int BULLETIN_ID = 888;
+    static final int CALENDAR_ID = 999;
+
     static final String[] BUTTONLABELS = new String[] {
             "Taloyhtiö info", "Vikailmoitus","Ilmoitustaulu", "Varaukset" };
 
@@ -24,8 +35,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Toolbar toolbar = (Toolbar) findViewById(R.layout.toolbar);
+        //setSupportActionBar(toolbar);
+
+        hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+
         gridView = (GridView) findViewById(R.id.gridview1);
         gridView.setAdapter(new ImageAdapter(this, BUTTONLABELS));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+
+                switch (position){
+                    case 0:
+                        hapticFeedback.vibrate(50);
+                        Intent intentHousing = new Intent(getBaseContext(), intentTest.class);
+                        startActivityForResult(intentHousing, HOUSING_ID);
+                            break;
+                    case 1:
+                        hapticFeedback.vibrate(50);
+                        Intent intentFix = new Intent(getBaseContext(), intentTest.class);
+                        startActivityForResult(intentFix, FIX_ID);
+                            break;
+                    case 2:
+                        hapticFeedback.vibrate(50);
+                        Intent intentBulletin = new Intent(getBaseContext(), intentTest.class);
+                        startActivityForResult(intentBulletin, BULLETIN_ID);
+                            break;
+                    case 3:
+                        hapticFeedback.vibrate(50);
+                        Intent intentCalendar = new Intent(getBaseContext(), intentTest.class);
+                        startActivityForResult(intentCalendar, CALENDAR_ID);
+                            break;
+
+                    default:
+                            break;
+                }
+
+            }
+        });
 
     }
 
@@ -33,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     // TOOLBAR //
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.toolbar, menu);
+        getMenuInflater().inflate(R.menu.mainmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -77,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (convertView == null) {
 
-                gridView = new View(context);
+                //gridView = new View(context); /// ??? tarvitaanko?
 
                 // get layout from customgridview.xml
                 gridView = inflater.inflate(R.layout.customgridview, null);
@@ -94,39 +142,23 @@ public class MainActivity extends AppCompatActivity {
                 String mobile = mobileValues[position];
 
 
-                if (position == 0)
-                {
-                    imageView.setImageResource(R.drawable.taloyhtio);
+                switch (position){
+                    case 0:
+                        imageView.setImageResource(R.drawable.taloyhtio);
+                        break;
+                    case 1:
+                        imageView.setImageResource(R.drawable.vikailmoitus);
+                        break;
+                    case 2:
+                        imageView.setImageResource(R.drawable.ilmoitus);
+                        break;
+                    case 3:
+                        imageView.setImageResource(R.drawable.kalenteri);
+                        break;
+                    default:
+                        imageView.setImageResource(R.mipmap.ic_launcher);
+                        break;
                 }
-                else if (position == 1)
-                {
-                    imageView.setImageResource(R.drawable.vikailmoitus);
-                }
-                else if(position == 2)
-                {
-                    imageView.setImageResource(R.drawable.ilmoitus);
-                }
-                else if(position == 3)
-                {
-                    imageView.setImageResource(R.drawable.kalenteri);
-                }
-                else
-                {
-                    imageView.setImageResource(R.mipmap.ic_launcher);
-                }
-
-                /*
-                if (mobile.equals("Taloyhtiö info")) {
-                    imageView.setImageResource(R.mipmap.ic_launcher);
-                } else if (mobile.equals("Vikailmoitus")) {
-                    imageView.setImageResource(R.mipmap.ic_launcher_round);
-                } else if (mobile.equals("Ilmoitustaulu")) {
-                    imageView.setImageResource(R.mipmap.ic_launcher_round);
-                } else {
-                    imageView.setImageResource(R.mipmap.ic_launcher);
-                }
-
-                 */
 
             } else {
                 gridView = (View) convertView;
@@ -154,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    //IMAGE ADAPTER//
 
 }
 

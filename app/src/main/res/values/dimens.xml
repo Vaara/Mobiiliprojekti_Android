@@ -8,7 +8,7 @@
     <dimen name="grid_icon_size">120dp</dimen>
     <dimen name="grid_text_size">16dp</dimen>
 
-    <dimen name="grid_vertical_spacing">30dp</dimen>
+    <dimen name="grid_vertical_spacing">20dp</dimen>
 
 </resources>
 

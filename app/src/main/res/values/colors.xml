@@ -9,4 +9,9 @@
     <color name="iconBackground">#A6C0F3</color>
     <color name="iconBorder">#89A7E1</color>
     <color name="iconLabel">#FFFFFF</color>
+
+    <color name="iconBackgroundOnClick">#FAD28C</color>
+    <color name="iconBorderOnClick">#7291CD</color>
+    <color name="iconLabelOnClick">#000000</color>
+
 </resources>
