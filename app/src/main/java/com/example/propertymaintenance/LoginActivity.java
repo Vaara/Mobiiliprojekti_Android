@@ -2,13 +2,29 @@ package com.example.propertymaintenance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.preference.PreferenceManager.*;
 
@@ -20,8 +36,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String USER_ID = "userId";
     public static final String USER_LEVEL = "userLevel";
-    public static final String USER_NAME = "userName";
+    public static final String USER_FULL_NAME = "userFullName";
+    public static final String USER_HOUSING_COOPERATIVE_ID = "userHousingCooperativeId";
+    public static final String USER_PROPERTY_MAINTENANCE_ID = "userPropertyMaintenanceId";
 
+    public static Integer userIdResponse;
+    public static Integer userLevelResponse;
+    public static String userFullNameResponse;
+    public static Integer userHousingCooperativeIdResponse;
+    public static Integer userPropertyMaintenanceIdResponse;
+
+    EditText edUsername;
+    EditText edPassword;
     Button btnLogin;
 
     @Override
@@ -29,6 +55,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        edUsername = findViewById(R.id.etUsername);
+        edPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
 
@@ -43,30 +71,64 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void checkLoginCredentials() {
 
-        // If loginOk == true
-        if (true) {
-            storeUserToSharedPrefs();
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Logging in...");
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        final String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/login";
+
+        JSONObject loginUser = new JSONObject();
+        try {
+            loginUser.put("username", "test1");
+            loginUser.put("password", "123");
+            //loginUser.put("username", edUsername.getText().toString());
+            //loginUser.put("password", edPassword.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        // If response is "Missing username or password"
-            // See above
-        // Else
-            // DB query 1&2
-            // If response is 404, user not found
-            // Else response is res.json({ userId, userLevel, userFullName });
 
-            //catch query 1&2
-                // response is res.sendStatus(500);
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, loginUser,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+                        try {
+                            userIdResponse = response.getInt("userId");
+                            userLevelResponse = response.optInt("userLevel");
+                            userFullNameResponse = response.optString("userFullName");
+                            userHousingCooperativeIdResponse = response.optInt("userHousingCooperativeId");
+                            userPropertyMaintenanceIdResponse = response.optInt("userPropertyMaintenanceId");
 
+                            storeUserToSharedPrefs();
 
-        else {
-            Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show();
-        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+        queue.add(getRequest);
     }
 
     public void storeUserToSharedPrefs() {
-        editor.putInt(USER_ID, 1234);
-        editor.putInt(USER_LEVEL, 0);
-        editor.putString(USER_NAME, "Test User");
+        editor.putInt(USER_ID, userIdResponse);
+        editor.putInt(USER_LEVEL, userLevelResponse);
+        editor.putString(USER_FULL_NAME, userFullNameResponse);
+
+        if (userIdResponse == 0) {
+            editor.putInt(USER_HOUSING_COOPERATIVE_ID, userHousingCooperativeIdResponse);
+        }
+
+        else {
+            editor.putInt(USER_PROPERTY_MAINTENANCE_ID, userPropertyMaintenanceIdResponse);
+        }
 
         // If successfully stores data to SharesPreferences
         if (editor.commit()) {
@@ -80,9 +142,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void removeUserFromSharedPrefs() {
+        Integer loggedInUserId = sharedPreferences.getInt("USER_ID", 99);
+
         editor.remove(USER_ID);
         editor.remove(USER_LEVEL);
-        editor.remove(USER_NAME);
+        editor.remove(USER_FULL_NAME);
+
+        if (loggedInUserId == 0) {
+            editor.remove(USER_HOUSING_COOPERATIVE_ID);
+        }
+
+        else if (loggedInUserId == 1) {
+            editor.remove(USER_PROPERTY_MAINTENANCE_ID);
+        }
 
         if (!editor.commit()) {
             Log.d("Login", "Unable to remove userdata from SharedPreferences");
