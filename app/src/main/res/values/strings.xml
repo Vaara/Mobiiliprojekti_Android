@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PropertyMaintenance</string>
+    <string name="toast_login_ok_fi">Tervetuloa</string>
+    <string name="toast_login_failed_fi">Kirjautuminen epäonnistui</string>
+    <string name="progress_dialog_login_fi">Kirjaudutaan sisään...</string>
+    <string name="toast_store_user_failed_fi">Käyttäjätietojen tallennus epäonnistui</string>
+    <string name="tv_login_title_fi">Eikka</string>
+    <string name="et_login_username_hint_fi">Käyttäjätunnus</string>
+    <string name="et_login_password_hint_fi">Salasana</string>
+    <string name="btn_login_fi">Kirjaudu</string>
+    <string name="tv_login_forgot_password_fi">Olen unohtanut salasanani</string>
 </resources>

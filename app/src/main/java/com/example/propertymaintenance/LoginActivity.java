@@ -42,18 +42,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String USER_ID = "userId";
-    public static final String USER_LEVEL = "userLevel";
-    public static final String USER_FULL_NAME = "userFullName";
-    public static final String USER_HOUSING_COOPERATIVE_ID = "userHousingCooperativeId";
-    public static final String USER_PROPERTY_MAINTENANCE_ID = "userPropertyMaintenanceId";
+    private static final String SHARED_PREFS = "sharedPrefs";
+    private static final String USER_ID = "userId";
+    private static final String USER_LEVEL = "userLevel";
+    private static final String USER_FULL_NAME = "userFullName";
+    private static final String USER_HOUSING_COOPERATIVE_ID = "userHousingCooperativeId";
+    private static final String USER_PROPERTY_MAINTENANCE_ID = "userPropertyMaintenanceId";
 
-    public static Integer userIdResponse;
-    public static Integer userLevelResponse;
-    public static String userFullNameResponse;
-    public static Integer userHousingCooperativeIdResponse;
-    public static Integer userPropertyMaintenanceIdResponse;
+    private static Integer userIdResponse;
+    private static Integer userLevelResponse;
+    private static String userFullNameResponse;
+    private static Integer userHousingCooperativeIdResponse;
+    private static Integer userPropertyMaintenanceIdResponse;
 
     EditText edUsername;
     EditText edPassword;
@@ -82,23 +82,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void checkLoginCredentials() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Logging in...");
+        progressDialog.setMessage(getString(R.string.progress_dialog_login_fi));
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(this);
         final String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/login";
 
-        JSONObject loginUser = new JSONObject();
+        JSONObject loginCredentials = new JSONObject();
         try {
-            //loginUser.put("username", "test1");
-            //loginUser.put("password", "123");
-            loginUser.put("username", edUsername.getText().toString());
-            loginUser.put("password", edPassword.getText().toString());
+            //loginCredentials.put("username", "test1");
+            //loginCredentials.put("password", "123");
+            loginCredentials.put("username", edUsername.getText().toString());
+            loginCredentials.put("password", edPassword.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, loginUser,
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, loginCredentials,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -111,9 +111,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             userPropertyMaintenanceIdResponse = response.optInt("userPropertyMaintenanceId");
 
                             storeUserToSharedPrefs();
+                            Toast.makeText(LoginActivity.this, R.string.toast_login_ok_fi, Toast.LENGTH_LONG).show();
                             login();
-                            //Toast.makeText(LoginActivity.this, userFullNameResponse.toString(), Toast.LENGTH_LONG).show();
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -123,8 +122,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_LONG).show();
-                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, R.string.toast_login_failed_fi, Toast.LENGTH_LONG).show();
+                        Log.d("Login", "Error in LoginRequest");
                     }
                 }
         );
@@ -166,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putInt(USER_HOUSING_COOPERATIVE_ID, userHousingCooperativeIdResponse);
         }
 
-        else {
+        else if (userIdResponse == 1) {
             editor.putInt(USER_PROPERTY_MAINTENANCE_ID, userPropertyMaintenanceIdResponse);
         }
 
@@ -176,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         else {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.toast_store_user_failed_fi, Toast.LENGTH_LONG).show();
             Log.d("Login", "Unable to store userdata to SharedPreferences");
         }
     }
