@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         RequestQueue queue = Volley.newRequestQueue(this);
         final String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/login";
-        //?datatype=json
 
         JSONObject loginUser = new JSONObject();
         try {
@@ -99,15 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("username", "test1");
-        params.put("password", "123");
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        //new JSONObject(params)
-        //loginUser
-        //serviceAdvice
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, loginUser,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -117,12 +107,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             userIdResponse = response.getInt("userId");
                             userLevelResponse = response.optInt("userLevel");
                             userFullNameResponse = response.optString("userFullName");
-                            //userHousingCooperativeIdResponse = response.optInt("userHousingCooperativeId");
-                            //userPropertyMaintenanceIdResponse = response.optInt("userPropertyMaintenanceId");
+                            userHousingCooperativeIdResponse = response.optInt("userHousingCooperativeId");
+                            userPropertyMaintenanceIdResponse = response.optInt("userPropertyMaintenanceId");
 
-                            //storeUserToSharedPrefs();
-                            //login();
-                            Toast.makeText(LoginActivity.this, userFullNameResponse.toString(), Toast.LENGTH_LONG).show();
+                            storeUserToSharedPrefs();
+                            login();
+                            //Toast.makeText(LoginActivity.this, userFullNameResponse.toString(), Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -139,168 +129,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
         );
         queue.add(getRequest);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        CustomRequest jsObjRequest = new CustomRequest(Request.Method.GET, url, params, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                progressDialog.dismiss();
-                try {
-                    userIdResponse = response.getInt("userId");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Log.e("LOG_VOLLEY", error.toString());
-                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_LONG).show();
-                //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }
-        );
-                requestQueue.add(jsObjRequest);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
- */
-
-
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        try {
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            String URL = "http://ec2-18-234-159-189.compute-1.amazonaws.com/login";
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("username", "test1");
-            jsonBody.put("password", "123");
-            final String mRequestBody = jsonBody.toString();
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Log.i("LOG_VOLLEY", response);
-                    progressDialog.dismiss();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("LOG_VOLLEY", error.toString());
-                    progressDialog.dismiss();
-                }
-            }) {
-                @Override
-                public String getBodyContentType() {
-                    return "application/json; charset=utf-8";
-                }
-
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-
-                    try {
-                        return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
-                        return null;
-                    }
-                }
-
-                @Override
-                protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                    String responseString = "";
-                    if (response != null) {
-                        responseString = String.valueOf(response.statusCode);
-                    }
-
-                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-                }
-            };
-
-            requestQueue.add(stringRequest);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-////////////////////////////////////////////////////////////////////////////////////////////////////
-*/
-
-
-
-/*
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        try {
-                            JSONObject obj = new JSONObject(response);
-
-                            if (!obj.getBoolean("error")) {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-
-                                userIdResponse = obj.getInt("userId");
-                                userLevelResponse = obj.optInt("userLevel");
-                                userFullNameResponse = obj.optString("userFullName");
-                                userHousingCooperativeIdResponse = obj.optInt("userHousingCooperativeId");
-                                userPropertyMaintenanceIdResponse = obj.optInt("userPropertyMaintenanceId");
-
-                                storeUserToSharedPrefs();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", "test1");
-                params.put("password", "123");
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
- */
-
-
-
-    }
-
-    public void getUserFromSharedPrefs() {
-        Integer userId = sharedPreferences.getInt(USER_ID, 99);
-        Integer userLevel = sharedPreferences.getInt(USER_LEVEL, 99);
-        String userFullName = sharedPreferences.getString(USER_FULL_NAME, "");
-        Integer userHousingCooperativeId;
-        Integer userPropertyMaintenanceId;
-
-        if (userId == 0) {
-            userHousingCooperativeId = sharedPreferences.getInt(USER_HOUSING_COOPERATIVE_ID, 99);
-        }
-
-        else {
-            userPropertyMaintenanceId = sharedPreferences.getInt(USER_PROPERTY_MAINTENANCE_ID, 99);
-        }
     }
 
     public Integer getUserIdFromSharedPrefs() {
