@@ -39,16 +39,6 @@ import static android.preference.PreferenceManager.*;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-
-    private static final String SHARED_PREFS = "sharedPrefs";
-    private static final String USER_ID = "userId";
-    private static final String USER_LEVEL = "userLevel";
-    private static final String USER_FULL_NAME = "userFullName";
-    private static final String USER_HOUSING_COOPERATIVE_ID = "userHousingCooperativeId";
-    private static final String USER_PROPERTY_MAINTENANCE_ID = "userPropertyMaintenanceId";
-
     private static Integer userIdResponse;
     private static Integer userLevelResponse;
     private static String userFullNameResponse;
@@ -68,9 +58,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
+    }
 
-        sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkSession();
+    }
+
+    private void checkSession() {
+        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+        Integer userId = sessionManagement.getSession();
+
+        if (userId != -1) {
+            moveToMainActivity();
+        }
+
+        else {
+            // Do nothing
+        }
     }
 
     @Override
@@ -90,8 +96,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         JSONObject loginCredentials = new JSONObject();
         try {
-            //loginCredentials.put("username", "test1");
-            //loginCredentials.put("password", "123");
             loginCredentials.put("username", edUsername.getText().toString());
             loginCredentials.put("password", edPassword.getText().toString());
         } catch (JSONException e) {
@@ -110,7 +114,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             userHousingCooperativeIdResponse = response.optInt("userHousingCooperativeId");
                             userPropertyMaintenanceIdResponse = response.optInt("userPropertyMaintenanceId");
 
-                            storeUserToSharedPrefs();
                             Toast.makeText(LoginActivity.this, R.string.toast_login_ok_fi, Toast.LENGTH_LONG).show();
                             login();
                         } catch (JSONException e) {
@@ -130,84 +133,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         queue.add(getRequest);
     }
 
-    public Integer getUserIdFromSharedPrefs() {
-        Integer userId = sharedPreferences.getInt(USER_ID, 99);
-        return userId;
+    public static Integer getUserIdResponse() {
+        return userIdResponse;
     }
 
-    public Integer getUserLevelFromSharedPrefs() {
-        Integer userLevel = sharedPreferences.getInt(USER_LEVEL, 99);
-        return userLevel;
+    public static Integer getUserLevelResponse() {
+        return userLevelResponse;
     }
 
-    public String getUserFullNameFromSharedPrefs() {
-        String userFullName = sharedPreferences.getString(USER_FULL_NAME, "");
-        return userFullName;
+    public static String getUserFullNameResponse() {
+        return userFullNameResponse;
     }
 
-    public Integer getUserHousingCooperativeIdFromSharedPrefs() {
-        Integer userHousingCooperativeId = sharedPreferences.getInt(USER_HOUSING_COOPERATIVE_ID, 99);
-        return userHousingCooperativeId;
-
+    public static Integer getUserHousingCooperativeIdResponse() {
+        return userHousingCooperativeIdResponse;
     }
 
-    public Integer getUserPropertyMaintenanceIDFromSharedPrefs() {
-        Integer userPropertyMaintenanceId = sharedPreferences.getInt(USER_PROPERTY_MAINTENANCE_ID, 99);
-        return userPropertyMaintenanceId;
-    }
-
-    public void storeUserToSharedPrefs() {
-        editor.putInt(USER_ID, userIdResponse);
-        editor.putInt(USER_LEVEL, userLevelResponse);
-        editor.putString(USER_FULL_NAME, userFullNameResponse);
-
-        if (userIdResponse == 0) {
-            editor.putInt(USER_HOUSING_COOPERATIVE_ID, userHousingCooperativeIdResponse);
-        }
-
-        else if (userIdResponse == 1) {
-            editor.putInt(USER_PROPERTY_MAINTENANCE_ID, userPropertyMaintenanceIdResponse);
-        }
-
-        // If successfully stores data to SharesPreferences
-        if (editor.commit()) {
-            login();
-        }
-
-        else {
-            Toast.makeText(this, R.string.toast_store_user_failed_fi, Toast.LENGTH_LONG).show();
-            Log.d("Login", "Unable to store userdata to SharedPreferences");
-        }
-    }
-
-    public void removeUserFromSharedPrefs() {
-        Integer loggedInUserId = sharedPreferences.getInt("USER_ID", 99);
-
-        editor.remove(USER_ID);
-        editor.remove(USER_LEVEL);
-        editor.remove(USER_FULL_NAME);
-
-        if (loggedInUserId == 0) {
-            editor.remove(USER_HOUSING_COOPERATIVE_ID);
-        }
-
-        else if (loggedInUserId == 1) {
-            editor.remove(USER_PROPERTY_MAINTENANCE_ID);
-        }
-
-        if (!editor.commit()) {
-            Log.d("Login", "Unable to remove userdata from SharedPreferences");
-        }
+    public static Integer getUserPropertyMaintenanceIdResponse() {
+        return userPropertyMaintenanceIdResponse;
     }
 
     public void login() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        finish();  // Prevents users from coming back to this activity with backButton
+        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+        sessionManagement.saveSession(userIdResponse);
+        moveToMainActivity();
     }
 
-    public void logout() {
-        removeUserFromSharedPrefs();
-        // Show login screen?
+    public void moveToMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
