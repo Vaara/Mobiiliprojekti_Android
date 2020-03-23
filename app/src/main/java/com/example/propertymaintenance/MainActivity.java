@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         hapticFeedback.vibrate(50);
-                        Intent intentBulletin = new Intent(getBaseContext(), intentTest.class);
+                        Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
                         startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
                     case 3:
