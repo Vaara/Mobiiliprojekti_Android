@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="blueMAgenta">#5b39c6</color>
+    <!-- TOOLBAR -->
+    <color name="toolbarColorPrimary">#4663B8</color>
+    <color name="toolbarColorPrimaryDark">#20346C</color>
+    <color name="toolbarColorAccent">#FF00C8</color>
+
+    <!-- ACTIVITY -->
+    <color name="activityBackground">#CDCDC0</color>
+
+    <!-- GRIDVIEW -->
+
+        <!-- default -->
+        <color name="iconBackground">#B4BFE6</color>
+        <color name="iconBorder">#778CBA</color>
+        <color name="iconLabel">#FFFFFF</color>
+        <!-- on click -->
+        <color name="iconBackgroundOnClick">#FAD28C</color>
+        <color name="iconBorderOnClick">#6C99F1</color>
+        <color name="iconLabelOnClick">#000000</color>
+
+    <!-- ICON VECTOR COLORS -->
+    <color name="iconColorDark">#452A1D</color>
+    <color name="iconColorMidDark">#9E549F9F</color>
+    <color name="iconColorMidLight">#F89654</color>
+    <color name="iconColorLight">#FDFDF6</color>
+
+    <!--
+    <color name="iconColorDark">#2570C8</color>
+    <color name="iconColorMidDark">#5DB6E5 </color>
+    <color name="iconColorMidLight">#92E0FC</color>
+    <color name="iconColorLight">#ffffff</color>
+    -->
+
 </resources>

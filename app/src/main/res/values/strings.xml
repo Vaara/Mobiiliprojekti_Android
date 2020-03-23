@@ -1,12 +1,21 @@
 <resources>
-    <string name="app_name">PropertyMaintenance</string>
 
-    <string-array name="titles">
-        <item>Pelastussuunnitelma</item>
-        <item>Taloyhtiohallituksen tiedot</item>
-        <item>Taloyhtion jarjestyssaannot</item>
-        <item>Kiinteistohuollon yhteystiedot</item>
-        <item>Isannoinnin yhteystiedot</item>
-        <item>Jatehuollon yhteystiedot</item>
-    </string-array>
+    <string name="app_name">Eikka</string>
+    <string name="app_subtitle_asukas">Asukasportaali</string>
+    <string name="app_subtitle_kiinteisto">Kiinteistöhuolto</string>
+
+
+    <string name="toast_login_ok_fi">Tervetuloa</string>
+    <string name="toast_login_failed_fi">Kirjautuminen epäonnistui</string>
+    <string name="progress_dialog_login_fi">Kirjaudutaan sisään...</string>
+    <string name="toast_store_user_failed_fi">Käyttäjätietojen tallennus epäonnistui</string>
+    <string name="tv_login_title_fi">Eikka</string>
+    <string name="et_login_username_hint_fi">Käyttäjätunnus</string>
+    <string name="et_login_password_hint_fi">Salasana</string>
+    <string name="btn_login_fi">Kirjaudu</string>
+    <string name="tv_login_forgot_password_fi">Olen unohtanut salasanani</string>
+    <string name="progress_dialog_logout_fi">Kirjaudutaan ulos...</string>
+    <string name="toast_logout_fi">Näkemiin</string>
+    <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>
+
 </resources>

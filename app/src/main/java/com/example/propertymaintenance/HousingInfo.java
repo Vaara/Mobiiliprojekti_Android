@@ -1,17 +1,17 @@
 package com.example.propertymaintenance;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -33,6 +33,8 @@ public class HousingInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_housing_info);
 
+        setupToolbar();
+
         lV = findViewById(R.id.housingInfoList);
 
         lV.setAdapter(new InfoAdapter(this, INFO_TITLES));
@@ -42,28 +44,27 @@ public class HousingInfo extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0) {
-                    Intent intent = new Intent(HousingInfo.this, Pelastus.class);
-                    new DownloadTask(HousingInfo.this, URL);
+                    Intent intent = new Intent(HousingInfo.this, RescuePlan.class);
                 }
 
                 if (position == 1) {
-                    Intent intent = new Intent(HousingInfo.this, TaloyhtioTiedot.class);
+                    Intent intent = new Intent(HousingInfo.this, HousingContact.class);
                     startActivity(intent);
                 }
                 if (position == 2) {
-                    Intent intent = new Intent(HousingInfo.this, Jarjestyssaannot.class);
+                    Intent intent = new Intent(HousingInfo.this, HousingRegulations.class);
                     startActivity(intent);
                 }
                 if (position == 3) {
-                    Intent intent = new Intent(HousingInfo.this, KiinteistoYhtt.class);
+                    Intent intent = new Intent(HousingInfo.this, PropertyMaintenanceContact.class);
                     startActivity(intent);
                 }
                 if (position == 4) {
-                    Intent intent = new Intent(HousingInfo.this, Isannointi.class);
+                    Intent intent = new Intent(HousingInfo.this, PropertyManagement.class);
                     startActivity(intent);
                 }
                 if (position == 5) {
-                    Intent intent = new Intent(HousingInfo.this, Jatehuolto.class);
+                    Intent intent = new Intent(HousingInfo.this, WasteManagement.class);
                     startActivity(intent);
                 }
             }
@@ -133,6 +134,42 @@ public class HousingInfo extends AppCompatActivity {
             return 0;
         }
     }
+
+    private void setupToolbar()
+    {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.include2);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        TextView subtitle = (TextView) toolbar.findViewById(R.id.toolbar_subtitle);
+        subtitle.setText("Näkymän nimi");
+    }
+
+    // INFLATE MENU //
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.secondmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId()==R.id.toolbar_button3){
+            //---//
+        }
+        else if(item.getItemId()==R.id.toolbar_button4){
+            //---//
+        }
+
+        else if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+
 
 

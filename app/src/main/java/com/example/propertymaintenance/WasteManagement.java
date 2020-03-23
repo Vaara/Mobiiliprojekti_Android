@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Isannointi extends AppCompatActivity {
+public class WasteManagement extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_isannointi);
+        setContentView(R.layout.activity_waste_management);
     }
 }

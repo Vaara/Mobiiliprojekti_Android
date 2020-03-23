@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class KiinteistoYhtt extends AppCompatActivity {
+public class PropertyMaintenanceContact extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kiinteisto_yhtt);
+        setContentView(R.layout.activity_property_maintenance_contact);
     }
 }

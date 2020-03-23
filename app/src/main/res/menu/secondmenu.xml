@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/toolbar_button3"
+        android:title="Toiset asetukset"
+        ></item>
+
+    <item
+        android:id="@+id/toolbar_button4"
+        android:title="Kirjaudu ulos"></item>
+
+</menu>

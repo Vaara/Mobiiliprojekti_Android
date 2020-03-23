@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Jatehuolto extends AppCompatActivity {
+public class PropertyManagement extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jatehuolto);
+        setContentView(R.layout.activity_property_management);
     }
 }

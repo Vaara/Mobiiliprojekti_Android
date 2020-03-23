@@ -10,21 +10,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.util.concurrent.TimeoutException;
-
-public class TaloyhtioTiedot extends AppCompatActivity {
+public class HousingContact extends AppCompatActivity {
 
     TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_taloyhtio_tiedot);
+        setContentView(R.layout.activity_housing_contact);
 
         textView = findViewById(R.id.housingInfoTest);
 
