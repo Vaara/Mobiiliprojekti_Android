@@ -18,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Vibrator;
 
+import android.app.ProgressDialog;
+import android.widget.Button;
+import android.widget.Toast;
+
 public class MainActivity extends AppCompatActivity {
     GridView gridView;
     private Vibrator hapticFeedback;
@@ -27,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     static final int BULLETIN_ID = 888;
     static final int CALENDAR_ID = 999;
 
-    static final String[] BUTTONLABELS = new String[] {
-            "Taloyhtiö info", "Vikailmoitus","Ilmoitustaulu", "Varaukset" };
+    static final String[] BUTTONLABELS = new String[]{
+            "Taloyhtiö info", "Vikailmoitus", "Ilmoitustaulu", "Varaukset"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,30 +49,30 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                switch (position){
+                switch (position) {
                     case 0:
                         hapticFeedback.vibrate(50);
                         Intent intentHousing = new Intent(getBaseContext(), intentTest.class);
                         startActivityForResult(intentHousing, HOUSING_ID);
-                            break;
+                        break;
                     case 1:
                         hapticFeedback.vibrate(50);
                         Intent intentFix = new Intent(getBaseContext(), intentTest.class);
                         startActivityForResult(intentFix, FIX_ID);
-                            break;
+                        break;
                     case 2:
                         hapticFeedback.vibrate(50);
                         Intent intentBulletin = new Intent(getBaseContext(), intentTest.class);
                         startActivityForResult(intentBulletin, BULLETIN_ID);
-                            break;
+                        break;
                     case 3:
                         hapticFeedback.vibrate(50);
                         Intent intentCalendar = new Intent(getBaseContext(), intentTest.class);
                         startActivityForResult(intentCalendar, CALENDAR_ID);
-                            break;
+                        break;
 
                     default:
-                            break;
+                        break;
                 }
             }
         });
@@ -76,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // set ToolBar //
-    private void setupToolbar()
-    {
+    private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.include1);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -86,20 +89,36 @@ public class MainActivity extends AppCompatActivity {
 
     // INFLATE MENU //
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mainmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId()==R.id.toolbar_button1){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.toolbar_button1) {
             //---//
-        }
-        else if(item.getItemId()==R.id.toolbar_button2){
-            //---//
+        } else if (item.getItemId() == R.id.toolbar_button2) {
+            logout();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void logout() {
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
+        progressDialog.show();
+        //Toast.makeText(MainActivity.this, R.string.toast_logout_fi,Toast.LENGTH_LONG).show();
+        SessionManagement sessionManagement = new SessionManagement(MainActivity.this);
+        sessionManagement.removeSession();
+        moveToLogin();
+    }
+
+    private void moveToLogin() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 
@@ -141,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 String mobile = mobileValues[position];
 
 
-                switch (position){
+                switch (position) {
                     case 0:
                         imageView.setImageResource(R.drawable.ic_icon_fix);
                         break;
@@ -183,6 +202,6 @@ public class MainActivity extends AppCompatActivity {
         public long getItemId(int position) {
             return 0;
         }
+
     }
 }
-
