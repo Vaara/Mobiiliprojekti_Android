@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".TaloyhtioTiedot">
 
-    <Button
-        android:id="@+id/goToHousingInfo"
+    <TextView
+        android:id="@+id/housingInfoTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Info"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="20dp"/>
+        android:textSize="15dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
