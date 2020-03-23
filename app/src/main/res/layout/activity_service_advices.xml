@@ -10,7 +10,6 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="2dp"
@@ -23,10 +22,16 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-
         android:background="@android:color/darker_gray"
+        android:gravity="top"
+        android:hint="Kotieläimet, turvalukot, yms.."
+        android:maxLines="6"
+        android:minLines="1"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,91 +53,85 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="8dp"
-        android:hint=""
         android:background="@android:color/darker_gray"
+        android:gravity="top"
+        android:hint="Vian sijainti ja tarkempi kuvaus"
+        android:maxLines="6"
+        android:minLines="1"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/editText2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="207dp"
         android:layout_marginBottom="8dp"
         android:text="Sisäänpääsy asuntoon:"
         app:layout_constraintBottom_toTopOf="@+id/radioButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="51dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:text="Lähetä"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/attachment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="128dp"
         android:layout_marginBottom="8dp"
         android:src="@android:drawable/ic_input_get"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendButton"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintStart_toEndOf="@+id/imageButton" />
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <CheckBox
+        android:id="@+id/masterkeyAllowed"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="78dp"
         android:layout_marginEnd="109dp"
         android:text="Yleisavaimella"
         app:layout_constraintEnd_toStartOf="@+id/radioButton2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@id/textView2" />
 
-    <RadioButton
-        android:id="@+id/radioButton2"
+    <CheckBox
+        android:id="@+id/callAndMakeAppointment"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
         android:layout_marginTop="78dp"
         android:layout_marginEnd="76dp"
