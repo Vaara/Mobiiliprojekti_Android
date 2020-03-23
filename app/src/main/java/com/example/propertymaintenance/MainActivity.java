@@ -173,16 +173,16 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        imageView.setImageResource(R.drawable.ic_icon_fix);
+                        imageView.setImageResource(R.drawable.ic_icon_housing);
                         break;
                     case 1:
-                        imageView.setImageResource(R.drawable.ic_icon_clipboard);
+                        imageView.setImageResource(R.drawable.ic_icon_fix);
                         break;
                     case 2:
-                        imageView.setImageResource(R.drawable.ic_icon_checklist);
+                        imageView.setImageResource(R.drawable.ic_icon_postit);
                         break;
                     case 3:
-                        imageView.setImageResource(R.drawable.ic_icon_postit);
+                        imageView.setImageResource(R.drawable.ic_icon_calendar);
                         break;
                     default:
                         imageView.setImageResource(R.mipmap.ic_launcher);

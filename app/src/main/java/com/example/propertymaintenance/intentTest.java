@@ -28,7 +28,7 @@ public class intentTest extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         TextView subtitle = (TextView) toolbar.findViewById(R.id.toolbar_subtitle);
-        subtitle.setText("Näkymän nimi");
+        subtitle.setText("Ville Vaara");
     }
 
     // INFLATE MENU //
