@@ -6,7 +6,7 @@
     android:minHeight="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
+    android:background="@color/toolbarColorPrimary"
     tools:showIn="@layout/activity_main"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
@@ -21,7 +21,10 @@
     android:layout_gravity="center">
 
     <include
-        layout="@layout/toolbar_customtitle"/>
+        layout="@layout/toolbar_customtitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"/>
 
 </LinearLayout>
 

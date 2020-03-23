@@ -20,9 +20,16 @@
         <color name="iconLabelOnClick">#000000</color>
 
     <!-- ICON VECTOR COLORS -->
-    <color name="iconColorDark">#452A1D</color>         <!-- #2570C8 -->
-    <color name="iconColorMidDark">#9E549F9F</color>    <!-- #5DB6E5 -->
-    <color name="iconColorMidLight">#F89654</color>     <!-- #92E0FC -->
-    <color name="iconColorLight">#FDFDF6</color>        <!-- #ffffff -->
+    <color name="iconColorDark">#452A1D</color>
+    <color name="iconColorMidDark">#9E549F9F</color>
+    <color name="iconColorMidLight">#F89654</color>
+    <color name="iconColorLight">#FDFDF6</color>
+
+    <!--
+    <color name="iconColorDark">#2570C8</color>
+    <color name="iconColorMidDark">#5DB6E5 </color>
+    <color name="iconColorMidLight">#92E0FC</color>
+    <color name="iconColorLight">#ffffff</color>
+    -->
 
 </resources>
