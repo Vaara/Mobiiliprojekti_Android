@@ -7,9 +7,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+
+    android:background="@color/activityBackground"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/toolbar_main"
+        android:id="@+id/include1"/>
 
     <GridView
         android:paddingTop="@dimen/top_spacer"
@@ -28,7 +32,12 @@
 </LinearLayout>
 
     <!--
+
+    android:background="@color/activityBackground"
+    android:fitsSystemWindows="true" < pitää olla joka activityssä jossa käytetään toolbaria
+
     CHEAT SHEET
+    android:fitsSystemWindows="true"
     android:verticalSpacing="@dimen/grid_vertical_spacing"
     android:paddingTop="@dimen/grid_vertical_spacing"
     android:gravity="bottom|center"

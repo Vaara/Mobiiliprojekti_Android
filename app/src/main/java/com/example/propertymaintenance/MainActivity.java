@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.layout.toolbar);
-        //setSupportActionBar(toolbar);
+        setupToolbar();
 
         hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
@@ -71,14 +70,21 @@ public class MainActivity extends AppCompatActivity {
                     default:
                             break;
                 }
-
             }
         });
-
     }
 
 
-    // TOOLBAR //
+    // set ToolBar //
+    private void setupToolbar()
+    {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.include1);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+
+    // INFLATE MENU //
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.mainmenu, menu);
@@ -91,17 +97,10 @@ public class MainActivity extends AppCompatActivity {
             //---//
         }
         else if(item.getItemId()==R.id.toolbar_button2){
-           //---//
+            //---//
         }
         return super.onOptionsItemSelected(item);
     }
-    // TOOLBAR //
-
-
-
-
-
-
 
 
     //IMAGE ADAPTER//
@@ -144,16 +143,16 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (position){
                     case 0:
-                        imageView.setImageResource(R.drawable.taloyhtio);
+                        imageView.setImageResource(R.drawable.ic_icon_fix);
                         break;
                     case 1:
-                        imageView.setImageResource(R.drawable.vikailmoitus);
+                        imageView.setImageResource(R.drawable.ic_icon_clipboard);
                         break;
                     case 2:
-                        imageView.setImageResource(R.drawable.ilmoitus);
+                        imageView.setImageResource(R.drawable.ic_icon_checklist);
                         break;
                     case 3:
-                        imageView.setImageResource(R.drawable.kalenteri);
+                        imageView.setImageResource(R.drawable.ic_icon_postit);
                         break;
                     default:
                         imageView.setImageResource(R.mipmap.ic_launcher);
@@ -184,9 +183,6 @@ public class MainActivity extends AppCompatActivity {
         public long getItemId(int position) {
             return 0;
         }
-
     }
-    //IMAGE ADAPTER//
-
 }
 

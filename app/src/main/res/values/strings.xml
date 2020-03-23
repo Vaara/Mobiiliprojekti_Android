@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">PropertyMaintenance</string>
+    <string name="app_name">Eikka</string>
+    <string name="app_subtitle_asukas">Asukasportaali</string>
+    <string name="app_subtitle_kiinteisto">Kiinteistöhuolto</string>
 </resources>
