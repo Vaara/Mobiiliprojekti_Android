@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             userHousingCooperativeIdResponse = response.optInt("userHousingCooperativeId");
                             userPropertyMaintenanceIdResponse = response.optInt("userPropertyMaintenanceId");
 
-                            Toast.makeText(LoginActivity.this, R.string.toast_login_ok_fi, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(LoginActivity.this, R.string.toast_login_ok_fi, Toast.LENGTH_LONG).show();
                             login();
                         } catch (JSONException e) {
                             e.printStackTrace();
