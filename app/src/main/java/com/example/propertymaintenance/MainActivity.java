@@ -39,19 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*<<<<<<< HEAD
-        findViewById(R.id.goToHousingInfo).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v){
-        if (v.getId() == R.id.goToHousingInfo) {
-            Intent infoIntent = new Intent(this, HousingInfo.class);
-            startActivity(infoIntent);
-        }
-=======*/
         setupToolbar();
-
         hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         gridView = (GridView) findViewById(R.id.gridview1);
@@ -89,14 +77,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     // set ToolBar //
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.include1);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
-
 
     // INFLATE MENU //
     @Override
@@ -115,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     public void logout() {
         final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
@@ -131,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 
     //IMAGE ADAPTER//
     public class ImageAdapter extends BaseAdapter {
@@ -214,5 +198,4 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
     }
-
 }
