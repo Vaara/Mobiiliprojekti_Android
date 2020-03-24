@@ -3,7 +3,7 @@
     <string name="app_name">Eikka</string>
     <string name="app_subtitle_asukas">Asukasportaali</string>
     <string name="app_subtitle_kiinteisto">Kiinteistöhuolto</string>
-
+    <string name="app_subtitle_bulletin_board">Ilmoitustaulu</string>
 
     <string name="toast_login_ok_fi">Tervetuloa</string>
     <string name="toast_login_failed_fi">Kirjautuminen epäonnistui</string>
@@ -17,5 +17,6 @@
     <string name="progress_dialog_logout_fi">Kirjaudutaan ulos...</string>
     <string name="toast_logout_fi">Näkemiin</string>
     <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>
+
 
 </resources>

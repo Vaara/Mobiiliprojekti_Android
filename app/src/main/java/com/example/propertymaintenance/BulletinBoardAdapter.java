@@ -5,55 +5,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BulletinBoardAdapter extends BaseAdapter {
 
     final public String[] header = new String[] {
-      "header1", "header2", "header3" };
+            "header1", "header2", "header3", "header4", "header5", "header6", "header7" };
 
     final public String[] message = new String[] {
-            "message1", "message2", "message3" };
+            "message1...............................................................................",
+            "message2...............................................................................",
+            "message3...............................................................................",
+            "message4...............................................................................",
+            "message5...............................................................................",
+            "message6...............................................................................",
+            "message7..............................................................................." };
 
     private Context context;
 
     public BulletinBoardAdapter(Context context) {
         this.context = context;
     }
-
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View listView;
-
-        if (view == null) {
-            listView = new View(context);
-
-            listView = inflater.inflate(R.layout.list_bulletin_board, null);
-
-            // Bulletin board HEADER
-            TextView textView1 = listView.findViewById(R.id.textViewBulletinHeader);
-            textView1.setText(header[position]);
-
-            // Bulletin board MESSAGE
-            TextView textView2 = listView.findViewById(R.id.textViewBulletinMessage);
-            textView2.setText(message[position]);
-
-        }
-        else {
-            listView = (View) view;
-        }
-        return listView;
-    }
-
 
     @Override
     public int getCount() {
@@ -70,5 +44,37 @@ public class BulletinBoardAdapter extends BaseAdapter {
         return 0;
     }
 
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
 
+    @Override
+    public View getView(int position, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ViewHolder holder = null;
+
+        if (view == null) {
+            view = inflater.inflate(R.layout.list_bulletin_board, null);
+            holder = new ViewHolder();
+            view.setTag(holder);
+
+            // Bulletin board HEADER
+            holder.textView1 = (TextView) view.findViewById(R.id.textViewBulletinHeader);
+
+            // Bulletin board MESSAGE
+            holder.textView2 = (TextView) view.findViewById(R.id.textViewBulletinMessage);
+        }
+        else {
+            holder = (ViewHolder) view.getTag();
+        }
+        holder.textView1.setText(header[position]);
+        holder.textView2.setText(message[position]);
+        return view;
+    }
+
+    private class ViewHolder {
+        public TextView textView1;
+        public TextView textView2;
+    }
 }
