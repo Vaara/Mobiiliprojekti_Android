@@ -3,6 +3,7 @@ package com.example.propertymaintenance;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +20,6 @@ import android.widget.TextView;
 import android.os.Vibrator;
 
 import android.app.ProgressDialog;
-import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     GridView gridView;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         hapticFeedback.vibrate(50);
-                        Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdvice.class);
+                        Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
                         startActivityForResult(intentFix, FIX_ID);
                         break;
                     case 2:
@@ -102,17 +101,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout() {
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
         progressDialog.show();
         //Toast.makeText(MainActivity.this, R.string.toast_logout_fi,Toast.LENGTH_LONG).show();
-        SessionManagement sessionManagement = new SessionManagement(MainActivity.this);
+        SessionManagement sessionManagement = new SessionManagement(this);
         sessionManagement.removeSession();
         moveToLogin();
     }
 
     private void moveToLogin() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activityBackground"
-    tools:context=".CustodianServiceAdvice"
+    tools:context=".CustodianServiceAdviceActivity"
 
     android:fitsSystemWindows="true">
     <include layout="@layout/toolbar_main"
@@ -15,28 +15,42 @@
         android:id="@+id/llButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
+        android:paddingTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/include2"
         android:gravity="center_horizontal">
 
         <Button
-            android:id="@+id/btnOpen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="5dp"
-            android:text="Open" />
-
-        <Button
-            android:id="@+id/btnAll"
+            android:id="@+id/btnCustodianServiceAdviceOpen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
-            android:text="All" />
+            android:paddingRight="5dp"
+            android:text="@string/btn_custodian_service_advice_open_fi" />
+
+        <Button
+            android:id="@+id/btnCustodianServiceAdviceDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/btn_custodian_service_advice_done_fi" />
+
+        <Button
+            android:id="@+id/btnCustodianServiceAdviceAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/btn_custodian_service_advice_all_fi" />
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/lvCustodianServiceAdvice"
+        android:background="@color/activityBackground"
+        android:layout_margin="30dp"
+        android:dividerHeight="10dp"
+        android:divider="@color/activityBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/llButtons"/>

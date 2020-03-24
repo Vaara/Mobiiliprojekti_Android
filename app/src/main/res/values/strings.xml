@@ -4,7 +4,6 @@
     <string name="app_subtitle_asukas">Asukasportaali</string>
     <string name="app_subtitle_kiinteisto">Kiinteistöhuolto</string>
 
-
     <string name="toast_login_ok_fi">Tervetuloa</string>
     <string name="toast_login_failed_fi">Kirjautuminen epäonnistui</string>
     <string name="progress_dialog_login_fi">Kirjaudutaan sisään...</string>
@@ -16,6 +15,11 @@
     <string name="tv_login_forgot_password_fi">Olen unohtanut salasanani</string>
     <string name="progress_dialog_logout_fi">Kirjaudutaan ulos...</string>
     <string name="toast_logout_fi">Näkemiin</string>
+
     <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>
+
+    <string name="btn_custodian_service_advice_open_fi">Avoimet</string>
+    <string name="btn_custodian_service_advice_done_fi">Tehdyt</string>
+    <string name="btn_custodian_service_advice_all_fi">Kaikki</string>
 
 </resources>
