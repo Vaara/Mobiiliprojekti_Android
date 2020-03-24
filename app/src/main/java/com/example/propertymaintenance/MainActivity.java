@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         hapticFeedback.vibrate(50);
-                        Intent intentFix = new Intent(getBaseContext(), intentTest.class);
+                        Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdvice.class);
                         startActivityForResult(intentFix, FIX_ID);
                         break;
                     case 2:
