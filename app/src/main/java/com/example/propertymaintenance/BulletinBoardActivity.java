@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class BulletinBoardActivity extends AppCompatActivity {
+public class BulletinBoardActivity extends BaseActivity {
     private ListView listViewBulletinBoard;
     private RequestQueue requestQueue;
     private ArrayList<String> titles;
@@ -37,6 +37,15 @@ public class BulletinBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void doStuff() {
         setContentView(R.layout.activity_bulletin_board);
         listViewBulletinBoard = findViewById(R.id.listViewBulletinBoard);
         titles = new ArrayList<>();
@@ -47,7 +56,6 @@ public class BulletinBoardActivity extends AppCompatActivity {
         USER_ID = new SessionManagement(this).getUserIdFromSharedPrefs();
         USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
 
-        setupToolbar();
         getBulletinBoardData(checkStakeHolder());
     }
 
@@ -61,7 +69,6 @@ public class BulletinBoardActivity extends AppCompatActivity {
             STAKEHOLDER_ID = new SessionManagement(this).getUserPropertyMaintenanceIDFromSharedPrefs();
             url = getString(R.string.api_custodian_bulletin_board);
         }
-        STAKEHOLDER_ID = 5;
         return url;
     }
 
@@ -78,11 +85,12 @@ public class BulletinBoardActivity extends AppCompatActivity {
                                 JSONObject results = jsonArray.getJSONObject(i);
                                 titles.add(results.getString("Title"));
                                 messages.add(results.getString("Message"));
-                                String title = results.getString("Title");
-                                String message = results.getString("Message");
                             }
                             listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                         } catch (JSONException e) {
+                            titles.add(getString(R.string.error_server));
+                            messages.add(getString(R.string.error_ask_retry));
+                            listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                             Log.d("Error", "error1");
                             e.printStackTrace();
                         }
@@ -91,46 +99,14 @@ public class BulletinBoardActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                titles.add(getString(R.string.error_server));
+                messages.add(getString(R.string.error_ask_retry));
+                listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                 Log.d("Error", "error2");
                 error.printStackTrace();
             }
         });
         requestQueue.add(request);
 
-    }
-
-    private void setupToolbar()
-    {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.include3);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        TextView subtitle = (TextView) toolbar.findViewById(R.id.toolbar_subtitle);
-        subtitle.setText(R.string.app_subtitle_bulletin_board);
-    }
-
-    // INFLATE MENU //
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.secondmenu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId()==R.id.toolbar_button3){
-            //---//
-        }
-        else if(item.getItemId()==R.id.toolbar_button4){
-            //---//
-        }
-
-        else if(item.getItemId() == android.R.id.home) {
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
