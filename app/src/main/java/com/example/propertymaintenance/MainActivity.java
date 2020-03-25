@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void doStuff() {
+
         hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         gridView = (GridView) findViewById(R.id.gridview1);
@@ -166,5 +167,4 @@ public class MainActivity extends BaseActivity {
             return 0;
         }
     }
-
 }
