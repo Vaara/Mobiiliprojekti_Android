@@ -40,10 +40,6 @@ public class ServiceAdvices extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imageButtonCamera) {
-            //Intent intent= new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
-            //startActivity(intent);
-            //openCamera();
-            //public void openImagePickOption() {
 
             final CharSequence[] items = {"Ota kuva", "Valitse Galleriasta", "Peruuta"};
 
