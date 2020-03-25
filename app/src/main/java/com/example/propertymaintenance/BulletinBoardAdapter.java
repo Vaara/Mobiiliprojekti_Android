@@ -8,30 +8,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 
 public class BulletinBoardAdapter extends BaseAdapter {
 
-    final public String[] header = new String[] {
-            "header1", "header2", "header3", "header4", "header5", "header6", "header7" };
-
-    final public String[] message = new String[] {
-            "message1...............................................................................",
-            "message2...............................................................................",
-            "message3...............................................................................",
-            "message4...............................................................................",
-            "message5...............................................................................",
-            "message6...............................................................................",
-            "message7..............................................................................." };
-
     private Context context;
+    private ArrayList<String> titles;
+    private ArrayList<String> messages;
 
-    public BulletinBoardAdapter(Context context) {
+    public BulletinBoardAdapter(Context context, ArrayList titles, ArrayList messages) {
         this.context = context;
+        this.titles = titles;
+        this.messages = messages;
     }
 
     @Override
     public int getCount() {
-        return header.length;
+        return titles.size();
     }
 
     @Override
@@ -68,8 +66,8 @@ public class BulletinBoardAdapter extends BaseAdapter {
         else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.textView1.setText(header[position]);
-        holder.textView2.setText(message[position]);
+        holder.textView1.setText(titles.get(position));
+        holder.textView2.setText(messages.get(position));
         return view;
     }
 
