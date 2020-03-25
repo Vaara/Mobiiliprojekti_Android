@@ -71,7 +71,6 @@ public class BulletinBoardActivity extends BaseActivity {
         else if (USER_LEVEL == 1) {
             STAKEHOLDER_ID = new SessionManagement(this).getUserPropertyMaintenanceIDFromSharedPrefs();
             url = getString(R.string.api_custodian_bulletin_board);
-            STAKEHOLDER_ID = 5;
         }
         return url;
     }
