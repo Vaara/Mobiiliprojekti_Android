@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Toolbar toolBar;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +76,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void logout(Activity activity) {
-        final ProgressDialog progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
-        progressDialog.show();
         SessionManagement sessionManagement = new SessionManagement(activity);
         sessionManagement.removeSession();
         moveToLogin();
