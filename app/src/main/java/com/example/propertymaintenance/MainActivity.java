@@ -22,7 +22,8 @@ import android.app.ProgressDialog;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
+
     GridView gridView;
     private Vibrator hapticFeedback;
 
@@ -34,23 +35,19 @@ public class MainActivity extends AppCompatActivity {
     static final String[] BUTTONLABELS = new String[]{
             "Taloyhtiö info", "Vikailmoitus", "Ilmoitustaulu", "Varaukset"};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-/*<<<<<<< HEAD
-        findViewById(R.id.goToHousingInfo).setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View v){
-        if (v.getId() == R.id.goToHousingInfo) {
-            Intent infoIntent = new Intent(this, HousingInfo.class);
-            startActivity(infoIntent);
-        }
-=======*/
-        setupToolbar();
+    protected int getLayoutResource() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void doStuff() {
 
         hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
@@ -88,50 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    // set ToolBar //
-    private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.include1);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-    }
-
-
-    // INFLATE MENU //
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.mainmenu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.toolbar_button1) {
-            //---//
-        } else if (item.getItemId() == R.id.toolbar_button2) {
-            logout();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    public void logout() {
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
-        progressDialog.show();
-        //Toast.makeText(MainActivity.this, R.string.toast_logout_fi,Toast.LENGTH_LONG).show();
-        SessionManagement sessionManagement = new SessionManagement(MainActivity.this);
-        sessionManagement.removeSession();
-        moveToLogin();
-    }
-
-    private void moveToLogin() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
 
     //IMAGE ADAPTER//
     public class ImageAdapter extends BaseAdapter {
@@ -173,16 +126,16 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        imageView.setImageResource(R.drawable.ic_icon_fix);
+                        imageView.setImageResource(R.drawable.ic_icon_housing);
                         break;
                     case 1:
-                        imageView.setImageResource(R.drawable.ic_icon_clipboard);
+                        imageView.setImageResource(R.drawable.ic_icon_fix);
                         break;
                     case 2:
-                        imageView.setImageResource(R.drawable.ic_icon_checklist);
+                        imageView.setImageResource(R.drawable.ic_icon_postit);
                         break;
                     case 3:
-                        imageView.setImageResource(R.drawable.ic_icon_postit);
+                        imageView.setImageResource(R.drawable.ic_icon_calendar);
                         break;
                     default:
                         imageView.setImageResource(R.mipmap.ic_launcher);
@@ -214,5 +167,4 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
     }
-
 }

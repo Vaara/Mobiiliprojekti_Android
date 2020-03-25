@@ -20,10 +20,10 @@
         <color name="iconLabelOnClick">#000000</color>
 
     <!-- ICON VECTOR COLORS -->
-    <color name="iconColorDark">#452A1D</color>
-    <color name="iconColorMidDark">#9E549F9F</color>
-    <color name="iconColorMidLight">#F89654</color>
-    <color name="iconColorLight">#FDFDF6</color>
+    <color name="iconColorDark">#401830</color>
+    <color name="iconColorMidDark">#9E3BDFDF</color>
+    <color name="iconColorMidLight">#EFA06B</color>
+    <color name="iconColorLight">#EAEAC7</color>
 
     <!--
     <color name="iconColorDark">#2570C8</color>

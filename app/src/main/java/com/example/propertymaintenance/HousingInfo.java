@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class HousingInfo extends AppCompatActivity {
+public class HousingInfo extends BaseActivity {
 
     ListView lV;
     static final String[] INFO_TITLES = new String[]{"Pelastussuunnitelma", "Taloyhtion yhteystiedot",
@@ -27,13 +27,17 @@ public class HousingInfo extends AppCompatActivity {
     String URL = "https://group3mobilebucket.s3.amazonaws.com/taloyhtion_pelastussuunnitelma.pdf";
     String URL_2 = "https://group3mobilebucket.s3.amazonaws.com/taloyhtion_jarjestyssaannot.pdf";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_housing_info);
+    }
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_housing_info;
+    }
+    @Override
+    protected void doStuff() {
 
-        setupToolbar();
 
         lV = findViewById(R.id.housingInfoList);
 
@@ -135,40 +139,7 @@ public class HousingInfo extends AppCompatActivity {
         }
     }
 
-    private void setupToolbar()
-    {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.include2);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        TextView subtitle = (TextView) toolbar.findViewById(R.id.toolbar_subtitle);
-        subtitle.setText("Näkymän nimi");
-    }
-
-    // INFLATE MENU //
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.secondmenu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId()==R.id.toolbar_button3){
-            //---//
-        }
-        else if(item.getItemId()==R.id.toolbar_button4){
-            //---//
-        }
-
-        else if(item.getItemId() == android.R.id.home) {
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
 
 
