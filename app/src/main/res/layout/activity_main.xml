@@ -12,8 +12,7 @@
     android:background="@color/activityBackground"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/toolbar_main"
-        android:id="@+id/include1"/>
+    <include layout="@layout/toolbar_main" />
 
     <GridView
         android:paddingTop="@dimen/top_spacer"
