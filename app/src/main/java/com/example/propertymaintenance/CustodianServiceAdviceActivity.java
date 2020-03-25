@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class CustodianServiceAdviceActivity extends AppCompatActivity implements View.OnClickListener {
+public class CustodianServiceAdviceActivity extends BaseActivity implements View.OnClickListener {
 
     Button btnOpen;
     Button btnDone;
@@ -29,11 +29,18 @@ public class CustodianServiceAdviceActivity extends AppCompatActivity implements
             "As Oy Lamppu", "As Oy Heinäpää", "As Oy Talvipuisto", "As Oy Ketunlenkki", "As Oy Rantakehä"
     };
 
-    // Fetch serviceAdvices from database and sort to showcurrent, all, open and done
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_custodian_service_advice;
+    }
+
+    @Override
+    protected void doStuff() {
         setContentView(R.layout.activity_custodian_service_advice);
 
         setupToolbar();
@@ -63,30 +70,6 @@ public class CustodianServiceAdviceActivity extends AppCompatActivity implements
 
         TextView subtitle = toolbar.findViewById(R.id.toolbar_subtitle);
         subtitle.setText("Vikailmoitukset");
-    }
-
-    // INFLATE MENU //
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.secondmenu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId()==R.id.toolbar_button3){
-            //---//
-        }
-        else if(item.getItemId()==R.id.toolbar_button4){
-            //---//
-            logout();
-        }
-
-        else if(item.getItemId() == android.R.id.home) {
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
