@@ -24,6 +24,9 @@
     <!-- Contact Information titles/messages -->
     <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>
 
+    <!-- Bulletin Board titles/messages -->
+    <string name="board_is_empty">Ilmoitustaulu on tyhjä.</string>
+
     <!-- Error messages -->
     <string name="error_server">Ongelma palvelimessa.</string>
     <string name="error_ask_retry">Yritä uudelleen tai tarvittaessa ota yhteys ylläpitoon.</string>

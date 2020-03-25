@@ -1,12 +1,7 @@
 package com.example.propertymaintenance;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +24,7 @@ public class BulletinBoardActivity extends BaseActivity {
     private ArrayList<String> titles;
     private ArrayList<String> messages;
     private BulletinBoardAdapter bulletinBoardAdapter;
+    private TextView subtitle;
 
     private int USER_ID;
     private int USER_LEVEL;
@@ -56,6 +52,8 @@ public class BulletinBoardActivity extends BaseActivity {
         USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
 
         getBulletinBoardData(checkStakeHolder());
+        subtitle = findViewById(R.id.toolbar_subtitle);
+        subtitle.setText("Ilmoitustaulu");
     }
 
     private String checkStakeHolder() {
@@ -80,17 +78,22 @@ public class BulletinBoardActivity extends BaseActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject results = jsonArray.getJSONObject(i);
-                                titles.add(results.getString("Title"));
-                                messages.add(results.getString("Message"));
+                            if (jsonArray.length() < 1) {
+                                titles.add(getString(R.string.board_is_empty));
+                                messages.add("");
+                            }
+                            else {
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject results = jsonArray.getJSONObject(i);
+                                    titles.add(results.getString("Title"));
+                                    messages.add(results.getString("Message"));
+                                }
                             }
                             listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                         } catch (JSONException e) {
                             titles.add(getString(R.string.error_server));
                             messages.add(getString(R.string.error_ask_retry));
                             listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
-                            Log.d("Error", "error1");
                             e.printStackTrace();
                         }
 
@@ -101,7 +104,6 @@ public class BulletinBoardActivity extends BaseActivity {
                 titles.add(getString(R.string.error_server));
                 messages.add(getString(R.string.error_ask_retry));
                 listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
-                Log.d("Error", "error2");
                 error.printStackTrace();
             }
         });
