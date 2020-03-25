@@ -94,20 +94,4 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
             btnAll.setEnabled(false);
         }
     }
-
-    public void logout() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
-        progressDialog.show();
-        //Toast.makeText(MainActivity.this, R.string.toast_logout_fi,Toast.LENGTH_LONG).show();
-        SessionManagement sessionManagement = new SessionManagement(this);
-        sessionManagement.removeSession();
-        moveToLogin();
-    }
-
-    private void moveToLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
 }

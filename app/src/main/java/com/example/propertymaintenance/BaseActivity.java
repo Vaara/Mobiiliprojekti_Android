@@ -65,7 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             //KIRJAUDU ULOS
             logout(this);
         }
-        
+
         else if(item.getItemId() == android.R.id.home) {
             //TOOLBAR <-
             finish();
