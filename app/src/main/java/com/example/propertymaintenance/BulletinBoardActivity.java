@@ -41,12 +41,11 @@ public class BulletinBoardActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_main;
+        return R.layout.activity_bulletin_board;
     }
 
     @Override
     protected void doStuff() {
-        setContentView(R.layout.activity_bulletin_board);
         listViewBulletinBoard = findViewById(R.id.listViewBulletinBoard);
         titles = new ArrayList<>();
         messages = new ArrayList<>();
