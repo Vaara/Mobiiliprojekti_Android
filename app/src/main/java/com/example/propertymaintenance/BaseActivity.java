@@ -68,9 +68,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     // LOGOUT //
     public void logout(Activity activity) {
-        final ProgressDialog progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
-        progressDialog.show();
+        //final ProgressDialog progressDialog = new ProgressDialog(activity);
+        //progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
+        //progressDialog.show();
         //Toast.makeText(MainActivity.this, R.string.toast_logout_fi,Toast.LENGTH_LONG).show();
         SessionManagement sessionManagement = new SessionManagement(activity);
         sessionManagement.removeSession();
