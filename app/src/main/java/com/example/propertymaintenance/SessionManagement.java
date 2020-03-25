@@ -55,11 +55,11 @@ public class SessionManagement {
         editor.putInt(USER_LEVEL, userLevelResponse);
         editor.putString(USER_FULL_NAME, userFullNameResponse);
 
-        if (userIdResponse == 0) {
+        if (userLevelResponse == 0) {
             editor.putInt(USER_HOUSING_COOPERATIVE_ID, userHousingCooperativeIdResponse);
         }
 
-        else if (userIdResponse == 1) {
+        else if (userLevelResponse == 1) {
             editor.putInt(USER_PROPERTY_MAINTENANCE_ID, userPropertyMaintenanceIdResponse);
         }
 

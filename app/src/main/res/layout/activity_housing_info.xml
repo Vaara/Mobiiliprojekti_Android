@@ -8,8 +8,7 @@
     android:background="@color/activityBackground"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/toolbar_main"
-        android:id="@+id/include2"/>
+    <include layout="@layout/toolbar_main"/>
 
 
     <ListView
@@ -18,7 +17,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/include2"
+        app:layout_constraintTop_toBottomOf="@id/includeToolbar"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
