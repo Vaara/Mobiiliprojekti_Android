@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Toolbar toolBar;
@@ -31,7 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
             }
         }
-
+        updateToolbarSubtitles();
         doStuff();
     }
 
@@ -55,7 +55,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.toolbar_button1) {
             //ASETUKSET
-        } else if (item.getItemId() == R.id.toolbar_button2) {
+        }
+        else if (item.getItemId() == R.id.toolbar_button2) {
             //KIRJAUDU ULOS
             logout(this);
         }
@@ -66,12 +67,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void updateToolbarSubtitles(){
+        TextView subtitle = (TextView) findViewById(R.id.toolbar_subtitle);
+        TextView userName = (TextView) findViewById(R.id.toolbar_user);
+
+        if(SessionManagement.getUserLevelFromSharedPrefs() == 1 && subtitle.getText() != "kiinteistöhuolto")
+        {
+            subtitle.setText("Kiinteistöhuolto");
+        }
+        else
+        {
+            subtitle.setText("Asukasportaali");
+        }
+
+        userName.setText(""+SessionManagement.getUserFullNameFromSharedPrefs());
+    }
+
     // LOGOUT //
     public void logout(Activity activity) {
-        //final ProgressDialog progressDialog = new ProgressDialog(activity);
-        //progressDialog.setMessage(getString(R.string.progress_dialog_logout_fi));
-        //progressDialog.show();
-        //Toast.makeText(MainActivity.this, R.string.toast_logout_fi,Toast.LENGTH_LONG).show();
         SessionManagement sessionManagement = new SessionManagement(activity);
         sessionManagement.removeSession();
         moveToLogin();
