@@ -25,7 +25,9 @@
     <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>
 
     <!-- Bulletin Board titles/messages -->
+    <string name="board_title">Ilmoitustaulu</string>
     <string name="board_is_empty">Ilmoitustaulu on tyhjä.</string>
+    <string name="board_progress_dialog">Ladataan ilmoitustaulua.</string>
 
     <!-- Error messages -->
     <string name="error_server">Ongelma palvelimessa.</string>

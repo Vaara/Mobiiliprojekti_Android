@@ -1,5 +1,6 @@
 package com.example.propertymaintenance;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
@@ -25,8 +26,8 @@ public class BulletinBoardActivity extends BaseActivity {
     private ArrayList<String> messages;
     private BulletinBoardAdapter bulletinBoardAdapter;
     private TextView subtitle;
+    private ProgressDialog progressDialog;
 
-    private int USER_ID;
     private int USER_LEVEL;
     private int STAKEHOLDER_ID;
 
@@ -46,14 +47,17 @@ public class BulletinBoardActivity extends BaseActivity {
         titles = new ArrayList<>();
         messages = new ArrayList<>();
         bulletinBoardAdapter = new BulletinBoardAdapter(this, titles, messages);
-
-        requestQueue = Volley.newRequestQueue(this);
-        USER_ID = new SessionManagement(this).getUserIdFromSharedPrefs();
         USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
+        requestQueue = Volley.newRequestQueue(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.board_progress_dialog));
+        progressDialog.show();
+
+        subtitle = findViewById(R.id.toolbar_subtitle);
+        subtitle.setText(R.string.board_title);
 
         getBulletinBoardData(checkStakeHolder());
-        subtitle = findViewById(R.id.toolbar_subtitle);
-        subtitle.setText("Ilmoitustaulu");
     }
 
     private String checkStakeHolder() {
@@ -76,6 +80,7 @@ public class BulletinBoardActivity extends BaseActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
                             if (jsonArray.length() < 1) {
@@ -91,6 +96,7 @@ public class BulletinBoardActivity extends BaseActivity {
                             }
                             listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                         } catch (JSONException e) {
+                            progressDialog.dismiss();
                             titles.add(getString(R.string.error_server));
                             messages.add(getString(R.string.error_ask_retry));
                             listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
@@ -101,6 +107,7 @@ public class BulletinBoardActivity extends BaseActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 titles.add(getString(R.string.error_server));
                 messages.add(getString(R.string.error_ask_retry));
                 listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
