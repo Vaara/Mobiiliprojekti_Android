@@ -5,7 +5,7 @@
     <string name="app_subtitle_asukas">Asukasportaali</string>
     <string name="app_subtitle_kiinteisto">Kiinteistöhuolto</string>
     <string name="app_subtitle_bulletin_board">Ilmoitustaulu</string>
-    
+
     <!-- Login titles/messages -->
     <string name="progress_dialog_login_fi">Kirjaudutaan sisään...</string>
     <string name="tv_login_title_fi">Eikka</string>
