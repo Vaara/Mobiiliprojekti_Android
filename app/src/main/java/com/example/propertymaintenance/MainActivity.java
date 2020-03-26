@@ -1,6 +1,7 @@
 package com.example.propertymaintenance;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +48,6 @@ public class MainActivity extends BaseActivity {
 
         gridView = (GridView) findViewById(R.id.gridview1);
 
-
         if(SessionManagement.getUserLevelFromSharedPrefs() == 1) {
             gridviewManagement();
         }
@@ -71,6 +71,9 @@ public class MainActivity extends BaseActivity {
                          */
                         break;
                     case 1: // Vikailmoitukset
+                        hapticFeedback.vibrate(50);
+                        Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
+                        startActivityForResult(intentFix, FIX_ID);
                         break;
                     case 2: // Ilmoitustaulu
                         break;
@@ -96,8 +99,6 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 1:
                         hapticFeedback.vibrate(50);
-                        Intent intentFix = new Intent(getBaseContext(), intentTest.class);
-                        startActivityForResult(intentFix, FIX_ID);
                         break;
                     case 2:
                         hapticFeedback.vibrate(50);
@@ -117,7 +118,6 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    //IMAGE ADAPTER//
     public class ImageAdapter extends BaseAdapter {
         private Context context;
         private final String[] mobileValues;
@@ -127,7 +127,6 @@ public class MainActivity extends BaseActivity {
             this.mobileValues = mobileValues;
         }
 
-        //---returns an ImageView view---
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -201,19 +200,16 @@ public class MainActivity extends BaseActivity {
             return gridView;
         }
 
-        //---returns the number of images---
         @Override
         public int getCount() {
             return mobileValues.length;
         }
 
-        //---returns the item---
         @Override
         public Object getItem(int position) {
             return null;
         }
 
-        //---returns the ID of an item---
         @Override
         public long getItemId(int position) {
             return 0;

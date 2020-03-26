@@ -47,7 +47,7 @@ public class BulletinBoardActivity extends BaseActivity {
         titles = new ArrayList<>();
         messages = new ArrayList<>();
         bulletinBoardAdapter = new BulletinBoardAdapter(this, titles, messages);
-        USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
+        USER_LEVEL = SessionManagement.getUserLevelFromSharedPrefs();
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(this);
@@ -55,7 +55,7 @@ public class BulletinBoardActivity extends BaseActivity {
         progressDialog.show();
 
         subtitle = findViewById(R.id.toolbar_subtitle);
-        subtitle.setText(R.string.board_title);
+        subtitle.setText(R.string.app_subtitle_bulletin_board);
 
         getBulletinBoardData(checkStakeHolder());
     }
@@ -63,11 +63,11 @@ public class BulletinBoardActivity extends BaseActivity {
     private String checkStakeHolder() {
         String url = "";
         if (USER_LEVEL == 0) {
-            STAKEHOLDER_ID = new SessionManagement(this).getUserHousingCooperativeIdFromSharedPrefs();
+            STAKEHOLDER_ID = SessionManagement.getUserHousingCooperativeIdFromSharedPrefs();
             url = getString(R.string.api_resident_bulletin_board);
         }
         else if (USER_LEVEL == 1) {
-            STAKEHOLDER_ID = new SessionManagement(this).getUserPropertyMaintenanceIDFromSharedPrefs();
+            STAKEHOLDER_ID = SessionManagement.getUserPropertyMaintenanceIDFromSharedPrefs();
             url = getString(R.string.api_custodian_bulletin_board);
         }
         return url;

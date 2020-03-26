@@ -31,19 +31,18 @@ public class HousingInfo extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_housing_info;
     }
+
     @Override
     protected void doStuff() {
-
-
         lV = findViewById(R.id.housingInfoList);
-
         lV.setAdapter(new InfoAdapter(this, INFO_TITLES));
-
         lV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -51,6 +50,7 @@ public class HousingInfo extends BaseActivity {
                     Intent intent = new Intent(HousingInfo.this, RescuePlan.class);
                     startActivity(intent);
                 }
+
                 else if (position == 1) {
                     Intent intent = new Intent(HousingInfo.this, HousingRegulations.class);
                     startActivity(intent);
@@ -123,8 +123,8 @@ public class HousingInfo extends BaseActivity {
                 else {
                     imageView.setImageResource(R.drawable.android_logo);
                 }
-            } else {
-
+            }
+            else {
                 listView = (View) convertView;
             }
 
@@ -146,8 +146,6 @@ public class HousingInfo extends BaseActivity {
             return 0;
         }
     }
-
-
 }
 
 

@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- PÄÄNÄKYMÄN GRID KOOT -->
     <dimen name="top_spacer">80dp</dimen>
 
     <dimen name="grid_size">160dp</dimen>
     <dimen name="grid_icon_size">120dp</dimen>
     <dimen name="grid_text_size">16dp</dimen>
-
     <dimen name="grid_vertical_spacing">20dp</dimen>
+
+    <dimen name="list_view_title">18sp</dimen>
+    <dimen name="list_view_body">16sp</dimen>
 
     <!-- Custom listview -->
     <dimen name="listview_icon_size">80dp</dimen>
     <dimen name="listview_margin">10dp</dimen>
 
 </resources>
-
-
-    <!--
-
-    <dimen name="my_value">16dp</dimen>
-
-    -->
