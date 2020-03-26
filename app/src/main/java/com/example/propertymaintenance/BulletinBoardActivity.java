@@ -28,7 +28,6 @@ public class BulletinBoardActivity extends BaseActivity {
     private TextView subtitle;
     private ProgressDialog progressDialog;
 
-    private int USER_ID;
     private int USER_LEVEL;
     private int STAKEHOLDER_ID;
 
@@ -48,18 +47,17 @@ public class BulletinBoardActivity extends BaseActivity {
         titles = new ArrayList<>();
         messages = new ArrayList<>();
         bulletinBoardAdapter = new BulletinBoardAdapter(this, titles, messages);
-
-        requestQueue = Volley.newRequestQueue(this);
-        USER_ID = new SessionManagement(this).getUserIdFromSharedPrefs();
         USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
-
-        getBulletinBoardData(checkStakeHolder());
-        subtitle = findViewById(R.id.toolbar_subtitle);
-        subtitle.setText(R.string.board_title);
+        requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.board_progress_dialog));
         progressDialog.show();
+
+        subtitle = findViewById(R.id.toolbar_subtitle);
+        subtitle.setText(R.string.board_title);
+
+        getBulletinBoardData(checkStakeHolder());
     }
 
     private String checkStakeHolder() {
