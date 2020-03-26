@@ -63,18 +63,18 @@ public class MainActivity extends BaseActivity {
                                     int position, long id) {
 
                 switch (position) {
-                    case 0:
+                    case 0: // Omat taloyhtiöt
                         /*
                         hapticFeedback.vibrate(50);
                         Intent intentHousing = new Intent(getBaseContext(), HousingInfo.class);
                         startActivityForResult(intentHousing, HOUSING_ID);
                          */
                         break;
-                    case 1:
+                    case 1: // Vikailmoitukset
                         break;
-                    case 2:
+                    case 2: // Ilmoitustaulu
                         break;
-                    case 3:
+                    case 3: // Työvuorot
                         break;
                     default:
                         break;
