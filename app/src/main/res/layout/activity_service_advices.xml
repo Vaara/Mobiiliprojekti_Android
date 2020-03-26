@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ServiceAdvices">
+    tools:context=".ServiceAdvices"
+    android:background="@color/activityBackground"
+    android:fitsSystemWindows="true">
+    <include layout="@layout/toolbar_main"/>
+
 
     <EditText
         android:id="@+id/textView2"
@@ -66,7 +70,6 @@
         android:layout_marginEnd="207dp"
         android:layout_marginBottom="8dp"
         android:text="Sisäänpääsy asuntoon:"
-        app:layout_constraintBottom_toTopOf="@+id/radioButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +105,6 @@
         android:layout_marginTop="136dp"
         android:layout_marginEnd="109dp"
         android:text="Yleisavaimella"
-        app:layout_constraintEnd_toStartOf="@+id/radioButton2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView2" />
@@ -116,7 +118,6 @@
         android:layout_marginBottom="8dp"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

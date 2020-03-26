@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class ServiceAdvices extends AppCompatActivity implements View.OnClickListener {
+public class ServiceAdvices extends BaseActivity implements View.OnClickListener {
 
 
     private static final int PERMISSION_CODE = 1000;
@@ -27,9 +27,17 @@ public class ServiceAdvices extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_advices);
-        findViewById(R.id.imageButtonCamera).setOnClickListener(this);
 
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_service_advices;
+    }
+
+    @Override
+    protected void doStuff() {
+        findViewById(R.id.imageButtonCamera).setOnClickListener(this);
     }
 
     public void pickImage() {
