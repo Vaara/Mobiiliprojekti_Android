@@ -48,7 +48,6 @@ public class MainActivity extends BaseActivity {
 
         gridView = (GridView) findViewById(R.id.gridview1);
 
-
         if(SessionManagement.getUserLevelFromSharedPrefs() == 1) {
             gridviewManagement();
         }
@@ -72,6 +71,9 @@ public class MainActivity extends BaseActivity {
                          */
                         break;
                     case 1:
+                        hapticFeedback.vibrate(50);
+                        Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
+                        startActivityForResult(intentFix, FIX_ID);
                         break;
                     case 2:
                         break;
@@ -97,8 +99,6 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 1:
                         hapticFeedback.vibrate(50);
-                        Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
-                        startActivityForResult(intentFix, FIX_ID);
                         break;
                     case 2:
                         hapticFeedback.vibrate(50);
