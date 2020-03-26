@@ -64,7 +64,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
             btnOpen.setEnabled(false);
             btnDone.setEnabled(true);
             btnAll.setEnabled(true);
-            // show proper list
             // notifydatasetChanged
         }
 

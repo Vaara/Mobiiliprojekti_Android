@@ -10,8 +10,8 @@ import android.widget.TextView;
 public class CustodianServiceAdviceAdapter extends BaseAdapter {
 
     private Context context;
-    private final String[] titles;
-    private final String[] housingCooperatives;
+    private String[] titles;
+    private String[] housingCooperatives;
 
     public CustodianServiceAdviceAdapter(Context context, String[] titles, String[] messages) {
         this.context = context;
