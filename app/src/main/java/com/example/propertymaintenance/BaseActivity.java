@@ -12,7 +12,6 @@ import android.view.MenuItem;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Toolbar toolBar;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
