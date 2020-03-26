@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,7 +24,6 @@ public class BulletinBoardActivity extends BaseActivity {
     private ArrayList<String> titles;
     private ArrayList<String> messages;
     private BulletinBoardAdapter bulletinBoardAdapter;
-    private TextView subtitle;
     private ProgressDialog progressDialog;
 
     private int USER_LEVEL;
@@ -54,9 +52,7 @@ public class BulletinBoardActivity extends BaseActivity {
         progressDialog.setMessage(getString(R.string.board_progress_dialog));
         progressDialog.show();
 
-        subtitle = findViewById(R.id.toolbar_subtitle);
-        subtitle.setText(R.string.app_subtitle_bulletin_board);
-
+        setToolbarTitle(getString(R.string.app_subtitle_bulletin_board));
         getBulletinBoardData(checkStakeHolder());
     }
 
