@@ -25,9 +25,11 @@ public class MainActivity extends BaseActivity {
     static final int BULLETIN_ID = 888;
     static final int CALENDAR_ID = 999;
 
-    static final String[] BUTTONLABELS = new String[]{
+    static final String[] BUTTONLABELSTENANT = new String[]{
             "Taloyhtiö info", "Vikailmoitus", "Ilmoitustaulu", "Varaukset"};
 
+    static final String[] BUTTONLABELSMANAGEMENT = new String[]{
+            "Omat taloyhtiöt", "Vikailmoitukset", "Ilmoitustaulu", "Työvuorot"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,44 @@ public class MainActivity extends BaseActivity {
         hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         gridView = (GridView) findViewById(R.id.gridview1);
-        gridView.setAdapter(new ImageAdapter(this, BUTTONLABELS));
+
+
+        if(SessionManagement.getUserLevelFromSharedPrefs() == 1) {
+            gridviewManagement();
+        }
+        else {
+            gridviewTenant();
+        }
+    }
+
+    private void gridviewManagement(){
+        gridView.setAdapter(new ImageAdapter(this, BUTTONLABELSMANAGEMENT));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+
+                switch (position) {
+                    case 0:
+                        /*
+                        hapticFeedback.vibrate(50);
+                        Intent intentHousing = new Intent(getBaseContext(), HousingInfo.class);
+                        startActivityForResult(intentHousing, HOUSING_ID);
+                         */
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+    private void gridviewTenant(){
+        gridView.setAdapter(new ImageAdapter(this, BUTTONLABELSTENANT));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -114,23 +153,44 @@ public class MainActivity extends BaseActivity {
 
                 String mobile = mobileValues[position];
 
+                if(SessionManagement.getUserLevelFromSharedPrefs() == 1) {
+                    switch (position) {
+                        case 0:
+                            imageView.setImageResource(R.drawable.ic_icon_housingcompanies);
+                            break;
+                        case 1:
+                            imageView.setImageResource(R.drawable.ic_icon_fix);
+                            break;
+                        case 2:
+                            imageView.setImageResource(R.drawable.ic_icon_postit);
+                            break;
+                        case 3:
+                            imageView.setImageResource(R.drawable.ic_icon_clockin);
+                            break;
+                        default:
+                            imageView.setImageResource(R.mipmap.ic_launcher);
+                            break;
+                    }
+                }
 
-                switch (position) {
-                    case 0:
-                        imageView.setImageResource(R.drawable.ic_icon_housing);
-                        break;
-                    case 1:
-                        imageView.setImageResource(R.drawable.ic_icon_fix);
-                        break;
-                    case 2:
-                        imageView.setImageResource(R.drawable.ic_icon_postit);
-                        break;
-                    case 3:
-                        imageView.setImageResource(R.drawable.ic_icon_calendar);
-                        break;
-                    default:
-                        imageView.setImageResource(R.mipmap.ic_launcher);
-                        break;
+                else {
+                    switch (position) {
+                        case 0:
+                            imageView.setImageResource(R.drawable.ic_icon_housing);
+                            break;
+                        case 1:
+                            imageView.setImageResource(R.drawable.ic_icon_fix);
+                            break;
+                        case 2:
+                            imageView.setImageResource(R.drawable.ic_icon_postit);
+                            break;
+                        case 3:
+                            imageView.setImageResource(R.drawable.ic_icon_calendar);
+                            break;
+                        default:
+                            imageView.setImageResource(R.mipmap.ic_launcher);
+                            break;
+                    }
                 }
 
             } else {

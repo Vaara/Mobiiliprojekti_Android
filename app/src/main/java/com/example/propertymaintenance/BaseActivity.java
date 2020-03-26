@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Toolbar toolBar;
@@ -33,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
             }
         }
-
+        updateToolbarSubtitles();
         doStuff();
     }
 
@@ -71,6 +72,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateToolbarSubtitles(){
+        TextView subtitle = (TextView) findViewById(R.id.toolbar_subtitle);
+        TextView userName = (TextView) findViewById(R.id.toolbar_user);
+
+        if(SessionManagement.getUserLevelFromSharedPrefs() == 1 && subtitle.getText() != "kiinteistöhuolto")
+        {
+            subtitle.setText("Kiinteistöhuolto");
+        }
+        else
+        {
+            subtitle.setText("Asukasportaali");
+        }
+
+        userName.setText(""+SessionManagement.getUserFullNameFromSharedPrefs());
     }
 
     public void logout(Activity activity) {
