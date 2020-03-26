@@ -11,7 +11,7 @@
 
 
     <EditText
-        android:id="@+id/textView2"
+        android:id="@+id/additionalInfoMessage"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
@@ -24,17 +24,18 @@
         android:maxLines="6"
         android:minLines="1"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintBottom_toTopOf="@+id/entryIntoHouse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/additionalInfoTitle" />
 
     <EditText
-        android:id="@+id/textView"
+        android:id="@+id/problemMessage"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/darker_gray"
@@ -43,71 +44,68 @@
         android:maxLines="6"
         android:minLines="1"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/additionalInfoTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/titleProblem" />
 
     <TextView
-        android:id="@+id/editText"
+        android:id="@+id/titleProblem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="64dp"
         android:layout_marginBottom="2dp"
         android:text="Kuvaile vika"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/problemMessage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/editText3"
+        android:id="@+id/entryIntoHouse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="207dp"
-        android:layout_marginBottom="8dp"
         android:text="Sisäänpääsy asuntoon:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/additionalInfoMessage" />
 
     <TextView
-        android:id="@+id/editText2"
+        android:id="@+id/additionalInfoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="Lisätiedot"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/additionalInfoMessage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/problemMessage" />
 
     <CheckBox
         android:id="@+id/callAndMakeAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="80dp"
         android:text="Soita ja sovi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/additionalInfoMessage" />
 
     <CheckBox
         android:id="@+id/masterkeyAllowed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="109dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="72dp"
         android:text="Yleisavaimella"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2" />
+        app:layout_constraintTop_toBottomOf="@id/additionalInfoMessage" />
 
     <ImageButton
         android:id="@+id/imageButtonCamera"
