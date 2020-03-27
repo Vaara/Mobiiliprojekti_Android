@@ -25,7 +25,7 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
-            android:id="@+id/tvCustodianServiceAdviceMessageBody"
+            android:id="@+id/tvCustodianServiceAdviceHousingCooperativeName"
             android:textSize="@dimen/list_view_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

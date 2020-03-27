@@ -7,21 +7,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CustodianServiceAdviceAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] titles;
-    private String[] housingCooperatives;
+    private ArrayList<String> titles;
+    private ArrayList<String> housingCooperatives;
 
-    public CustodianServiceAdviceAdapter(Context context, String[] titles, String[] messages) {
+    public CustodianServiceAdviceAdapter(Context context, ArrayList titles, ArrayList housingCooperatives) {
         this.context = context;
         this.titles = titles;
-        this.housingCooperatives = messages;
+        this.housingCooperatives = housingCooperatives;
     }
 
     @Override
     public int getCount() {
-        return titles.length;
+        return titles.size();
     }
 
     @Override
@@ -36,6 +38,7 @@ public class CustodianServiceAdviceAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View listView;
 
@@ -44,10 +47,10 @@ public class CustodianServiceAdviceAdapter extends BaseAdapter {
             listView = inflater.inflate(R.layout.custodian_service_advice_list, null);
 
             TextView tvTitle = listView.findViewById(R.id.tvCustodianServiceAdviceMessageTitle);
-            tvTitle.setText(titles[position]);
+            tvTitle.setText(titles.get(position));
 
-            TextView tvMessage = listView.findViewById(R.id.tvCustodianServiceAdviceMessageBody);
-            tvMessage.setText(housingCooperatives[position]);
+            TextView tvHousingCooperative = listView.findViewById(R.id.tvCustodianServiceAdviceHousingCooperativeName);
+            tvHousingCooperative.setText(housingCooperatives.get(position));
         }
 
         else {
