@@ -115,7 +115,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
         }
 
 
-        if (v.getId() == R.id.sendButton) {
+        if (v.getId() == R.id.sendButton && edProblemMessage != null) {
 
             if (checkBoxMasterKey.isChecked()) {
                 masterKey = 1;
@@ -139,18 +139,19 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
     private void sendMessage(){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String urlBasepart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice/";
-        String urlIdPart = SessionManagement.getUserIdFromSharedPrefs().toString();
-        String url = urlBasepart + urlIdPart;
+        String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice/";
+        Log.d ("problemMessage",edProblemMessage.getText().toString());
+        Log.d ("problemMessage",edTitleProblem.getText().toString());
+        Log.d ("problemMessage",edAdditionalMessage.getText().toString());
 
 
         JSONObject serviceAdvice = new JSONObject();
         try {
-            serviceAdvice.put("idResidents", USER_ID);
-            serviceAdvice.put("idHousingCooperative", USER_HOUSING_COOPERATIVE_ID);
-            serviceAdvice.put("ServiceMessageTitle",edTitleProblem.getText().toString());
-            serviceAdvice.put("ServiceMessage", edProblemMessage.getText().toString());
-            serviceAdvice.put("AdditionalMessage", edAdditionalMessage.getText().toString());
+            serviceAdvice.put("idResidents", 1);
+            serviceAdvice.put("idHousingCooperative", 1);
+            serviceAdvice.put("ServiceMessageTitle","test3");
+            serviceAdvice.put("ServiceMessage", "test4");
+            serviceAdvice.put("AdditionalMessage", "test5");
             serviceAdvice.put("MasterKeyAllowed", masterKey);
             serviceAdvice.put("ContactResident", contactResident);
         } catch (JSONException e) {
@@ -160,6 +161,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
 
                           //  Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
                         //Log.d("viesti2", String.valueOf(response));
@@ -171,7 +173,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
 
                         //Toast.makeText(ServiceAdvices.this, error.getMessage(),Toast.LENGTH_LONG).show();
                         Toast.makeText(getApplicationContext(), "Response:  " + error.toString(), Toast.LENGTH_LONG).show();
-
+                        error.printStackTrace();
                         Log.d("viesti", "Error in lähetys");
                     }
                 }
