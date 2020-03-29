@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +29,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
 
     private int USER_ID;
     private int USER_LEVEL;
+    private int USER_HOUSING_COOPERATIVE_ID;
     private int IMAGE_CAPTURE_CODE = 1001;
     private static final int PICK_IMAGE = 1002;
 
@@ -38,6 +40,10 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
     private RequestQueue requestQueue;
     private int masterKey;
     private int contactResident;
+    EditText edTitleProblem;
+    EditText edProblemMessage;
+    EditText edAdditionalMessage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,9 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
     @Override
     protected void doStuff() {
 
+        edTitleProblem = findViewById(R.id.titleProblem);
+        edProblemMessage = findViewById(R.id.problemMessage);
+        edAdditionalMessage = findViewById(R.id.additionalInfoMessage);
         findViewById(R.id.imageButtonCamera).setOnClickListener(this);
         sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
@@ -64,6 +73,8 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
         requestQueue = Volley.newRequestQueue(this);
         USER_ID = new SessionManagement(this).getUserIdFromSharedPrefs();
         USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
+        USER_HOUSING_COOPERATIVE_ID = new SessionManagement(this).getUserHousingCooperativeIdFromSharedPrefs();
+
         getUserAddress();
 
     }
@@ -107,12 +118,12 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
         if (v.getId() == R.id.sendButton) {
 
             if (checkBoxMasterKey.isChecked()) {
+                masterKey = 1;
                 Log.d("vikailmoitus", "masterkey");
-
             }
             if (checkBoxContactResident.isChecked()) {
+                contactResident = 1;
                 Log.d("vikailmoitus", "soita ja sovi");
-
             }
             sendMessage();
         }
@@ -128,36 +139,52 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
     private void sendMessage(){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String urlBasepart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice";
-        String urlIdPart = SessionManagement.getUserIdFromSharedPrefs();
+        String urlBasepart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice/";
+        String urlIdPart = SessionManagement.getUserIdFromSharedPrefs().toString();
         String url = urlBasepart + urlIdPart;
+
 
         JSONObject serviceAdvice = new JSONObject();
         try {
-            serviceAdvice.put("idResidents", "");
-            serviceAdvice.put("idHousingCooperative", "");
-            serviceAdvice.put("ServiceMessageTitle","");
-            serviceAdvice.put("ServiceMessage", "");
-            serviceAdvice.put("AdditionalMessage", "");
+            serviceAdvice.put("idResidents", USER_ID);
+            serviceAdvice.put("idHousingCooperative", USER_HOUSING_COOPERATIVE_ID);
+            serviceAdvice.put("ServiceMessageTitle",edTitleProblem.getText().toString());
+            serviceAdvice.put("ServiceMessage", edProblemMessage.getText().toString());
+            serviceAdvice.put("AdditionalMessage", edAdditionalMessage.getText().toString());
             serviceAdvice.put("MasterKeyAllowed", masterKey);
             serviceAdvice.put("ContactResident", contactResident);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if (checkBoxMasterKey.isChecked()) {
-            masterKey = 1;
-            Log.d("vikailmoitus", "masterkey");
-        }
-        if (checkBoxContactResident.isChecked()) {
-            contactResident = 1;
-            Log.d("vikailmoitus", "soita ja sovi");
-        }
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, serviceAdvice,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                          //  Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+                        //Log.d("viesti2", String.valueOf(response));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        //Toast.makeText(ServiceAdvices.this, error.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Response:  " + error.toString(), Toast.LENGTH_LONG).show();
+
+                        Log.d("viesti", "Error in lähetys");
+                    }
+                }
+        );
+        queue.add(getRequest);
 
     }
 
     private void getUserAddress() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/resident/1";
+        String urlBasepart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/resident/";
+        String urlIdPart = SessionManagement.getUserIdFromSharedPrefs().toString();
+        String url = urlBasepart + urlIdPart;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
