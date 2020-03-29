@@ -8,8 +8,26 @@
 
     android:background="@color/activityBackground"
     android:fitsSystemWindows="true">
-    <include layout="@layout/toolbar_main"/>
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_main" />
+
+    <EditText
+        android:id="@+id/titleProblem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/infoProblem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/additionalInfoMessage"
@@ -47,16 +65,16 @@
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/additionalInfoTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleProblem" />
+        app:layout_constraintTop_toBottomOf="@+id/infoProblem" />
 
     <TextView
-        android:id="@+id/titleProblem"
+        android:id="@+id/infoProblem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="120dp"
         android:layout_marginBottom="2dp"
         android:text="Kuvaile vika"
         app:layout_constraintBottom_toTopOf="@+id/problemMessage"
@@ -92,8 +110,9 @@
         android:id="@+id/callAndMakeAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="66dp"
         android:layout_marginEnd="80dp"
+        android:onClick="onCheckboxClicked"
         android:text="Soita ja sovi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/additionalInfoMessage" />
@@ -103,7 +122,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="66dp"
+        android:onClick="onCheckboxClicked"
         android:text="Yleisavaimella"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/additionalInfoMessage" />
@@ -130,6 +150,20 @@
         android:text="Lähetä"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/infoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="346dp"
+        android:layout_marginBottom="8dp"
+        android:text="Otsikko"
+        app:layout_constraintBottom_toTopOf="@+id/titleProblem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
