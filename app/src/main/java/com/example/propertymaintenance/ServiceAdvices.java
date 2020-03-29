@@ -147,11 +147,11 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
 
         JSONObject serviceAdvice = new JSONObject();
         try {
-            serviceAdvice.put("idResidents", 1);
-            serviceAdvice.put("idHousingCooperative", 1);
-            serviceAdvice.put("ServiceMessageTitle","test3");
-            serviceAdvice.put("ServiceMessage", "test4");
-            serviceAdvice.put("AdditionalMessage", "test5");
+            serviceAdvice.put("idResidents", USER_ID);
+            serviceAdvice.put("idHousingCooperative", USER_HOUSING_COOPERATIVE_ID);
+            serviceAdvice.put("ServiceMessageTitle",edTitleProblem.getText().toString());
+            serviceAdvice.put("ServiceMessage", edProblemMessage.getText().toString());
+            serviceAdvice.put("AdditionalMessage", edAdditionalMessage.getText().toString());
             serviceAdvice.put("MasterKeyAllowed", masterKey);
             serviceAdvice.put("ContactResident", contactResident);
         } catch (JSONException e) {
