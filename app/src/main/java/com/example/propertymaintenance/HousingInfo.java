@@ -20,9 +20,9 @@ import android.widget.TextView;
 public class HousingInfo extends BaseActivity {
 
     ListView lV;
-    static final String[] INFO_TITLES = new String[]{"Pelastussuunnitelma", "Taloyhtion yhteystiedot",
-            "Taloyhtion jarjestyssaannot", "Kiinteistohuollon yhteystiedot", "Isannoinnin yhteystiedot",
-            "Jatehuollon yhteystiedot"};
+    static final String[] INFO_TITLES = new String[]{"Pelastussuunnitelma", "Taloyhtiön järjestyssäännöt",
+            "Taloyhtiön yhteystiedot", "Kiinteistöhuollon yhteystiedot", "Isännoinnin yhteystiedot",
+            "Jätehuollon yhteystiedot"};
 
     String URL = "https://group3mobilebucket.s3.amazonaws.com/taloyhtion_pelastussuunnitelma.pdf";
     String URL_2 = "https://group3mobilebucket.s3.amazonaws.com/taloyhtion_jarjestyssaannot.pdf";
@@ -31,43 +31,43 @@ public class HousingInfo extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_housing_info;
     }
+
     @Override
     protected void doStuff() {
-
-
         lV = findViewById(R.id.housingInfoList);
-
         lV.setAdapter(new InfoAdapter(this, INFO_TITLES));
-
         lV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0) {
                     Intent intent = new Intent(HousingInfo.this, RescuePlan.class);
-                }
-
-                if (position == 1) {
-                    Intent intent = new Intent(HousingInfo.this, HousingContact.class);
                     startActivity(intent);
                 }
-                if (position == 2) {
+
+                else if (position == 1) {
                     Intent intent = new Intent(HousingInfo.this, HousingRegulations.class);
                     startActivity(intent);
                 }
-                if (position == 3) {
+                else if (position == 2) {
+                    Intent intent = new Intent(HousingInfo.this, HousingContact.class);
+                    startActivity(intent);
+                }
+                else if (position == 3) {
                     Intent intent = new Intent(HousingInfo.this, PropertyMaintenanceContact.class);
                     startActivity(intent);
                 }
-                if (position == 4) {
+                else if (position == 4) {
                     Intent intent = new Intent(HousingInfo.this, PropertyManagement.class);
                     startActivity(intent);
                 }
-                if (position == 5) {
+                else if (position == 5) {
                     Intent intent = new Intent(HousingInfo.this, WasteManagement.class);
                     startActivity(intent);
                 }
@@ -103,20 +103,28 @@ public class HousingInfo extends BaseActivity {
                 String icon = infoValues[position];
 
                 if (icon.equals("Pelastussuunnitelma")){
-                    imageView.setImageResource(R.drawable.android_logo);
-                } else if (icon.equals("Taloyhtiohallituksen tiedot")){
-                    imageView.setImageResource(R.drawable.android_logo);
-                } else if (icon.equals("Taloyhtion yhteystiedot")){
-                    imageView.setImageResource(R.drawable.android_logo);
-                } else if (icon.equals("Kiinteistohuollon yhteystiedot")){
-                    imageView.setImageResource(R.drawable.android_logo);
-                } else if (icon.equals("Isannoinnin yhteystiedot")){
-                    imageView.setImageResource(R.drawable.android_logo);
-                } else {
+                    imageView.setImageResource(R.drawable.ic_icon_emergency);
+                }
+                else if (icon.equals("Taloyhtiön yhteystiedot")){
+                    imageView.setImageResource(R.drawable.ic_icon_contacthousing);
+                }
+                else if (icon.equals("Taloyhtiön järjestyssäännöt")){
+                    imageView.setImageResource(R.drawable.ic_icon_handshake);
+                }
+                else if (icon.equals("Kiinteistöhuollon yhteystiedot")){
+                    imageView.setImageResource(R.drawable.ic_icon_contactmaintenance);
+                }
+                else if (icon.equals("Isännoinnin yhteystiedot")){
+                    imageView.setImageResource(R.drawable.ic_icon_contactproperty);
+                }
+                else if (icon.equals("Jätehuollon yhteystiedot")){
+                    imageView.setImageResource(R.drawable.ic_icon_contactwaste);
+                }
+                else {
                     imageView.setImageResource(R.drawable.android_logo);
                 }
-            } else {
-
+            }
+            else {
                 listView = (View) convertView;
             }
 
@@ -138,8 +146,6 @@ public class HousingInfo extends BaseActivity {
             return 0;
         }
     }
-
-
 }
 
 

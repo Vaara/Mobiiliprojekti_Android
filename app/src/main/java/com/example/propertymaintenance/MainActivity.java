@@ -1,7 +1,6 @@
 package com.example.propertymaintenance;
 
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,9 +26,11 @@ public class MainActivity extends BaseActivity {
     static final int BULLETIN_ID = 888;
     static final int CALENDAR_ID = 999;
 
-    static final String[] BUTTONLABELS = new String[]{
+    static final String[] BUTTONLABELSTENANT = new String[]{
             "Taloyhtiö info", "Vikailmoitus", "Ilmoitustaulu", "Varaukset"};
 
+    static final String[] BUTTONLABELSMANAGEMENT = new String[]{
+            "Omat taloyhtiöt", "Vikailmoitukset", "Ilmoitustaulu", "Työvuorot"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,46 @@ public class MainActivity extends BaseActivity {
         hapticFeedback = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         gridView = (GridView) findViewById(R.id.gridview1);
-        gridView.setAdapter(new ImageAdapter(this, BUTTONLABELS));
+
+        if(SessionManagement.getUserLevelFromSharedPrefs() == 1) {
+            gridviewManagement();
+        }
+        else {
+            gridviewTenant();
+        }
+    }
+
+    private void gridviewManagement(){
+        gridView.setAdapter(new ImageAdapter(this, BUTTONLABELSMANAGEMENT));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+
+                switch (position) {
+                    case 0: // Omat taloyhtiöt
+                        /*
+                        hapticFeedback.vibrate(50);
+                        Intent intentHousing = new Intent(getBaseContext(), HousingInfo.class);
+                        startActivityForResult(intentHousing, HOUSING_ID);
+                         */
+                        break;
+                    case 1: // Vikailmoitukset
+                        hapticFeedback.vibrate(50);
+                        Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
+                        startActivityForResult(intentFix, FIX_ID);
+                        break;
+                    case 2: // Ilmoitustaulu
+                        break;
+                    case 3: // Työvuorot
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+    private void gridviewTenant(){
+        gridView.setAdapter(new ImageAdapter(this, BUTTONLABELSTENANT));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -81,7 +121,6 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    //IMAGE ADAPTER//
     public class ImageAdapter extends BaseAdapter {
         private Context context;
         private final String[] mobileValues;
@@ -91,7 +130,6 @@ public class MainActivity extends BaseActivity {
             this.mobileValues = mobileValues;
         }
 
-        //---returns an ImageView view---
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -118,23 +156,44 @@ public class MainActivity extends BaseActivity {
 
                 String mobile = mobileValues[position];
 
+                if(SessionManagement.getUserLevelFromSharedPrefs() == 1) {
+                    switch (position) {
+                        case 0:
+                            imageView.setImageResource(R.drawable.ic_icon_housingcompanies);
+                            break;
+                        case 1:
+                            imageView.setImageResource(R.drawable.ic_icon_fix);
+                            break;
+                        case 2:
+                            imageView.setImageResource(R.drawable.ic_icon_postit);
+                            break;
+                        case 3:
+                            imageView.setImageResource(R.drawable.ic_icon_clockin);
+                            break;
+                        default:
+                            imageView.setImageResource(R.mipmap.ic_launcher);
+                            break;
+                    }
+                }
 
-                switch (position) {
-                    case 0:
-                        imageView.setImageResource(R.drawable.ic_icon_housing);
-                        break;
-                    case 1:
-                        imageView.setImageResource(R.drawable.ic_icon_fix);
-                        break;
-                    case 2:
-                        imageView.setImageResource(R.drawable.ic_icon_postit);
-                        break;
-                    case 3:
-                        imageView.setImageResource(R.drawable.ic_icon_calendar);
-                        break;
-                    default:
-                        imageView.setImageResource(R.mipmap.ic_launcher);
-                        break;
+                else {
+                    switch (position) {
+                        case 0:
+                            imageView.setImageResource(R.drawable.ic_icon_housing);
+                            break;
+                        case 1:
+                            imageView.setImageResource(R.drawable.ic_icon_fix);
+                            break;
+                        case 2:
+                            imageView.setImageResource(R.drawable.ic_icon_postit);
+                            break;
+                        case 3:
+                            imageView.setImageResource(R.drawable.ic_icon_calendar);
+                            break;
+                        default:
+                            imageView.setImageResource(R.mipmap.ic_launcher);
+                            break;
+                    }
                 }
 
             } else {
@@ -144,19 +203,16 @@ public class MainActivity extends BaseActivity {
             return gridView;
         }
 
-        //---returns the number of images---
         @Override
         public int getCount() {
             return mobileValues.length;
         }
 
-        //---returns the item---
         @Override
         public Object getItem(int position) {
             return null;
         }
 
-        //---returns the ID of an item---
         @Override
         public long getItemId(int position) {
             return 0;

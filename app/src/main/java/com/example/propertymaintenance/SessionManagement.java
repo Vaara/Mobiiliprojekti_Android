@@ -5,16 +5,16 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 public class SessionManagement {
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    private static SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
 
-    private String SHARED_PREFS = "sharedPrefs";
-    private String USER_ID = "userId";
-    private String USER_LEVEL = "userLevel";
-    private String USER_FULL_NAME = "userFullName";
-    private String USER_HOUSING_COOPERATIVE_ID = "userHousingCooperativeId";
-    private String USER_PROPERTY_MAINTENANCE_ID = "userPropertyMaintenanceId";
-    private  String SESSION_KEY = "sessionKey";
+    private static String SHARED_PREFS = "sharedPrefs";
+    private static String USER_ID = "userId";
+    private static String USER_LEVEL = "userLevel";
+    private static String USER_FULL_NAME = "userFullName";
+    private static String USER_HOUSING_COOPERATIVE_ID = "userHousingCooperativeId";
+    private static String USER_PROPERTY_MAINTENANCE_ID = "userPropertyMaintenanceId";
+    private static String SESSION_KEY = "sessionKey";
 
     private Integer userIdResponse;
     private  Integer userLevelResponse;
@@ -93,28 +93,28 @@ public class SessionManagement {
         }
     }
 
-    public  Integer getUserIdFromSharedPrefs() {
+    public static Integer getUserIdFromSharedPrefs() {
         Integer userId = sharedPreferences.getInt(USER_ID, 99);
         return userId;
     }
 
-    public  Integer getUserLevelFromSharedPrefs() {
+    public static Integer getUserLevelFromSharedPrefs() {
         Integer userLevel = sharedPreferences.getInt(USER_LEVEL, 99);
         return userLevel;
     }
 
-    public  String getUserFullNameFromSharedPrefs() {
+    public static String getUserFullNameFromSharedPrefs() {
         String userFullName = sharedPreferences.getString(USER_FULL_NAME, "");
         return userFullName;
     }
 
-    public  Integer getUserHousingCooperativeIdFromSharedPrefs() {
+    public static Integer getUserHousingCooperativeIdFromSharedPrefs() {
         Integer userHousingCooperativeId = sharedPreferences.getInt(USER_HOUSING_COOPERATIVE_ID, 99);
         return userHousingCooperativeId;
 
     }
 
-    public  Integer getUserPropertyMaintenanceIDFromSharedPrefs() {
+    public static Integer getUserPropertyMaintenanceIDFromSharedPrefs() {
         Integer userPropertyMaintenanceId = sharedPreferences.getInt(USER_PROPERTY_MAINTENANCE_ID, 99);
         return userPropertyMaintenanceId;
     }
