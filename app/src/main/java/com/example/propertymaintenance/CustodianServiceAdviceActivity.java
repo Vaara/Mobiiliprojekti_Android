@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,12 +27,15 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     Button btnOpen;
     Button btnDone;
     ListView listView;
-    CustodianServiceAdviceAdapter adapter;
+    CustodianServiceAdviceAdapter adapterId;
+    CustodianServiceAdviceAdapter adapterName;
+
 
     static private ArrayList<String> messageTitles;
-    static private ArrayList<String> housingCooperatives;
+    static private ArrayList<String> housingCooperativeIds;
+    static private ArrayList<String> housingCooperativeNames;
 
-    static HashMap<Integer, String> housingCooperativeIds;
+    static HashMap<Integer, String> housingCooperativeIdsNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +52,14 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
         setToolbarTitle("Vikailmoitukset");
 
         messageTitles = new ArrayList<>();
-        housingCooperatives = new ArrayList<>();
+        housingCooperativeIds = new ArrayList<>();
+        housingCooperativeNames = new ArrayList<>();
 
-        housingCooperativeIds = new HashMap<>();
+        housingCooperativeIdsNames = new HashMap<>();
 
         listView = findViewById(R.id.lvCustodianServiceAdvice);
-        adapter = new CustodianServiceAdviceAdapter(this, messageTitles, housingCooperatives);
-        listView.setAdapter(adapter);
+        adapterId = new CustodianServiceAdviceAdapter(this, messageTitles, housingCooperativeIds);
+        listView.setAdapter(adapterId);
 
         btnOpen = findViewById(R.id.btnCustodianServiceAdviceOpen);
         btnOpen.setOnClickListener(this);
@@ -99,7 +102,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
                         messageTitles.clear();
-                        housingCooperatives.clear();
+                        housingCooperativeIds.clear();
                         //housingCooperativeIds.clear();
 
                         try {
@@ -107,7 +110,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
                             if (results.length() < 1) {
                                 messageTitles.add(getString(R.string.custodian_service_advice_no_service_advices_fi));
-                                housingCooperatives.add("");
+                                housingCooperativeIds.add("");
                             }
 
                             else {
@@ -116,50 +119,32 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                     String title = singleServiceAdvice.optString("ServiceMessageTitle");
                                     Integer housingCooperativeId = singleServiceAdvice.optInt("idHousingCooperative");
                                     Integer done = singleServiceAdvice.optInt("Done");
-                                    String name;
+                                    String name = housingCooperativeId.toString();
 
+                                    housingCooperativeIdsNames.put(housingCooperativeId, name);
 
-                                    if (housingCooperativeIds.containsKey(housingCooperativeId)) {
-                                        name = housingCooperativeIds.get(housingCooperativeId);
-                                        housingCooperatives.add(name);
+                                    // Open ServiceAdvices selected
+                                    if (!btnOpen.isEnabled()) {
+
+                                        if (done == 0) {
+                                            messageTitles.add(title);
+                                            housingCooperativeIds.add(name);
+                                        }
                                     }
 
-                                    else {
-                                        name = "Taloyhtiö";
+                                    // Done ServiceAdvices selected
+                                    else if (!btnDone.isEnabled()) {
 
-                                        //messageTitles.add(title);
-                                        //housingCooperatives.add(name);
-
-                                        // Somehow prevents all messages to download to list
-                                        // housingCooperativeIds.put(housingCooperativeId, name);
-
-
-                                        if (btnOpen.isEnabled() == false) {
-
-                                            if (done ==0) {
-                                                messageTitles.add(title);
-                                                housingCooperatives.add(name);
-                                                //housingCooperativeIds.put(id, name);
-                                            }
+                                        if (done == 1) {
+                                            messageTitles.add(title);
+                                            housingCooperativeIds.add(name);
                                         }
-
-                                        else if (btnDone.isEnabled() == false) {
-
-                                            if (done == 1) {
-                                                messageTitles.add(title);
-                                                housingCooperatives.add(name);
-                                                //housingCooperativeIds.put(id, name);
-                                            }
-                                        }
-
-                                        //fetchName(id);
-                                        Log.d("TEST", "fetchData() Name from hashmap " + name);
-                                        Log.d("TEST", "fetchData() name " + name);
                                     }
                                 }
-                                Log.d("TEST", "fetchData()");
                             }
-                            adapter.notifyDataSetChanged();
+                            //adapter.notifyDataSetChanged();
+                            fetchHousingCooperativeNames();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(CustodianServiceAdviceActivity.this, R.string.something_went_wrong_fi, Toast.LENGTH_LONG).show();
@@ -179,16 +164,15 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
         queue.add(getRequest);
     }
 
-    public void fetchName(final Integer idTest) {
+    public void fetchHousingCooperativeNames() {
         RequestQueue queueName = Volley.newRequestQueue(this);
-        String urlBasePart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/housingcooperative/";
-        String urlIdPart = idTest.toString();
-        String url = urlBasePart + urlIdPart;
+        String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/housingcooperative";
 
         JsonObjectRequest getRequestName = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Integer id;
                         String name;
 
                         try {
@@ -199,14 +183,14 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                             }
 
                             else {
-                                JSONObject singleServiceAdvice = results.getJSONObject(0);
-                                name = singleServiceAdvice.optString("Name");
-                                housingCooperativeIds.put(idTest, name);
-                                String nema = housingCooperativeIds.get(idTest);
-                                Log.d("TEST", "fetchName()");
-                                Log.d("TEST", "fetchName() Name from optstring " + name);
-                                Log.d("TEST", "fetchName() Name from hashmap " + nema);
+                                for (int i=0; i<results.length(); i++) {
+                                    JSONObject singleHousingCooperative = results.getJSONObject(i);
+                                    id = singleHousingCooperative.optInt("idHousingCooperative");
+                                    name = singleHousingCooperative.optString("Name");
+                                    housingCooperativeIdsNames.put(id, name);
+                                }
                             }
+                            updateIdsToNames();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -215,10 +199,22 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("TEST", "onErrorResponse fetchName()");
+                        Log.d("TEST", "onErrorResponse fetchHousingCooperativeNames()");
                     }
                 }
         );
         queueName.add(getRequestName);
+    }
+
+    public void updateIdsToNames() {
+        for (int i = 0; i< housingCooperativeIds.size(); i++) {
+            Integer id = Integer.parseInt(housingCooperativeIds.get(i));
+            String name = housingCooperativeIdsNames.get(id);
+            Log.d("TEST", "getHashMap" + name);
+            housingCooperativeNames.add(name);
+        }
+
+        adapterName = new CustodianServiceAdviceAdapter(this, messageTitles, housingCooperativeNames);
+        listView.setAdapter(adapterName);
     }
 }
