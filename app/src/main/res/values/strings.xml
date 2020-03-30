@@ -46,7 +46,6 @@
     <string name="api_custodian">/custodian/</string>
     <string name="api_housing_cooperative">/housingcooperative/</string>
     <string name="api_service_advice">/serviceadvice/</string>
-    <string name="api_service_advice_done">/serviceadvice/done/</string>
     <string name="api_service_advice_report">/serviceadvicereport/</string>
     <string name="api_resident_bulletin_board">/residentbulletinboard/</string>
     <string name="api_custodian_bulletin_board">/custodianbulletinboard/</string>
