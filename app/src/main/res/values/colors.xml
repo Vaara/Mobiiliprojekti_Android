@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- TOOLBAR -->
     <color name="toolbarColorPrimary">#4663B8</color>
     <color name="toolbarColorPrimaryDark">#20346C</color>
@@ -32,4 +33,5 @@
     <color name="iconColorLight">#ffffff</color>
     -->
 
+>>>>>>> master
 </resources>

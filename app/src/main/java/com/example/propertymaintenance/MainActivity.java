@@ -1,19 +1,20 @@
 package com.example.propertymaintenance;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Vibrator;
+
 
 public class MainActivity extends BaseActivity {
 
@@ -101,7 +102,11 @@ public class MainActivity extends BaseActivity {
                         startActivityForResult(intentHousing, HOUSING_ID);
                         break;
                     case 1:
-                        //---
+
+                        hapticFeedback.vibrate(50);
+                        Intent intentFix = new Intent(getBaseContext(), ServiceAdvices.class);
+                        startActivityForResult(intentFix, FIX_ID);
+
                         break;
                     case 2:
                         Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
