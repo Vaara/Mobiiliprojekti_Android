@@ -1,9 +1,11 @@
 package com.example.propertymaintenance;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -71,6 +73,15 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
         progressDialog = new ProgressDialog(CustodianServiceAdviceActivity.this);
         progressDialog.setMessage(getString(R.string.progress_dialog_loading_fi));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Intent intent = new Intent(getApplicationContext(), CustodianServiceAdviceViewDetails.class);
+                //intent.putExtra("serviceID", Integer.parseInt(housingCooperativeIds.get(position)));
+                //startActivity(intent);
+            }
+        });
 
         fetchData();
     }
