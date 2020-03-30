@@ -64,11 +64,11 @@ public class MainActivity extends BaseActivity {
 
                 switch (position) {
                     case 0: // Omat taloyhtiöt
-                        /*
-                        hapticFeedback.vibrate(50);
-                        Intent intentHousing = new Intent(getBaseContext(), HousingInfo.class);
-                        startActivityForResult(intentHousing, HOUSING_ID);
-                         */
+
+                        Intent serviced = new Intent(getBaseContext(), CustodianServiceAdviceViewDetails.class);
+                        serviced.putExtra("serviceID",6);
+                        startActivityForResult(serviced, FIX_ID);
+
                         break;
                     case 1: // Vikailmoitukset
                         hapticFeedback.vibrate(50);
