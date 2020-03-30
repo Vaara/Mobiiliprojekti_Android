@@ -108,17 +108,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
+
                         try {
                             userIdResponse = response.getInt("userId");
                             userLevelResponse = response.optInt("userLevel");
                             userFullNameResponse = response.optString("userFullName");
                             userHousingCooperativeIdResponse = response.optInt("userHousingCooperativeId");
                             userPropertyMaintenanceIdResponse = response.optInt("userPropertyMaintenanceId");
-
-                            //Toast.makeText(LoginActivity.this, R.string.toast_login_ok_fi, Toast.LENGTH_LONG).show();
                             login();
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(LoginActivity.this, R.string.toast_login_failed_fi, Toast.LENGTH_LONG).show();
+                            Log.d("Login", "catch in LoginRequestResponse");
                         }
                     }
                 },

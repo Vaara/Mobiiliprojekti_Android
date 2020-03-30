@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CustodianServiceAdviceActivity extends BaseActivity implements View.OnClickListener {
 
@@ -30,8 +31,10 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     ListView listView;
     CustodianServiceAdviceAdapter adapter;
 
-    private ArrayList<String> messageTitles;
-    private ArrayList<String> housingCooperatives;
+    static private ArrayList<String> messageTitles;
+    static private ArrayList<String> housingCooperatives;
+
+    static HashMap<Integer, String> housingCooperativeIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +48,12 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
     @Override
     protected void doStuff() {
-        setToolbarTitle("Vikailmoitukset"); // replaced the setupToolbar();
+        setToolbarTitle("Vikailmoitukset");
+
         messageTitles = new ArrayList<>();
         housingCooperatives = new ArrayList<>();
+
+        housingCooperativeIds = new HashMap<>();
 
         listView = findViewById(R.id.lvCustodianServiceAdvice);
         adapter = new CustodianServiceAdviceAdapter(this, messageTitles, housingCooperatives);
@@ -92,29 +98,23 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
     public void fetchData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Ladataan...");
+        progressDialog.setMessage(getString(R.string.progress_dialog_loading_fi));
         progressDialog.show();
-        RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice/1";
 
-        /*
-        JSONObject loginCredentials = new JSONObject();
-        try {
-            loginCredentials.put("username", edUsername.getText().toString());
-            loginCredentials.put("password", edPassword.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-         */
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String urlBasePart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice/";
+        String urlIdPart = SessionManagement.getUserPropertyMaintenanceIDFromSharedPrefs().toString();
+        String url = urlBasePart + urlIdPart;
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
-                        messageTitles.clear();
-                        housingCooperatives.clear();
-                        
+                        //messageTitles.clear();
+                        //housingCooperatives.clear();
+                        //housingCooperativeIds.clear();
+
                         try {
                             JSONArray results = response.getJSONArray("results");
 
@@ -126,17 +126,64 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                             else {
                                 for (int i=0; i<results.length(); i++) {
                                     JSONObject singleServiceAdvice = results.getJSONObject(i);
-                                    messageTitles.add(singleServiceAdvice.optString("ServiceMessageTitle"));
-                                    housingCooperatives.add(singleServiceAdvice.optString("ServiceMessage"));
+                                    String title = singleServiceAdvice.optString("ServiceMessageTitle");
+                                    //Integer housingCooperativeId = singleServiceAdvice.optInt("idHousingCooperative");
+                                    //Integer done = singleServiceAdvice.optInt("Done");
+                                    String name;
+
+                                    /*
+                                    if (housingCooperativeIds.containsKey(housingCooperativeId)) {
+                                        name = housingCooperativeIds.get(housingCooperativeId);
+                                        housingCooperatives.add(name);
+                                    }
+
+
+                                     */
+                                    //else {
+                                        name = "Taloyhtiö";
+
+                                        messageTitles.add(title);
+                                        housingCooperatives.add(name);
+
+                                        // Somehow prevents all messages to download to list
+                                        // housingCooperativeIds.put(housingCooperativeId, name);
+
+                                        /*
+                                        if (btnOpen.isEnabled() == false) {
+
+                                            if (done ==0) {
+                                                messageTitles.add(title);
+                                                housingCooperatives.add(name);
+                                                //housingCooperativeIds.put(id, name);
+                                            }
+                                        }
+
+                                        else if (btnDone.isEnabled() == false) {
+
+                                            if (done == 1) {
+                                                messageTitles.add(title);
+                                                housingCooperatives.add(name);
+                                                //housingCooperativeIds.put(id, name);
+                                            }
+                                        }
+
+                                         */
+
+
+                                        //fetchName(id);
+                                        Log.d("TEST", "fetchData() Name from hashmap " + name);
+                                        Log.d("TEST", "fetchData() name " + name);
+                                    //}
                                 }
+                                Log.d("TEST", "fetchData()");
                             }
-                            adapter.notifyDataSetChanged();
-                            //Toast.makeText(CustodianServiceAdviceActivity.this, "Ollaan oikeessa paikassa", Toast.LENGTH_LONG).show();
+                            //adapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(CustodianServiceAdviceActivity.this, R.string.something_went_wrong_fi, Toast.LENGTH_LONG).show();
-                            Log.d("CustodianServiceAdvice", "catch in CustodianServiceAdviceRequest");
+                            Log.d("CustodianServiceAdvice", "catch in CustodianServiceAdviceRequestResponse");
                         }
+                        adapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {
@@ -149,5 +196,48 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                 }
         );
         queue.add(getRequest);
+    }
+
+    public void fetchName(final Integer idTest) {
+        RequestQueue queueName = Volley.newRequestQueue(this);
+        String urlBasePart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/housingcooperative/";
+        String urlIdPart = idTest.toString();
+        String url = urlBasePart + urlIdPart;
+
+        JsonObjectRequest getRequestName = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        String name;
+
+                        try {
+                            JSONArray results = response.getJSONArray("results");
+
+                            if (results.length() < 1) {
+                                name = "Name not found";
+                            }
+
+                            else {
+                                JSONObject singleServiceAdvice = results.getJSONObject(0);
+                                name = singleServiceAdvice.optString("Name");
+                                housingCooperativeIds.put(idTest, name);
+                                String nema = housingCooperativeIds.get(idTest);
+                                Log.d("TEST", "fetchName()");
+                                Log.d("TEST", "fetchName() Name from optstring " + name);
+                                Log.d("TEST", "fetchName() Name from hashmap " + nema);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("TEST", "onErrorResponse fetchName()");
+                    }
+                }
+        );
+        queueName.add(getRequestName);
     }
 }

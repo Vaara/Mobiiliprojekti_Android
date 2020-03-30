@@ -38,26 +38,28 @@ public class CustodianServiceAdviceAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View listView;
+        ViewHolder holder = null;
 
         if (convertView == null) {
-            listView = new View(context);
-            listView = inflater.inflate(R.layout.custodian_service_advice_list, null);
+            convertView = inflater.inflate(R.layout.custodian_service_advice_list, null);
+            holder = new ViewHolder();
+            convertView.setTag(holder);
 
-            TextView tvTitle = listView.findViewById(R.id.tvCustodianServiceAdviceMessageTitle);
-            tvTitle.setText(titles.get(position));
-
-            TextView tvHousingCooperative = listView.findViewById(R.id.tvCustodianServiceAdviceHousingCooperativeName);
-            tvHousingCooperative.setText(housingCooperatives.get(position));
+            holder.tvTitle = convertView.findViewById(R.id.tvCustodianServiceAdviceMessageTitle);
+            holder.tvHousingCooperativeName = convertView.findViewById(R.id.tvCustodianServiceAdviceHousingCooperativeName);
         }
-
         else {
-            listView = convertView;
+            holder = (ViewHolder) convertView.getTag();
         }
+        holder.tvTitle.setText(titles.get(position));
+        holder.tvHousingCooperativeName.setText(housingCooperatives.get(position));
+        return convertView;
+    }
 
-        return listView;
+    private class ViewHolder {
+        public TextView tvTitle;
+        public TextView tvHousingCooperativeName;
     }
 }
 

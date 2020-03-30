@@ -50,5 +50,6 @@
     <string name="api_service_advice_report">/serviceadvicereport/</string>
     <string name="api_resident_bulletin_board">/residentbulletinboard/</string>
     <string name="api_custodian_bulletin_board">/custodianbulletinboard/</string>
+    <string name="progress_dialog_loading_fi">Ladataan...</string>
 
 </resources>
