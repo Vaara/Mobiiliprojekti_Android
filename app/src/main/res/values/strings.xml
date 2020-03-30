@@ -25,6 +25,7 @@
     <string name="btn_custodian_service_advice_open_fi">Avoimet</string>
     <string name="btn_custodian_service_advice_done_fi">Tehdyt</string>
     <string name="btn_custodian_service_advice_all_fi">Kaikki</string>
+    <string name="custodian_service_advice_no_service_advices_fi">Ei vikailmoituksia</string>
 
     <!-- Contact Information titles/messages -->
     <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>
@@ -36,6 +37,7 @@
     <!-- Error messages -->
     <string name="error_server">Ongelma palvelimessa.</string>
     <string name="error_ask_retry">Yritä uudelleen tai tarvittaessa ota yhteys ylläpitoon.</string>
+    <string name="something_went_wrong_fi">Jotain meni vikaan</string>
 
     <!-- API url's -->
     <string name="api_base">http://ec2-18-234-159-189.compute-1.amazonaws.com</string>
@@ -47,5 +49,6 @@
     <string name="api_service_advice_report">/serviceadvicereport/</string>
     <string name="api_resident_bulletin_board">/residentbulletinboard/</string>
     <string name="api_custodian_bulletin_board">/custodianbulletinboard/</string>
+    <string name="progress_dialog_loading_fi">Ladataan...</string>
 
 </resources>
