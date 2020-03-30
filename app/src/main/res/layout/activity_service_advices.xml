@@ -9,9 +9,7 @@
     android:background="@color/activityBackground"
     android:fitsSystemWindows="true">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar_main" />
+    <include layout="@layout/toolbar_main" />
 
     <EditText
         android:id="@+id/titleProblem"
