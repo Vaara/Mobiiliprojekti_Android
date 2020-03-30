@@ -27,7 +27,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
     Button btnOpen;
     Button btnDone;
-    Button btnAll;
     ListView listView;
     CustodianServiceAdviceAdapter adapter;
 
@@ -63,11 +62,8 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
         btnOpen.setOnClickListener(this);
         btnDone = findViewById(R.id.btnCustodianServiceAdviceDone);
         btnDone.setOnClickListener(this);
-        btnAll = findViewById(R.id.btnCustodianServiceAdviceAll);
-        btnAll.setOnClickListener(this);
         btnOpen.setEnabled(false);
         btnDone.setEnabled(true);
-        btnAll.setEnabled(true);
 
         fetchData();
     }
@@ -77,21 +73,12 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
         if (v.getId() == R.id.btnCustodianServiceAdviceOpen) {
             btnOpen.setEnabled(false);
             btnDone.setEnabled(true);
-            btnAll.setEnabled(true);
             fetchData();
         }
 
         else if (v.getId() == R.id.btnCustodianServiceAdviceDone) {
             btnOpen.setEnabled(true);
             btnDone.setEnabled(false);
-            btnAll.setEnabled(true);
-            fetchData();
-        }
-
-        else if (v.getId() == R.id.btnCustodianServiceAdviceAll) {
-            btnOpen.setEnabled(true);
-            btnDone.setEnabled(true);
-            btnAll.setEnabled(false);
             fetchData();
         }
     }
@@ -111,8 +98,8 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                     @Override
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
-                        //messageTitles.clear();
-                        //housingCooperatives.clear();
+                        messageTitles.clear();
+                        housingCooperatives.clear();
                         //housingCooperativeIds.clear();
 
                         try {
@@ -127,28 +114,26 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                 for (int i=0; i<results.length(); i++) {
                                     JSONObject singleServiceAdvice = results.getJSONObject(i);
                                     String title = singleServiceAdvice.optString("ServiceMessageTitle");
-                                    //Integer housingCooperativeId = singleServiceAdvice.optInt("idHousingCooperative");
-                                    //Integer done = singleServiceAdvice.optInt("Done");
+                                    Integer housingCooperativeId = singleServiceAdvice.optInt("idHousingCooperative");
+                                    Integer done = singleServiceAdvice.optInt("Done");
                                     String name;
 
-                                    /*
+
                                     if (housingCooperativeIds.containsKey(housingCooperativeId)) {
                                         name = housingCooperativeIds.get(housingCooperativeId);
                                         housingCooperatives.add(name);
                                     }
 
-
-                                     */
-                                    //else {
+                                    else {
                                         name = "Taloyhtiö";
 
-                                        messageTitles.add(title);
-                                        housingCooperatives.add(name);
+                                        //messageTitles.add(title);
+                                        //housingCooperatives.add(name);
 
                                         // Somehow prevents all messages to download to list
                                         // housingCooperativeIds.put(housingCooperativeId, name);
 
-                                        /*
+
                                         if (btnOpen.isEnabled() == false) {
 
                                             if (done ==0) {
@@ -167,23 +152,19 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                             }
                                         }
 
-                                         */
-
-
                                         //fetchName(id);
                                         Log.d("TEST", "fetchData() Name from hashmap " + name);
                                         Log.d("TEST", "fetchData() name " + name);
-                                    //}
+                                    }
                                 }
                                 Log.d("TEST", "fetchData()");
                             }
-                            //adapter.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(CustodianServiceAdviceActivity.this, R.string.something_went_wrong_fi, Toast.LENGTH_LONG).show();
                             Log.d("CustodianServiceAdvice", "catch in CustodianServiceAdviceRequestResponse");
                         }
-                        adapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {
