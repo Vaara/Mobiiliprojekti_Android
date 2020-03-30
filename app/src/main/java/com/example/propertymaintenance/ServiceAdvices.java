@@ -13,19 +13,27 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 public class ServiceAdvices extends BaseActivity implements View.OnClickListener {
 
+    String mRequestBody;
     private int USER_ID;
     private int USER_LEVEL;
     private int USER_HOUSING_COOPERATIVE_ID;
@@ -70,7 +78,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
         USER_ID = new SessionManagement(this).getUserIdFromSharedPrefs();
         USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
         USER_HOUSING_COOPERATIVE_ID = new SessionManagement(this).getUserHousingCooperativeIdFromSharedPrefs();
-        getUserAddress();
+       // getUserAddress();
     }
 
     public void pickImage() {
@@ -124,41 +132,65 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
         if (requestCode == IMAGE_CAPTURE_CODE && resultCode == RESULT_OK) {
         }
     }
-    private void sendMessage(){
+    private void sendMessage() {
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice/";
 
+        try {
+            requestQueue = Volley.newRequestQueue(this);
             JSONObject serviceAdvice = new JSONObject();
-                try {
-                    serviceAdvice.put("idResidents", USER_ID);
-                    serviceAdvice.put("idHousingCooperative", USER_HOUSING_COOPERATIVE_ID);
-                    serviceAdvice.put("ServiceMessageTitle",edTitleProblem.getText().toString());
-                    serviceAdvice.put("ServiceMessage", edProblemMessage.getText().toString());
-                    serviceAdvice.put("AdditionalMessage", edAdditionalMessage.getText().toString());
-                    serviceAdvice.put("MasterKeyAllowed", masterKey);
-                    serviceAdvice.put("ContactResident", contactResident);
-                } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, serviceAdvice,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), "Response:  " + error.toString(), Toast.LENGTH_LONG).show();
-                        //error.printStackTrace();
-                       // Log.d("viesti", "Error in lähetys");
+            serviceAdvice.put("idResidents", USER_ID);
+            serviceAdvice.put("idHousingCooperative", USER_HOUSING_COOPERATIVE_ID);
+            serviceAdvice.put("ServiceMessageTitle", edTitleProblem.getText().toString());
+            serviceAdvice.put("ServiceMessage", edProblemMessage.getText().toString());
+            serviceAdvice.put("AdditionalMessage", edAdditionalMessage.getText().toString());
+            serviceAdvice.put("MasterKeyAllowed", masterKey);
+            serviceAdvice.put("ContactResident", contactResident);
+            final String mRequestBody = serviceAdvice.toString();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i("LOG_RESPONSE", response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("LOG_RESPONSE", error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
+                        return null;
                     }
                 }
-        );
-        queue.add(getRequest);
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        responseString = String.valueOf(response.statusCode);
+                    }
+                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
+
+            requestQueue.add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
-    private void getUserAddress() {
+        private void getUserAddress() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String urlBasepart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/resident/";
         String urlIdPart = SessionManagement.getUserIdFromSharedPrefs().toString();
