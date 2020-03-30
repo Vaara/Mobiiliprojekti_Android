@@ -26,7 +26,7 @@ public class HousingContact extends AppCompatActivity {
         textView = findViewById(R.id.housingInfoTest);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/housingcooperative/1";
+        String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/resident/1";
 
         /*StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -39,6 +39,8 @@ public class HousingContact extends AppCompatActivity {
                 textView.setText("Did not work");
             }
         });
+
+        /resident/
 
         queue.add(stringRequest);*/
 

@@ -1,36 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:id="@+id/includeToolbar"
     android:minHeight="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/toolbarColorPrimary"
     tools:showIn="@layout/activity_housing_info"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    app:contentInsetStart="0dp"
-    app:contentInsetLeft="0dp"
-    app:contentInsetStartWithNavigation="0dp">
+   <!-- android:layout_marginLeft="?attr/actionBarSize" -->
+
 
 <LinearLayout
-    android:layout_width="wrap_content"
+
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:layout_gravity="center">
+    android:gravity="center">
 
-    <include
+    <ImageView
+        android:id="@+id/grid_icon"
+        android:layout_width="@android:dimen/app_icon_size"
+        android:layout_height="@android:dimen/app_icon_size"
+        android:src="@drawable/ic_eikka_logo"
+        android:layout_gravity="center_vertical">
+    </ImageView>
+
+
+    <!--<include
+
         layout="@layout/toolbar_customtitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left"/>
-    <include
-        layout="@layout/toolbar_userinfo"
+        android:layout_gravity="left"/>-->
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left"/>
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:layout_weight="1"
+
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+
+        <include
+            layout="@layout/toolbar_userinfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="2"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
 

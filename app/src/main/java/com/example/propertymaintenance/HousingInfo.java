@@ -103,13 +103,13 @@ public class HousingInfo extends BaseActivity {
                 String icon = infoValues[position];
 
                 if (icon.equals("Pelastussuunnitelma")){
-                    imageView.setImageResource(R.drawable.ic_icon_emergency);
+                    imageView.setImageResource(R.drawable.ic_icon_bubble_emergency);
                 }
                 else if (icon.equals("Taloyhtiön yhteystiedot")){
                     imageView.setImageResource(R.drawable.ic_icon_contacthousing);
                 }
                 else if (icon.equals("Taloyhtiön järjestyssäännöt")){
-                    imageView.setImageResource(R.drawable.ic_icon_handshake);
+                    imageView.setImageResource(R.drawable.ic_icon_bubble_handshake);
                 }
                 else if (icon.equals("Kiinteistöhuollon yhteystiedot")){
                     imageView.setImageResource(R.drawable.ic_icon_contactmaintenance);

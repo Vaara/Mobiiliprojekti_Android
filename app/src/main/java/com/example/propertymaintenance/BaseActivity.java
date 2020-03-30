@@ -34,8 +34,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                     setDisplayHomeEnabled(true);
                 }
 
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(false);
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
+
             }
         }
         setToolbarTitle();
@@ -64,6 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.toolbar_button1) {
             //ASETUKSET
+            setDisplayHomeEnabled(false);
         }
 
         else if (item.getItemId() == R.id.toolbar_button2) {
@@ -80,8 +82,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setToolbarTitle(){
-        TextView subtitle = (TextView) findViewById(R.id.toolbar_subtitle);
-
         if(SessionManagement.getUserLevelFromSharedPrefs() == 1 && subtitle.getText() != "kiinteistöhuolto")
         {
             subtitle.setText("Kiinteistöhuolto");
@@ -92,12 +92,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
     protected void setToolbarTitle(String title){
-        TextView subtitle = (TextView) findViewById(R.id.toolbar_subtitle);
             subtitle.setText(title);
     }
 
     protected void setToolbarUser(){
-        userName.setText(""+SessionManagement.getUserFullNameFromSharedPrefs());
+            userName.setText(""+SessionManagement.getUserFullNameFromSharedPrefs());
     }
 
     public void logout(Activity activity) {

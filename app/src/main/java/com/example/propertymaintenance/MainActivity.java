@@ -75,7 +75,9 @@ public class MainActivity extends BaseActivity {
                         Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
                         startActivityForResult(intentFix, FIX_ID);
                         break;
-                    case 2: // Ilmoitustaulu
+                    case 2:
+                        Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
+                        startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
                     case 3: // Työvuorot
                         break;
@@ -91,22 +93,21 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
+                hapticFeedback.vibrate(50);
                 switch (position) {
                     case 0:
-                        hapticFeedback.vibrate(50);
+
                         Intent intentHousing = new Intent(getBaseContext(), HousingInfo.class);
                         startActivityForResult(intentHousing, HOUSING_ID);
                         break;
                     case 1:
-                        hapticFeedback.vibrate(50);
+                        //---
                         break;
                     case 2:
-                        hapticFeedback.vibrate(50);
                         Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
                         startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
                     case 3:
-                        hapticFeedback.vibrate(50);
                         Intent intentCalendar = new Intent(getBaseContext(), intentTest.class);
                         startActivityForResult(intentCalendar, CALENDAR_ID);
                         break;
