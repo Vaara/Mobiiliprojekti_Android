@@ -30,6 +30,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     CustodianServiceAdviceAdapter adapterId;
     CustodianServiceAdviceAdapter adapterName;
 
+    ProgressDialog progressDialog;
 
     static private ArrayList<String> messageTitles;
     static private ArrayList<String> housingCooperativeIds;
@@ -68,6 +69,9 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
         btnOpen.setEnabled(false);
         btnDone.setEnabled(true);
 
+        progressDialog = new ProgressDialog(CustodianServiceAdviceActivity.this);
+        progressDialog.setMessage(getString(R.string.progress_dialog_loading_fi));
+
         fetchData();
     }
 
@@ -87,8 +91,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     }
 
     public void fetchData() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.progress_dialog_loading_fi));
         progressDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -100,10 +102,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        progressDialog.dismiss();
-                        messageTitles.clear();
-                        housingCooperativeIds.clear();
-                        //housingCooperativeIds.clear();
+                        clearLists();
 
                         try {
                             JSONArray results = response.getJSONArray("results");
@@ -111,6 +110,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                             if (results.length() < 1) {
                                 messageTitles.add(getString(R.string.custodian_service_advice_no_service_advices_fi));
                                 housingCooperativeIds.add("");
+                                adapterId.notifyDataSetChanged();
                             }
 
                             else {
@@ -119,16 +119,16 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                     String title = singleServiceAdvice.optString("ServiceMessageTitle");
                                     Integer housingCooperativeId = singleServiceAdvice.optInt("idHousingCooperative");
                                     Integer done = singleServiceAdvice.optInt("Done");
-                                    String name = housingCooperativeId.toString();
+                                    String nameId = housingCooperativeId.toString();
 
-                                    housingCooperativeIdsNames.put(housingCooperativeId, name);
+                                    housingCooperativeIdsNames.put(housingCooperativeId, nameId);
 
                                     // Open ServiceAdvices selected
                                     if (!btnOpen.isEnabled()) {
 
                                         if (done == 0) {
                                             messageTitles.add(title);
-                                            housingCooperativeIds.add(name);
+                                            housingCooperativeIds.add(nameId);
                                         }
                                     }
 
@@ -137,18 +137,16 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
                                         if (done == 1) {
                                             messageTitles.add(title);
-                                            housingCooperativeIds.add(name);
+                                            housingCooperativeIds.add(nameId);
                                         }
                                     }
                                 }
+                                fetchHousingCooperativeNames();
                             }
-                            //adapter.notifyDataSetChanged();
-                            fetchHousingCooperativeNames();
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(CustodianServiceAdviceActivity.this, R.string.something_went_wrong_fi, Toast.LENGTH_LONG).show();
-                            Log.d("CustodianServiceAdvice", "catch in CustodianServiceAdviceRequestResponse");
+                            Log.d("CustodianServiceAdvice", "fetchData(): catch");
                         }
                     }
                 },
@@ -157,7 +155,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
                         Toast.makeText(CustodianServiceAdviceActivity.this, getString(R.string.error_server), Toast.LENGTH_LONG).show();
-                        Log.d("CustodianServiceAdvice", "Error in CustodianServiceAdviceRequest");
+                        Log.d("CustodianServiceAdvice", "fetchData(): onErrorResponse");
                     }
                 }
         );
@@ -179,7 +177,9 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                             JSONArray results = response.getJSONArray("results");
 
                             if (results.length() < 1) {
+                                id = -1;
                                 name = "Name not found";
+                                housingCooperativeIdsNames.put(id, name);
                             }
 
                             else {
@@ -199,7 +199,10 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("TEST", "onErrorResponse fetchHousingCooperativeNames()");
+                        // If fetchHousingCooperativeNames() fails, use ids instead of names
+                        adapterId.notifyDataSetChanged();
+                        progressDialog.dismiss();
+                        Log.d("CustodianServiceAdvice", "fetchHousingCooperativeNames(): onErrorResponse");
                     }
                 }
         );
@@ -207,14 +210,26 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     }
 
     public void updateIdsToNames() {
-        for (int i = 0; i< housingCooperativeIds.size(); i++) {
-            Integer id = Integer.parseInt(housingCooperativeIds.get(i));
-            String name = housingCooperativeIdsNames.get(id);
-            Log.d("TEST", "getHashMap" + name);
-            housingCooperativeNames.add(name);
-        }
 
+        for (int i = 0; i< housingCooperativeIds.size(); i++) {
+            try {
+                Integer id = Integer.parseInt(housingCooperativeIds.get(i));
+                String name = housingCooperativeIdsNames.get(id);
+
+                housingCooperativeNames.add(name);
+            } catch (Exception e) {
+                Log.d("CustodianServiceAdvice", "updateIdsToNames(): catch");
+            }
+        }
         adapterName = new CustodianServiceAdviceAdapter(this, messageTitles, housingCooperativeNames);
         listView.setAdapter(adapterName);
+        progressDialog.dismiss();
+    }
+
+    public void clearLists() {
+        messageTitles.clear();
+        housingCooperativeIds.clear();
+        housingCooperativeNames.clear();
+        housingCooperativeIdsNames.clear();
     }
 }
