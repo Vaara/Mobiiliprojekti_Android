@@ -36,7 +36,7 @@
     <string name="board_progress_dialog">Ladataan ilmoitustaulua.</string>
 
     <!-- Housing Cooperative List titles/messages -->
-
+    <string name="btn_close_popup">Sulje</string>
 
     <!-- Error messages -->
     <string name="error_server">Ongelma palvelimessa.</string>

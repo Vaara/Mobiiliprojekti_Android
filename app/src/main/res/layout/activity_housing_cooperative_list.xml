@@ -6,15 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".HousingCooperativeListActivity"
     android:background="@color/activityBackground"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:id="@+id/housingCooperativeList">
 
     <include layout="@layout/toolbar_main" />
 
     <ListView
         android:id="@+id/listViewHousingList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

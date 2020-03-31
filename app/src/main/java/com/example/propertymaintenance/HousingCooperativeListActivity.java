@@ -4,9 +4,15 @@ package com.example.propertymaintenance;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +35,9 @@ public class HousingCooperativeListActivity extends BaseActivity {
     private HousingCooperativeObject housingCooperativeObject;
     private ProgressDialog progressDialog;
     private ArrayList<HousingCooperativeObject> housingList;
+    private PopupWindow popupWindow;
+    private ConstraintLayout layout;
+    private ImageButton buttonClosePopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +60,43 @@ public class HousingCooperativeListActivity extends BaseActivity {
         progressDialog.setMessage(getString(R.string.board_progress_dialog));
         progressDialog.show();
 
+        layout = findViewById(R.id.housingCooperativeList);
+        buttonClosePopup = findViewById(R.id.buttonClosePopup);
+
+        createPopupWindow();
+
         setToolbarTitle(getString(R.string.app_subtitle_housing_cooperative_list));
         housingCooperativeRequest();
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("test", "test");
+                popupWindow.dismiss();
+            }
+        });
 
         listViewHousingCooperativeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                popupWindow.dismiss();
+                popupWindow.showAsDropDown(view, 0, -175);
                 Log.d("position:", String.valueOf(i));
                 Log.d("apartments:", housingList.get(i).getApartments());
+            }
+        });
+    }
+
+    private void createPopupWindow() {
+        LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.popup_housing_cooperative, null);
+        popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        ImageButton buttonClosePopup = popupView.findViewById(R.id.buttonClosePopup);
+        buttonClosePopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
             }
         });
     }
@@ -114,4 +152,5 @@ public class HousingCooperativeListActivity extends BaseActivity {
         });
         requestQueue.add(request);
     }
+
 }
