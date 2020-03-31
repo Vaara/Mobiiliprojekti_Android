@@ -121,7 +121,7 @@ public class HousingInfo extends BaseActivity {
                     imageView.setImageResource(R.drawable.ic_icon_contactwaste);
                 }
                 else {
-                    imageView.setImageResource(R.drawable.android_logo);
+                    imageView.setImageResource(R.mipmap.ic_launcher);
                 }
             }
             else {
