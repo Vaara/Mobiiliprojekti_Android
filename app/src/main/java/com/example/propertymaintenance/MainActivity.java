@@ -65,11 +65,9 @@ public class MainActivity extends BaseActivity {
 
                 switch (position) {
                     case 0: // Omat taloyhtiöt
-                        /*
                         hapticFeedback.vibrate(50);
-                        Intent intentHousing = new Intent(getBaseContext(), HousingInfo.class);
+                        Intent intentHousing = new Intent(getBaseContext(), HousingCooperativeListActivity.class);
                         startActivityForResult(intentHousing, HOUSING_ID);
-                         */
                         break;
                     case 1: // Vikailmoitukset
                         hapticFeedback.vibrate(50);
@@ -77,6 +75,9 @@ public class MainActivity extends BaseActivity {
                         startActivityForResult(intentFix, FIX_ID);
                         break;
                     case 2: // Ilmoitustaulu
+                        hapticFeedback.vibrate(50);
+                        Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
+                        startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
                     case 3: // Työvuorot
                         break;
