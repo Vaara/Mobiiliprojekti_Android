@@ -32,6 +32,9 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     CustodianServiceAdviceAdapter adapterId;
     CustodianServiceAdviceAdapter adapterName;
 
+    ArrayList<Integer> idServiceAdviceOpen = new ArrayList<Integer>();
+    ArrayList<Integer> idServiceAdviceClosed = new ArrayList<Integer>();
+
     ProgressDialog progressDialog;
 
     static private ArrayList<String> messageTitles;
@@ -77,9 +80,17 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent intent = new Intent(getApplicationContext(), CustodianServiceAdviceViewDetails.class);
-                //intent.putExtra("serviceID", Integer.parseInt(housingCooperativeIds.get(position)));
-                //startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), CustodianServiceAdviceViewDetails.class);
+                if(btnOpen.isEnabled()==false)
+                {
+                    intent.putExtra("serviceID", idServiceAdviceOpen.get(position));
+                }
+                else
+                {
+                    intent.putExtra("serviceID", idServiceAdviceClosed.get(position));
+                }
+
+                startActivity(intent);
             }
         });
 
@@ -131,6 +142,16 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                     Integer housingCooperativeId = singleServiceAdvice.optInt("idHousingCooperative");
                                     Integer done = singleServiceAdvice.optInt("Done");
                                     String nameId = housingCooperativeId.toString();
+
+                                    if(done == 0)
+                                    {
+                                        idServiceAdviceOpen.add(singleServiceAdvice.getInt("idServiceAdvices"));
+                                    }
+                                    else if(done == 1)
+                                    {
+                                        idServiceAdviceClosed.add(singleServiceAdvice.getInt("idServiceAdvices"));
+                                    }
+
 
                                     housingCooperativeIdsNames.put(housingCooperativeId, nameId);
 

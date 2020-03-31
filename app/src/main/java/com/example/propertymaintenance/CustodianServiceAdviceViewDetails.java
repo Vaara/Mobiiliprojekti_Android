@@ -44,6 +44,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
         Intent getID = getIntent();
         serviceID = getID.getIntExtra("serviceID", -999);
+        textResident.setText(""+serviceID);
 
         serviceAdvice(urlServiceAdvice);
 
