@@ -37,7 +37,6 @@ public class HousingCooperativeListActivity extends BaseActivity {
     private ArrayList<HousingCooperativeObject> housingList;
     private PopupWindow popupWindow;
     private ConstraintLayout layout;
-    private ImageButton buttonClosePopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +56,10 @@ public class HousingCooperativeListActivity extends BaseActivity {
         housingCooperativeListAdapter = new HousingCooperativeListAdapter(this, housingList);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.board_progress_dialog));
+        progressDialog.setMessage(getString(R.string.board_progress_dialog_fi));
         progressDialog.show();
 
         layout = findViewById(R.id.housingCooperativeList);
-        buttonClosePopup = findViewById(R.id.buttonClosePopup);
 
         createPopupWindow();
 
@@ -71,7 +69,6 @@ public class HousingCooperativeListActivity extends BaseActivity {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("test", "test");
                 popupWindow.dismiss();
             }
         });
@@ -81,6 +78,8 @@ public class HousingCooperativeListActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 popupWindow.dismiss();
                 popupWindow.showAsDropDown(view, 0, -175);
+                String name = housingList.get(i).getName();
+
                 Log.d("position:", String.valueOf(i));
                 Log.d("apartments:", housingList.get(i).getApartments());
             }
