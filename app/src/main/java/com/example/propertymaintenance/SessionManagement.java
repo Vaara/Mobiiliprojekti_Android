@@ -67,7 +67,7 @@ public class SessionManagement {
     }
 
     public void removeUserFromSharedPrefs() {
-        Integer loggedInUserId = sharedPreferences.getInt("USER_ID", 99);
+        Integer loggedInUserId = sharedPreferences.getInt("USER_ID", -1);
         editor.remove(USER_ID);
         editor.remove(USER_LEVEL);
         editor.remove(USER_FULL_NAME);
@@ -94,12 +94,12 @@ public class SessionManagement {
     }
 
     public static Integer getUserIdFromSharedPrefs() {
-        Integer userId = sharedPreferences.getInt(USER_ID, 99);
+        Integer userId = sharedPreferences.getInt(USER_ID, -1);
         return userId;
     }
 
     public static Integer getUserLevelFromSharedPrefs() {
-        Integer userLevel = sharedPreferences.getInt(USER_LEVEL, 99);
+        Integer userLevel = sharedPreferences.getInt(USER_LEVEL, -1);
         return userLevel;
     }
 
@@ -109,13 +109,13 @@ public class SessionManagement {
     }
 
     public static Integer getUserHousingCooperativeIdFromSharedPrefs() {
-        Integer userHousingCooperativeId = sharedPreferences.getInt(USER_HOUSING_COOPERATIVE_ID, 99);
+        Integer userHousingCooperativeId = sharedPreferences.getInt(USER_HOUSING_COOPERATIVE_ID, -1);
         return userHousingCooperativeId;
 
     }
 
     public static Integer getUserPropertyMaintenanceIDFromSharedPrefs() {
-        Integer userPropertyMaintenanceId = sharedPreferences.getInt(USER_PROPERTY_MAINTENANCE_ID, 99);
+        Integer userPropertyMaintenanceId = sharedPreferences.getInt(USER_PROPERTY_MAINTENANCE_ID, -1);
         return userPropertyMaintenanceId;
     }
 }
