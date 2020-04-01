@@ -1,8 +1,11 @@
 package com.example.propertymaintenance;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -75,6 +78,8 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
 
         queue.add(getResidentInfo);*/
+
+        //sendReport();
     }
 
 
@@ -131,7 +136,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                 });
         queue.add(getServiceAdvice);
     }
-}
+
 
         /*
         //----------------------------------------------------------------------
@@ -161,3 +166,136 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
         queue.add(getResidentInfo);
 
          */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void sendReport() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.progress_dialog_sending_fi));
+        progressDialog.show();
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvicereport";
+
+        JSONObject reportBody = new JSONObject();
+        try {
+            reportBody.put("idServiceAdvices", serviceID);
+            reportBody.put("idCustodians", SessionManagement.getUserIdFromSharedPrefs());
+            reportBody.put("CustodianReport", "Kettingissä reikiä");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // 201 created
+        // 500 database error / incorrect values
+
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, reportBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            JSONArray results = response.getJSONArray("results");
+                            //Toast.makeText(CustodianServiceAdviceViewDetails.this, R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //Toast.makeText(CustodianServiceAdviceViewDetails.this, R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
+                            Log.d("CustodianSendReport", "sendReport(): catch");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        //Toast.makeText(CustodianServiceAdviceViewDetails.this, getString(R.string.error_server), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(CustodianServiceAdviceViewDetails.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.d("CustodianSendReport", "sendReport(): onErrorResponse");
+                    }
+                }
+        );
+        queue.add(getRequest);
+    }
+}
