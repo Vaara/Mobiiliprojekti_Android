@@ -29,17 +29,15 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     Button btnOpen;
     Button btnDone;
     ListView listView;
+    ProgressDialog progressDialog;
     CustodianServiceAdviceAdapter adapterId;
     CustodianServiceAdviceAdapter adapterName;
-
-    ArrayList<Integer> idServiceAdviceOpen = new ArrayList<Integer>();
-    ArrayList<Integer> idServiceAdviceClosed = new ArrayList<Integer>();
-
-    ProgressDialog progressDialog;
 
     static private ArrayList<String> messageTitles;
     static private ArrayList<String> housingCooperativeIds;
     static private ArrayList<String> housingCooperativeNames;
+    static private ArrayList<Integer> idServiceAdviceOpen = new ArrayList<>();
+    static private ArrayList<Integer> idServiceAdviceClosed = new ArrayList<>();
 
     static HashMap<Integer, String> housingCooperativeIdsNames;
 
@@ -143,16 +141,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                     Integer done = singleServiceAdvice.optInt("Done");
                                     String nameId = housingCooperativeId.toString();
 
-                                    if(done == 0)
-                                    {
-                                        idServiceAdviceOpen.add(singleServiceAdvice.getInt("idServiceAdvices"));
-                                    }
-                                    else if(done == 1)
-                                    {
-                                        idServiceAdviceClosed.add(singleServiceAdvice.getInt("idServiceAdvices"));
-                                    }
-
-
                                     housingCooperativeIdsNames.put(housingCooperativeId, nameId);
 
                                     // Open ServiceAdvices selected
@@ -161,6 +149,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                         if (done == 0) {
                                             messageTitles.add(title);
                                             housingCooperativeIds.add(nameId);
+                                            idServiceAdviceOpen.add(singleServiceAdvice.getInt("idServiceAdvices"));
                                         }
                                     }
 
@@ -170,6 +159,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                         if (done == 1) {
                                             messageTitles.add(title);
                                             housingCooperativeIds.add(nameId);
+                                            idServiceAdviceClosed.add(singleServiceAdvice.getInt("idServiceAdvices"));
                                         }
                                     }
                                 }
