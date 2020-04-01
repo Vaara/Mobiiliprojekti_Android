@@ -36,7 +36,12 @@
     <string name="board_progress_dialog_fi">Ladataan ilmoitustaulua.</string>
 
     <!-- Housing Cooperative List titles/messages -->
-    <string name="btn_close_popup_fi">Sulje</string>
+    <string name="housing_list_btn_close_popup_fi">Sulje</string>
+    <string name="housing_list_popup_name_fi">Nimi: \</string>
+    <string name="housing_list_popup_address_fi">Osoite: \</string>
+    <string name="housing_list_popup_apartments_fi">Asunnot: \</string>
+    <string name="housing_list_popup_property_management_fi">Isännöitsijä: \</string>
+    <string name="housing_list_popup_waste_management_fi">Jätehuolto: \</string>
 
     <!-- Error messages -->
     <string name="error_server_fi">Ongelma palvelimessa.</string>

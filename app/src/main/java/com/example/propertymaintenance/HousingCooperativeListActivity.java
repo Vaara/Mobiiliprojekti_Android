@@ -3,16 +3,19 @@ package com.example.propertymaintenance;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,7 +39,6 @@ public class HousingCooperativeListActivity extends BaseActivity {
     private ProgressDialog progressDialog;
     private ArrayList<HousingCooperativeObject> housingList;
     private PopupWindow popupWindow;
-    private ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,37 +61,74 @@ public class HousingCooperativeListActivity extends BaseActivity {
         progressDialog.setMessage(getString(R.string.board_progress_dialog_fi));
         progressDialog.show();
 
-        layout = findViewById(R.id.housingCooperativeList);
+        /*
+        housingCooperativeObject = new HousingCooperativeObject(1, 11, "test", "test", "test", "test", "test");
+        housingList.add(housingCooperativeObject);
+        housingList.add(housingCooperativeObject);
+        housingList.add(housingCooperativeObject);
+        housingList.add(housingCooperativeObject);
+        housingList.add(housingCooperativeObject);
+        housingList.add(housingCooperativeObject);
 
-        createPopupWindow();
+         */
+
+
 
         setToolbarTitle(getString(R.string.app_subtitle_housing_cooperative_list));
         housingCooperativeRequest();
 
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupWindow.dismiss();
-            }
-        });
 
         listViewHousingCooperativeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+
+                int[] textViewIDs = new int[] {
+                        R.id.textViewHousingPopupName, R.id.textViewHousingPopupAddress, R.id.textViewHousingPopupApartments,
+                        R.id.textViewHousingPropertyManagement, R.id.textViewHousingPopupWasteManagement
+                };
+                String[] textTitles = new String[] {
+                        getString(R.string.housing_list_popup_name_fi),
+                        getString(R.string.housing_list_popup_address_fi),
+                        getString(R.string.housing_list_popup_apartments_fi),
+                        getString(R.string.housing_list_popup_property_management_fi),
+                        getString(R.string.housing_list_popup_waste_management_fi)
+                };
+                String[] textFields = new String[] {
+                        housingList.get(i).getName(),
+                        housingList.get(i).getAddress(),
+                        housingList.get(i).getApartments(),
+                        housingList.get(i).getPropertyManagement(),
+                        housingList.get(i).getWasteManagement()
+                };
+
+                createPopupWindow(textViewIDs, textTitles, textFields);
                 popupWindow.dismiss();
                 popupWindow.showAsDropDown(view, 0, -175);
-                String name = housingList.get(i).getName();
-
-                Log.d("position:", String.valueOf(i));
-                Log.d("apartments:", housingList.get(i).getApartments());
             }
         });
     }
 
-    private void createPopupWindow() {
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (popupWindow != null && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private void createPopupWindow(int[] textViewIDs, String[] textTitles, String[] textFields) {
         LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = layoutInflater.inflate(R.layout.popup_housing_cooperative, null);
         popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.setClippingEnabled(false);
+
+        for (int i = 0; i < textViewIDs.length; i++) {
+            TextView textViewName = popupView.findViewById(textViewIDs[i]);
+            textViewName.setText(Html.fromHtml("<b>" + textTitles[i] + "</b>" + textFields[i]));
+        }
 
         ImageButton buttonClosePopup = popupView.findViewById(R.id.buttonClosePopup);
         buttonClosePopup.setOnClickListener(new View.OnClickListener() {
@@ -110,10 +149,7 @@ public class HousingCooperativeListActivity extends BaseActivity {
                         progressDialog.dismiss();
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
-                            if (jsonArray.length() < 1) {
-                                Log.d("Response:", "EMPTY");
-                            }
-                            else {
+                            if (jsonArray.length() > 0) {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject results = jsonArray.getJSONObject(i);
                                     int housingID = results.getInt("idHousingCooperative");
@@ -123,33 +159,33 @@ public class HousingCooperativeListActivity extends BaseActivity {
                                     String apartments = results.getString("Apartments");
                                     String propertyManagement = results.getString("PropertyManagement");
                                     String wasteManagement = results.getString("WasteManagement");
-                                    housingCooperativeObject = new HousingCooperativeObject(housingID, propertyID, name, address, apartments, propertyManagement, wasteManagement);
-                                    housingList.add(housingCooperativeObject);
+                                    createHousingObject(housingID, propertyID, name, address, apartments, propertyManagement, wasteManagement);
                                 }
                             }
-                            Log.d("name:", housingList.get(0).getName());
-                            listViewHousingCooperativeList.setAdapter(housingCooperativeListAdapter);
-                            //listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                         } catch (JSONException e) {
                             progressDialog.dismiss();
-                            //titles.add(getString(R.string.error_server));
-                            //messages.add(getString(R.string.error_ask_retry));
-                            //listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
+                            createHousingObject(0, 0, getString(R.string.error_server_fi), getString(R.string.error_ask_retry_fi),
+                                    "", "", "");
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                //titles.add(getString(R.string.error_server));
-                //messages.add(getString(R.string.error_ask_retry));
-                //listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
+                createHousingObject(0, 0, getString(R.string.error_server_fi), getString(R.string.error_ask_retry_fi),
+                        "", "", "");
                 error.printStackTrace();
             }
         });
         requestQueue.add(request);
     }
+
+    private void createHousingObject(int housingID, int propertyID, String name, String address, String apartments, String propertyManagement, String wasteManagement) {
+        housingCooperativeObject = new HousingCooperativeObject(housingID, propertyID, name, address, apartments, propertyManagement, wasteManagement);
+        housingList.add(housingCooperativeObject);
+        listViewHousingCooperativeList.setAdapter(housingCooperativeListAdapter);
+    }
+
 
 }
