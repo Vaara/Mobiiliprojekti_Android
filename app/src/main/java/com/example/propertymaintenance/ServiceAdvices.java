@@ -82,6 +82,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
        // getUserAddress();
     }
 
+    //You can select an image from the gallery
     public void pickImage() {
 
         Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -118,7 +119,6 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
         }
         if (v.getId() == R.id.sendButton) {
 
-
             if (checkBoxMasterKey.isChecked()) {
                 masterKey = 1;
             }
@@ -132,8 +132,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
                 String text = "Vikailmoituksen lähetys onnistui";
                 Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
                 finish();
-            }
-            else{
+            } else{
                 Context context = getApplicationContext();
                 String text = "Vikailmoituksen lähetys epäonnistui";
                 Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
