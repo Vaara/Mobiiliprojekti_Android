@@ -17,13 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".CustodianServiceAdviceViewDetails"/>
         <activity android:name=".CustodianServiceAdviceActivity" />
         <activity android:name=".BulletinBoardActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".WasteManagement" />
-        <activity android:name=".PropertyManagement" />
         <activity android:name=".ServiceAdvices"/>
+        <activity android:name=".OwnReservations"></activity>
         <activity android:name=".PropertyMaintenanceContact" />
         <activity android:name=".HousingRegulations" />
         <activity android:name=".HousingContact" />
