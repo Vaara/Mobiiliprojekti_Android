@@ -1,6 +1,7 @@
 package com.example.propertymaintenance;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -115,7 +116,8 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
             });
             builder.show();
         }
-        if (v.getId() == R.id.sendButton && edProblemMessage != null) {
+        if (v.getId() == R.id.sendButton) {
+
 
             if (checkBoxMasterKey.isChecked()) {
                 masterKey = 1;
@@ -123,7 +125,19 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
             if (checkBoxContactResident.isChecked()) {
                 contactResident = 1;
             }
-            sendMessage();
+            if ((edProblemMessage != null && edProblemMessage.length() > 0) &&
+                    (edTitleProblem != null && edTitleProblem.length() > 0)){
+                sendMessage();
+                Context context= getApplicationContext();
+                String text = "Vikailmoituksen lähetys onnistui";
+                Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
+                finish();
+            }
+            else{
+                Context context = getApplicationContext();
+                String text = "Vikailmoituksen lähetys epäonnistui";
+                Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
+            }
         }
     }
 
