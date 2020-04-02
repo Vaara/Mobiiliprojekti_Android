@@ -7,16 +7,23 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class CustodianServiceAdviceViewDetails extends BaseActivity {
     private TextView textView;
@@ -47,7 +54,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
         Intent getID = getIntent();
         serviceID = getID.getIntExtra("serviceID", -999);
-        textResident.setText(""+serviceID);
+        textResident.setText("" + serviceID);
 
         serviceAdvice(urlServiceAdvice);
 
@@ -79,7 +86,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
         queue.add(getResidentInfo);*/
 
-        //sendReport();
+        sendReport();
     }
 
 
@@ -190,65 +197,6 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void sendReport() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.progress_dialog_sending_fi));
@@ -260,42 +208,68 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
         JSONObject reportBody = new JSONObject();
         try {
             reportBody.put("idServiceAdvices", serviceID);
-            reportBody.put("idCustodians", SessionManagement.getUserIdFromSharedPrefs());
-            reportBody.put("CustodianReport", "Kettingissä reikiä");
+            reportBody.put("idCustodian", SessionManagement.getUserIdFromSharedPrefs());
+            reportBody.put("CustodianReport", "Ovi korjattu");
+
+            final String requestBody = reportBody.toString();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    progressDialog.dismiss();
+
+                    if (response.equalsIgnoreCase("201")) {
+                        Toast.makeText(CustodianServiceAdviceViewDetails.this,
+                                R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
+                    }
+
+                    else if (response.equalsIgnoreCase("500")){
+                        Toast.makeText(CustodianServiceAdviceViewDetails.this,
+                                R.string.error_server, Toast.LENGTH_LONG).show();
+                    }
+                    Log.d("ServiceAdviceReport", "onResponse()" + response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressDialog.dismiss();
+                    Toast.makeText(CustodianServiceAdviceViewDetails.this,
+                            getString(R.string.error_server), Toast.LENGTH_LONG).show();
+                    Log.d("ServiceAdviceReport", "onErrorResponse()" + error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf(
+                                "Unsupported Encoding while trying to get the bytes of %s using %s",
+                                requestBody, "utf-8");
+                        return null;
+                    }
+                }
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        responseString = String.valueOf(response.statusCode);
+                    }
+                    return Response.success(responseString,
+                            HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
+            queue.add(stringRequest);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        // 201 created
-        // 500 database error / incorrect values
-
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, reportBody,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-                            JSONArray results = response.getJSONArray("results");
-                            //Toast.makeText(CustodianServiceAdviceViewDetails.this, R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            //Toast.makeText(CustodianServiceAdviceViewDetails.this, R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
-                            Log.d("CustodianSendReport", "sendReport(): catch");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        //Toast.makeText(CustodianServiceAdviceViewDetails.this, getString(R.string.error_server), Toast.LENGTH_LONG).show();
-                        //Toast.makeText(CustodianServiceAdviceViewDetails.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.d("CustodianSendReport", "sendReport(): onErrorResponse");
-                    }
-                }
-        );
-        queue.add(getRequest);
     }
 }
+
