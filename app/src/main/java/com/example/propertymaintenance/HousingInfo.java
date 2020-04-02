@@ -3,9 +3,16 @@ package com.example.propertymaintenance;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDoneException;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,17 +23,25 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class HousingInfo extends AppCompatActivity {
 
+    private static final String TAG = "TAG" ;
     ListView lV;
     static final String[] INFO_TITLES = new String[]{"Pelastussuunnitelma", "Taloyhtion yhteystiedot",
             "Taloyhtion jarjestyssaannot", "Kiinteistohuollon yhteystiedot", "Isannoinnin yhteystiedot",
             "Jatehuollon yhteystiedot"};
 
-    String URL = "https://group3mobilebucket.s3.amazonaws.com/taloyhtion_pelastussuunnitelma.pdf";
-    String URL_2 = "https://group3mobilebucket.s3.amazonaws.com/taloyhtion_jarjestyssaannot.pdf";
-
+    static final String RESCUE = "https://group3mobilebucket.s3.amazonaws.com/mockupdocuments/taloyhtion_pelastussuunnitelma.pdf";
+    static final String REGULATION= "https://group3mobilebucket.s3.amazonaws.com/mockupdocuments/taloyhtion_jarjestyssaannot.pdf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,32 +59,32 @@ public class HousingInfo extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0) {
-                    Intent intent = new Intent(HousingInfo.this, RescuePlan.class);
+
+                   startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(RESCUE)));
                 }
 
-                if (position == 1) {
+                else if (position == 1) {
                     Intent intent = new Intent(HousingInfo.this, HousingContact.class);
                     startActivity(intent);
                 }
-                if (position == 2) {
+                else if (position == 2) {
                     Intent intent = new Intent(HousingInfo.this, HousingRegulations.class);
-                    startActivity(intent);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(REGULATION)));
                 }
-                if (position == 3) {
+                else if (position == 3) {
                     Intent intent = new Intent(HousingInfo.this, PropertyMaintenanceContact.class);
                     startActivity(intent);
                 }
-                if (position == 4) {
-                    Intent intent = new Intent(HousingInfo.this, PropertyManagement.class);
-                    startActivity(intent);
+                else if (position == 4) {
+                    Toast.makeText(HousingInfo.this, "Tästä voisit siirtyä isännöitsijän yhteystietoihin", Toast.LENGTH_SHORT).show();
                 }
-                if (position == 5) {
-                    Intent intent = new Intent(HousingInfo.this, WasteManagement.class);
-                    startActivity(intent);
+                else if (position == 5) {
+                    Toast.makeText(HousingInfo.this, "Tästä voisit siirtyä jätehuollon yhteystietoihin", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
 
     public class InfoAdapter extends BaseAdapter {
         private Context contex;
@@ -169,6 +184,8 @@ public class HousingInfo extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
 
 
