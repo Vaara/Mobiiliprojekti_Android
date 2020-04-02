@@ -86,7 +86,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
         queue.add(getResidentInfo);*/
 
-        sendReport();
+        //sendReport();
     }
 
 
