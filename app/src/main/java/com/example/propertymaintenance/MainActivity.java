@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 3:
                         hapticFeedback.vibrate(50);
-                        Intent intentCalendar = new Intent(getBaseContext(), intentTest.class);
+                        Intent intentCalendar = new Intent(getBaseContext(), OwnReservations.class);
                         startActivityForResult(intentCalendar, CALENDAR_ID);
                         break;
 
