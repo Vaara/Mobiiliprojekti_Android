@@ -1,6 +1,7 @@
 package com.example.propertymaintenance;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -128,9 +129,9 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
             if ((edProblemMessage != null && edProblemMessage.length() > 0) &&
                     (edTitleProblem != null && edTitleProblem.length() > 0)){
                 sendMessage();
-                Context context= getApplicationContext();
-                String text = "Vikailmoituksen lähetys onnistui";
-                Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("Lähetetään viestiä");
+                progressDialog.show();
                 finish();
             } else{
                 Context context = getApplicationContext();
