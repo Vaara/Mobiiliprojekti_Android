@@ -59,9 +59,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
     }
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_service_advices;
-    }
+    protected int getLayoutResource() { return R.layout.activity_service_advices; }
 
     @Override
     protected void doStuff() {
