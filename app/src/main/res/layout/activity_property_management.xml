@@ -36,16 +36,17 @@
         android:id="@+id/emailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="346dp"
+        android:layout_marginEnd="269dp"
         android:layout_marginBottom="24dp"
-        android:text="Viestin aihe"
+        android:text="Viesti isännöitsijälle"
         app:layout_constraintBottom_toTopOf="@+id/titleMessage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="0.481" />
 
     <EditText
         android:id="@+id/titleMessage"
@@ -68,14 +69,13 @@
         android:id="@+id/infoMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="320dp"
+        android:layout_marginEnd="313dp"
         android:layout_marginBottom="16dp"
         android:text="Kirjoita viesti"
         app:layout_constraintBottom_toTopOf="@+id/emailText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleMessage" />
 
