@@ -17,5 +17,6 @@ public class PropertyManagement extends BaseActivity {
     @Override
     protected void doStuff() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        setToolbarTitle("Isännöinnin yhteystiedot");
     }
 }

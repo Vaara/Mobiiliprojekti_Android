@@ -90,6 +90,7 @@ public class HousingInfo extends BaseActivity {
                 }
             }
         });
+        setToolbarTitle("Taloyhtiö info");
     }
 
 
