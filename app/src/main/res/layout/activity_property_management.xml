@@ -10,7 +10,7 @@
     android:fitsSystemWindows="true">
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/includeToolbar"
         layout="@layout/toolbar_main" />
 
     <EditText
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toBottomOf="@+id/includeToolbar" />
 
     <TextView
         android:id="@+id/emailTitle"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
         app:layout_constraintVertical_bias="0.481" />
 
     <EditText
