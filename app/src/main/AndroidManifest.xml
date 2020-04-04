@@ -30,6 +30,7 @@
         <activity android:name=".HousingInfo" />
         <activity android:name=".MainActivity" />
         <activity android:name=".intentTest" />
+        <activity android:name=".PropertyManagement" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
