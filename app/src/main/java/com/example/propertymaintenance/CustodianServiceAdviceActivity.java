@@ -1,7 +1,6 @@
 package com.example.propertymaintenance;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -165,7 +164,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(CustodianServiceAdviceActivity.this, getString(R.string.error_server), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CustodianServiceAdviceActivity.this, getString(R.string.error_server_fi), Toast.LENGTH_LONG).show();
                         Log.d("CustodianServiceAdvice", "fetchData(): onErrorResponse");
                     }
                 }
