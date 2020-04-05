@@ -39,6 +39,7 @@ public class HousingCooperativeListActivity extends BaseActivity {
     private ProgressDialog progressDialog;
     private ArrayList<HousingCooperativeObject> housingList;
     private PopupWindow popupWindow;
+    private int PROPERTY_MAINTENANCE_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,27 +57,14 @@ public class HousingCooperativeListActivity extends BaseActivity {
         requestQueue = Volley.newRequestQueue(this);
         housingList = new ArrayList<>();
         housingCooperativeListAdapter = new HousingCooperativeListAdapter(this, housingList);
+        PROPERTY_MAINTENANCE_ID = SessionManagement.getUserPropertyMaintenanceIDFromSharedPrefs();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.board_progress_dialog_fi));
         progressDialog.show();
 
-        /*
-        housingCooperativeObject = new HousingCooperativeObject(1, 11, "test", "test", "test", "test", "test");
-        housingList.add(housingCooperativeObject);
-        housingList.add(housingCooperativeObject);
-        housingList.add(housingCooperativeObject);
-        housingList.add(housingCooperativeObject);
-        housingList.add(housingCooperativeObject);
-        housingList.add(housingCooperativeObject);
-
-         */
-
-
-
         setToolbarTitle(getString(R.string.app_subtitle_housing_cooperative_list));
         housingCooperativeRequest();
-
 
         listViewHousingCooperativeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -159,7 +147,10 @@ public class HousingCooperativeListActivity extends BaseActivity {
                                     String apartments = results.getString("Apartments");
                                     String propertyManagement = results.getString("PropertyManagement");
                                     String wasteManagement = results.getString("WasteManagement");
-                                    createHousingObject(housingID, propertyID, name, address, apartments, propertyManagement, wasteManagement);
+                                    if (propertyID == PROPERTY_MAINTENANCE_ID) {
+                                        createHousingObject(housingID, propertyID, name, address, apartments, propertyManagement, wasteManagement);
+                                    }
+
                                 }
                             }
                         } catch (JSONException e) {
