@@ -2,7 +2,6 @@ package com.example.propertymaintenance;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -49,7 +48,7 @@ public class BulletinBoardActivity extends BaseActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.board_progress_dialog));
+        progressDialog.setMessage(getString(R.string.board_progress_dialog_fi));
         progressDialog.show();
 
         setToolbarTitle(getString(R.string.app_subtitle_bulletin_board));
@@ -80,7 +79,7 @@ public class BulletinBoardActivity extends BaseActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
                             if (jsonArray.length() < 1) {
-                                titles.add(getString(R.string.board_is_empty));
+                                titles.add(getString(R.string.board_is_empty_fi));
                                 messages.add("");
                             }
                             else {
@@ -93,8 +92,8 @@ public class BulletinBoardActivity extends BaseActivity {
                             listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                         } catch (JSONException e) {
                             progressDialog.dismiss();
-                            titles.add(getString(R.string.error_server));
-                            messages.add(getString(R.string.error_ask_retry));
+                            titles.add(getString(R.string.error_server_fi));
+                            messages.add(getString(R.string.error_ask_retry_fi));
                             listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                             e.printStackTrace();
                         }
@@ -104,8 +103,8 @@ public class BulletinBoardActivity extends BaseActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                titles.add(getString(R.string.error_server));
-                messages.add(getString(R.string.error_ask_retry));
+                titles.add(getString(R.string.error_server_fi));
+                messages.add(getString(R.string.error_ask_retry_fi));
                 listViewBulletinBoard.setAdapter(bulletinBoardAdapter);
                 error.printStackTrace();
             }

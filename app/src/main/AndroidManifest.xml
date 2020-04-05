@@ -23,6 +23,7 @@
         <activity android:name=".BaseActivity"></activity>
         <activity android:name=".ServiceAdvices"/>
         <activity android:name=".OwnReservations"></activity>
+        <activity android:name=".HousingCooperativeListActivity"></activity>
         <activity android:name=".PropertyMaintenanceContact" />
         <activity android:name=".HousingRegulations" />
         <activity android:name=".HousingContact" />
