@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class PropertyManagement extends BaseActivity implements View.OnClickListener {
+public class PropertyMaintenanceFeedback extends BaseActivity implements View.OnClickListener {
 
     EditText edEmailTitle;
     EditText edEmailText;
@@ -34,7 +34,7 @@ public class PropertyManagement extends BaseActivity implements View.OnClickList
         sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setToolbarTitle("Isännöinnöin yhteystiedot");
+        setToolbarTitle("Palautetta kiinteistöhuollolle");
 
     }
 
@@ -48,7 +48,7 @@ public class PropertyManagement extends BaseActivity implements View.OnClickList
                 progressDialog.setMessage("Lähetetään viestiä");
                 progressDialog.show();
                 Context context = getApplicationContext();
-                String text = "Viestisi on lähetetty isännöitsijälle";
+                String text = "Palautteesi on lähetetty kiinteistöhuollolle";
                 Toast.makeText(context, text, Toast.LENGTH_LONG).show();
             }
             if (edEmailTitle == null || edEmailTitle.length() < 1) {

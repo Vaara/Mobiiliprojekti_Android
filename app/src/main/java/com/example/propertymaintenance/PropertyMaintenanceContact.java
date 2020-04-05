@@ -2,8 +2,11 @@ package com.example.propertymaintenance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -18,25 +21,27 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
-public class PropertyMaintenanceContact extends AppCompatActivity {
+public class PropertyMaintenanceContact extends AppCompatActivity implements View.OnClickListener {
 
     TextView textView;
     TextView propMainName;
     TextView propPhoneNumber;
     TextView propEmail;
     TextView propAddress;
-
+    Button feedbackButton;
     String name, phoneNumber, eMail, homeAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_maintenance_contact);
+        feedbackButton = findViewById(R.id.feedbackButton);
+        feedbackButton.setOnClickListener(this);
         jSONParse();
 
     }
 
-    private void jSONParse(){
+    private void jSONParse() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -55,7 +60,7 @@ public class PropertyMaintenanceContact extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
 
-                            for (int i = 0; i < jsonArray.length(); i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject result = jsonArray.getJSONObject(i);
 
@@ -79,11 +84,19 @@ public class PropertyMaintenanceContact extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
+                error.printStackTrace();
             }
         });
 
         queue.add(request);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.feedbackButton) {
+            Intent intent = new Intent(PropertyMaintenanceContact.this, PropertyMaintenanceFeedback.class);
+            startActivity(intent);
+        }
     }
 }
