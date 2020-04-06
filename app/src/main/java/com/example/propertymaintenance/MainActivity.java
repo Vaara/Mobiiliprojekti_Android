@@ -65,18 +65,19 @@ public class MainActivity extends BaseActivity {
 
                 switch (position) {
                     case 0: // Omat taloyhtiöt
-
-                        Intent serviced = new Intent(getBaseContext(), CustodianServiceAdviceViewDetails.class);
-                        serviced.putExtra("serviceID",6);
-                        startActivityForResult(serviced, FIX_ID);
-
+                        hapticFeedback.vibrate(50);
+                        Intent intentHousing = new Intent(getBaseContext(), HousingCooperativeListActivity.class);
+                        startActivityForResult(intentHousing, HOUSING_ID);
                         break;
+
                     case 1: // Vikailmoitukset
                         hapticFeedback.vibrate(50);
                         Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
                         startActivityForResult(intentFix, FIX_ID);
                         break;
-                    case 2:
+
+                    case 2: // Ilmoitustaulu
+                        hapticFeedback.vibrate(50);
                         Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
                         startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
@@ -113,8 +114,10 @@ public class MainActivity extends BaseActivity {
                         startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
                     case 3:
-                        Intent intentCalendar = new Intent(getBaseContext(), intentTest.class);
+                        hapticFeedback.vibrate(50);
+                        Intent intentCalendar = new Intent(getBaseContext(), OwnReservations.class);
                         startActivityForResult(intentCalendar, CALENDAR_ID);
+
                         break;
 
                     default:

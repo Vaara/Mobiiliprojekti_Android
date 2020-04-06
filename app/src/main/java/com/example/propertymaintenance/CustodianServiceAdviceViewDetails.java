@@ -1,7 +1,10 @@
 package com.example.propertymaintenance;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -16,11 +19,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CustodianServiceAdviceViewDetails extends BaseActivity {
-    private TextView textView;
-    private TextView textResident;
-    private int checkID;
-    private int residentId;
-    static int serviceID;
+    private TextView serviceHeader, serviceMessage, serviceAdditional, serviceResidentName, serviceResidentPhone, serviceResidentAddress;
+    private CheckBox checkBoxContactRequest, checkBoxMasterKeyAllowed;
+
+    private static int serviceID;
+    private static int residentId;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,88 +39,91 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
     @Override
     protected void doStuff() {
-        textView = findViewById(R.id.testServiceAdvice);
-        textResident = findViewById(R.id.testResident);
-        RequestQueue queue = Volley.newRequestQueue(this);
+        setToolbarTitle("Vikailmoitukset");
 
-        String urlBase = getString(R.string.api_base);
-        String urlServiceAdvice = urlBase + getString(R.string.api_service_advice) + SessionManagement.getUserPropertyMaintenanceIDFromSharedPrefs();
-        String urlResident;
+        serviceHeader = findViewById(R.id.serviceHeader);
+        serviceMessage = findViewById(R.id.serviceMessage);
+        serviceAdditional = findViewById(R.id.serviceAdditionalInfo);
+        serviceResidentName = findViewById(R.id.serviceUserName);
+        serviceResidentPhone = findViewById(R.id.serviceUserPhone);
+        serviceResidentAddress = findViewById(R.id.serviceUserAddress);
+
+        serviceMessage.setMovementMethod(new ScrollingMovementMethod());
+        serviceAdditional.setMovementMethod(new ScrollingMovementMethod());
+
+        checkBoxContactRequest = findViewById(R.id.callMeMaybe);
+        checkBoxMasterKeyAllowed = findViewById(R.id.masterKeyPermission);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.progress_dialog_loading_fi));
+
+        String urlServiceAdvice = getString(R.string.api_base) + getString(R.string.api_service_advice) + SessionManagement.getUserPropertyMaintenanceIDFromSharedPrefs();
 
         Intent getID = getIntent();
         serviceID = getID.getIntExtra("serviceID", -999);
-        textResident.setText(""+serviceID);
 
-        serviceAdvice(urlServiceAdvice);
-
-        /*
-        urlResident = "http://ec2-18-234-159-189.compute-1.amazonaws.com/resident/1";
-        JsonObjectRequest getResidentInfo = new JsonObjectRequest(Request.Method.GET, urlResident, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String Name = response.getString("Name");
-                            String Phone = response.getString("Phone");
-
-                            textResident.setText(Name + "\n" + Phone + "\n\n");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                textResident.setText(error.toString());
-            }
-        });
-        //---------------------------------------------------------------------------
-
-
-        queue.add(getResidentInfo);*/
+        queue.add(serviceAdvice(urlServiceAdvice));
+        //queue.add(residentDetails(urlResidentDetails+1));
     }
 
 
-    private void serviceAdvice(String url) {
-        RequestQueue queue = Volley.newRequestQueue(this);
+    private JsonObjectRequest serviceAdvice(String url) {
+        progressDialog.show();
         JsonObjectRequest getServiceAdvice = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-
+                        String messageTitle;
+                        String message;
+                        String additionalMessage;
+                        Integer masterKey;
+                        Integer contactRequest;
 
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject ServiceAdvice = jsonArray.getJSONObject(i);
-                                checkID = ServiceAdvice.getInt("idServiceAdvices");
+
+                                int checkID = ServiceAdvice.getInt("idServiceAdvices");
                                 if (checkID == serviceID) {
                                     residentId = ServiceAdvice.getInt("idResidents");
-                                    String messageTitle = ServiceAdvice.getString("ServiceMessageTitle");
-                                    String message = ServiceAdvice.getString("ServiceMessage");
-                                    String additionalmessage = ServiceAdvice.getString("AdditionalMessage");
+                                    residentDetails(residentId);
+                                    messageTitle = ServiceAdvice.getString("ServiceMessageTitle");
+                                    message = ServiceAdvice.getString("ServiceMessage");
+                                    additionalMessage = ServiceAdvice.getString("AdditionalMessage");
 
+                                    masterKey = ServiceAdvice.getInt("MasterKeyAllowed");
+                                    contactRequest = ServiceAdvice.getInt("ContactResident");
+
+                                    /*
                                     String imageId = ServiceAdvice.getString("ImageId");
-                                    String masterKey = ServiceAdvice.getString("MasterKeyAllowed");
-                                    String contactResident = ServiceAdvice.getString("ContactResident");
                                     String isDone = ServiceAdvice.getString("Done");
+                                    */
 
-                                    if (additionalmessage == null || additionalmessage == "null") {
-                                        additionalmessage = "";
+                                    if (additionalMessage == null || additionalMessage == "null") {
+                                        additionalMessage = "";
                                     }
 
-                                    textView.setText(messageTitle + " " + "\n" + message + " " + "\n" + additionalmessage + "\n\n");
-                                    //textView.setText(imageId + " " + "\n" + masterKey + " " + "\n" + contactResident + "\n\n");
-                                } else {
+                                    if(masterKey == 1)
+                                    {
+                                        checkBoxMasterKeyAllowed.setChecked(true);
+                                    }
 
+                                    if(contactRequest == 1)
+                                    {
+                                        checkBoxContactRequest.setChecked(true);
+                                    }
+
+                                    serviceHeader.setText(messageTitle);
+                                    serviceMessage.setText(message);
+                                    serviceAdditional.setText(additionalMessage);
+
+                                    break;
                                 }
-
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -125,26 +133,39 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        textView.setText(error.toString());
+                        //textView.setText(error.toString());
 
                     }
                 });
-        queue.add(getServiceAdvice);
+        return getServiceAdvice;
     }
-}
 
-        /*
-        //----------------------------------------------------------------------
-        String urlResident = "http://ec2-18-234-159-189.compute-1.amazonaws.com/resident/1";
-        JsonObjectRequest getResidentInfo = new JsonObjectRequest(Request.Method.GET, urlResident, null,
+
+    private void residentDetails(Integer id){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String urlResidentDetails = getString(R.string.api_base) + getString(R.string.api_resident);
+        String url = urlResidentDetails + id;
+
+        JsonObjectRequest getResidentInfo = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
+
                     @Override
                     public void onResponse(JSONObject response) {
+                        String name;
+                        String phone;
+                        String address;
                         try {
-                            String residentName = response.getString("Name");
-                            String residentPhone = response.getString("Phone");
 
-                            textResident.setText(residentName + "\n" + residentPhone + "\n\n");
+                            JSONArray residentArray = response.getJSONArray("results");
+                            JSONObject residentInfo = residentArray.getJSONObject(0);
+                            name = residentInfo.getString("Name");
+                            phone = residentInfo.getString("Phone");
+                            address = residentInfo.getString("Address");
+
+                            serviceResidentName.setText(name);
+                            serviceResidentPhone.setText(phone);
+                            serviceResidentAddress.setText(address);
+
                         } catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -154,10 +175,11 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                //textTemp.setText(error.toString());
+
             }
         });
-        //---------------------------------------------------------------------------
         queue.add(getResidentInfo);
-
-         */
+        progressDialog.dismiss();
+        //return getResidentInfo;
+    }
+}

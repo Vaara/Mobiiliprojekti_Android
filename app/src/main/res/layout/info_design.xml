@@ -14,7 +14,7 @@
         android:id="@+id/listIcon"
         android:layout_width="@dimen/listview_icon_size"
         android:layout_height="@dimen/listview_icon_size"
-        android:src="@drawable/android_logo" />
+        android:src="@mipmap/ic_launcher"/>
 
     <TextView
         android:layout_marginLeft="@dimen/listview_margin"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@color/activityBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,19 +12,113 @@
 
     <include layout="@layout/toolbar_main"/>
 
-    <TextView
-        android:id="@+id/testServiceAdvice"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="12345678"/>
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/textfield_roundedbgnd">
+        <LinearLayout
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@color/textField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/serviceUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Matti Meikäläinen"
+                android:textAlignment="center" />
+            <TextView
+                android:id="@+id/serviceUserPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/serviceUserAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Otokuja2 123456"
+                android:textAlignment="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/textfield_roundedbgnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
 
     <TextView
-        android:id="@+id/testResident"
+        android:id="@+id/serviceHeader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="9999999"/>
+        android:layout_height="wrap_content"
+        android:text="Headline"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textAlignment="center"/>
 
+    <TextView
+        android:enabled="false"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/serviceMessage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="This is where the service advice-ticket body would appear at. scrollable message box."
+        android:textColor="@color/textFieldText"
+        android:background="@color/textField"
+        android:textAlignment="textStart"
+        android:scrollbars="vertical"/>
+    <TextView
+        android:enabled="false"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/serviceAdditionalInfo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/textFieldText"
+        android:background="@color/textField"
+        android:text="this is where the additional info would appear at."
+        android:scrollbars="vertical"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:textColor="@color/textFieldText"
+                android:enabled="false"
+                android:id="@+id/callMeMaybe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Soittopyyntö"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:textColor="@color/textFieldText"
+                android:enabled="false"
+                android:id="@+id/masterKeyPermission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Yleisavain"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

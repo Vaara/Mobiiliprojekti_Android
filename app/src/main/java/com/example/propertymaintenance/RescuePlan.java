@@ -4,11 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class RescuePlan extends AppCompatActivity {
+public class RescuePlan extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rescue_plan);
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_rescue_plan;
+    }
+
+    @Override
+    protected void doStuff() {
+
     }
 }

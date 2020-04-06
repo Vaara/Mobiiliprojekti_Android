@@ -6,13 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".HousingContact">
 
+    <include layout="@layout/toolbar_main"/>
+
     <TextView
         android:id="@+id/housingInfoTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/housingCOPName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/housingInfoTest"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/addressHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Katuosoite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/housingCOPName"/>
+
+    <TextView
+        android:id="@+id/addressField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressHeader"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
