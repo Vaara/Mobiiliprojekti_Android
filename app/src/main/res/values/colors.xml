@@ -7,24 +7,37 @@
     <color name="toolbarColorAccent">#FF00C8</color>
 
     <!-- ACTIVITY -->
-    <color name="activityBackground">#E1E1DC</color>
+    <color name="activityBackground">#F4F2EA</color>
+
+    <color name="textFieldBackground">#B4BFE6</color>
+    <color name="textFieldBackgroundStroke">#778CBA</color>
+    <color name="textField">#66FFFFFF</color>
+    <color name="textFieldText">#000000</color>
+    <color name="Shadow">#33000000</color>
 
     <!-- GRIDVIEW -->
 
-        <!-- default -->
-        <color name="iconBackground">#B4BFE6</color>
-        <color name="iconBorder">#778CBA</color>
-        <color name="iconLabel">#FFFFFF</color>
-        <!-- on click -->
-        <color name="iconBackgroundOnClick">#FAD28C</color>
-        <color name="iconBorderOnClick">#6C99F1</color>
-        <color name="iconLabelOnClick">#000000</color>
+    <!-- default -->
+    <color name="iconBackground">#B4BFE6</color>
+    <color name="iconBorder">#778CBA</color>
+    <color name="iconLabel">#FFFFFF</color>
+
+    <!-- on click -->
+    <color name="iconBackgroundOnClick">#FAD28C</color>
+    <color name="iconBorderOnClick">#6C99F1</color>
+    <color name="iconLabelOnClick">#000000</color>
 
     <!-- ICON VECTOR COLORS -->
     <color name="iconColorDark">#401830</color>
     <color name="iconColorMidDark">#9E3BDFDF</color>
     <color name="iconColorMidLight">#EFA06B</color>
     <color name="iconColorLight">#EAEAC7</color>
+
+    <!-- Login cityscape -->
+    <color name="cityColorDark">#AFCBED</color>
+    <color name="cityColorMidDark">#D2E5FD</color>
+    <color name="cityColorMidLight">#E9F0FF</color>
+    <color name="cityColorLight">#FFFFFF</color>
 
     <!--
     <color name="iconColorDark">#2570C8</color>
@@ -33,5 +46,4 @@
     <color name="iconColorLight">#ffffff</color>
     -->
 
->>>>>>> master
 </resources>

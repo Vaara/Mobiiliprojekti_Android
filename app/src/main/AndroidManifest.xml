@@ -19,18 +19,18 @@
         android:usesCleartextTraffic="true">
 
         <activity android:name=".CustodianServiceAdviceViewDetails"/>
-        <activity android:name=".CustodianServiceAdviceActivity" />
-        <activity android:name=".BulletinBoardActivity" />
-        <activity android:name=".BaseActivity" />
+        <activity android:name=".CustodianServiceAdviceActivity"/>
+        <activity android:name=".BulletinBoardActivity"/>
+        <activity android:name=".BaseActivity"/>
         <activity android:name=".ServiceAdvices"/>
-        <activity android:name=".OwnReservations"></activity>
+        <activity android:name=".OwnReservations"/>
+        <activity android:name=".HousingCooperativeListActivity"/>
         <activity android:name=".PropertyMaintenanceContact" />
         <activity android:name=".HousingRegulations" />
         <activity android:name=".HousingContact" />
         <activity android:name=".RescuePlan" />
         <activity android:name=".HousingInfo" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".intentTest" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

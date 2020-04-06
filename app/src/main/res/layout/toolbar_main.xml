@@ -13,98 +13,66 @@
     tools:showIn="@layout/activity_housing_info"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-   <!-- android:layout_marginLeft="?attr/actionBarSize" -->
-
-
-<LinearLayout
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center">
-
-    <ImageView
-        android:id="@+id/grid_icon"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:src="@drawable/ic_eikka_logo"
-        android:layout_gravity="center_vertical">
-    </ImageView>
-
-
-    <!--<include
-
-        layout="@layout/toolbar_customtitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"/>-->
+    <!-- android:layout_marginLeft="?attr/actionBarSize" -->
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/grid_icon"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:src="@drawable/ic_eikka_logo"
+            android:layout_gravity="center_vertical">
+        </ImageView>
+
+
+        <!--<include
+
+            layout="@layout/toolbar_customtitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"/>-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/app_name"
-            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
 
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/app_name"
+                    android:layout_weight="1"
+                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
 
-        <include
-            layout="@layout/toolbar_userinfo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_weight="2"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"/>
+                <!--style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" -->
+
+                <include
+                    layout="@layout/toolbar_userinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="2"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
 
 
 
 </androidx.appcompat.widget.Toolbar>
-
-<!-- tools:showIn="@layout/activity_main"  < ei vaikuta ohjelmaan mutta preview   -->
-
-<!--
-    <ImageView
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:src="@drawable/ic_eikka_logo"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/app_name"
-            android:layout_gravity="center"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:textSize="20dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/app_subtitle_asukas"
-            android:layout_gravity="center"/>
--->
-    <!--
-    https://www.vogella.com/tutorials/AndroidActionBar/article.html
-
-    app:contentInsetLeft="0dp"
-    app:contentInsetStart="0dp"
-    -->

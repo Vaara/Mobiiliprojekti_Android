@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
-public class HousingContact extends AppCompatActivity {
+public class HousingContact extends BaseActivity {
 
     TextView textView;
     TextView housingName;
@@ -27,8 +27,16 @@ public class HousingContact extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_housing_contact);
+        //setContentView(R.layout.activity_housing_contact);
+    }
 
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_housing_contact;
+    }
+
+    @Override
+    protected void doStuff() {
         jSonParse();
     }
 

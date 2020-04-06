@@ -5,6 +5,7 @@
     <string name="app_subtitle_asukas">Asukasportaali</string>
     <string name="app_subtitle_kiinteisto">Kiinteistöhuolto</string>
     <string name="app_subtitle_bulletin_board">Ilmoitustaulu</string>
+    <string name="app_subtitle_housing_cooperative_list">Omat taloyhtiöt</string>
 
     <!-- Login titles/messages -->
     <string name="progress_dialog_login_fi">Kirjaudutaan sisään...</string>
@@ -35,12 +36,20 @@
     <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>
 
     <!-- Bulletin Board titles/messages -->
-    <string name="board_is_empty">Ilmoitustaulu on tyhjä.</string>
-    <string name="board_progress_dialog">Ladataan ilmoitustaulua.</string>
+    <string name="board_is_empty_fi">Ilmoitustaulu on tyhjä.</string>
+    <string name="board_progress_dialog_fi">Ladataan ilmoitustaulua.</string>
+
+    <!-- Housing Cooperative List titles/messages -->
+    <string name="housing_list_btn_close_popup_fi">Sulje</string>
+    <string name="housing_list_popup_name_fi">Nimi: \</string>
+    <string name="housing_list_popup_address_fi">Osoite: \</string>
+    <string name="housing_list_popup_apartments_fi">Asunnot: \</string>
+    <string name="housing_list_popup_property_management_fi">Isännöitsijä: \</string>
+    <string name="housing_list_popup_waste_management_fi">Jätehuolto: \</string>
 
     <!-- Error messages -->
-    <string name="error_server">Ongelma palvelimessa.</string>
-    <string name="error_ask_retry">Yritä uudelleen tai tarvittaessa ota yhteys ylläpitoon.</string>
+    <string name="error_server_fi">Ongelma palvelimessa.</string>
+    <string name="error_ask_retry_fi">Yritä uudelleen tai tarvittaessa ota yhteys ylläpitoon.</string>
     <string name="something_went_wrong_fi">Jotain meni vikaan</string>
 
     <!-- API url's -->

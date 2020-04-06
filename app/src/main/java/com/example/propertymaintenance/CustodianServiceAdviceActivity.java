@@ -182,7 +182,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(CustodianServiceAdviceActivity.this, getString(R.string.error_server), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CustodianServiceAdviceActivity.this, getString(R.string.error_server_fi), Toast.LENGTH_LONG).show();
                         Log.d("CustodianServiceAdvice", "fetchData(): onErrorResponse");
                     }
                 }

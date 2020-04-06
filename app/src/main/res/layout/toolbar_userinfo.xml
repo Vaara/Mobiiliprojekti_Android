@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:textAlignment="center"
-            android:text="Ville Vaara"
+            android:text="Matti Meikäläinen"
             android:layout_weight="1"/>
 
 

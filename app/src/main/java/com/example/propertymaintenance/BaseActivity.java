@@ -66,7 +66,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.toolbar_button1) {
             //ASETUKSET
-            setDisplayHomeEnabled(false);
         }
 
         else if (item.getItemId() == R.id.toolbar_button2) {

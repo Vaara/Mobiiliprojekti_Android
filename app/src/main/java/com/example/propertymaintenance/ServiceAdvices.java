@@ -1,6 +1,8 @@
 package com.example.propertymaintenance;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,6 +83,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
        // getUserAddress();
     }
 
+    //You can select an image from the gallery
     public void pickImage() {
 
         Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -115,7 +118,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
             });
             builder.show();
         }
-        if (v.getId() == R.id.sendButton && edProblemMessage != null) {
+        if (v.getId() == R.id.sendButton) {
 
             if (checkBoxMasterKey.isChecked()) {
                 masterKey = 1;
@@ -123,7 +126,27 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
             if (checkBoxContactResident.isChecked()) {
                 contactResident = 1;
             }
-            sendMessage();
+            if ((edProblemMessage != null && edProblemMessage.length() > 0) &&
+                    (edTitleProblem != null && edTitleProblem.length() > 0)){
+                sendMessage();
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("Lähetetään viestiä");
+                progressDialog.show();
+                Context context = getApplicationContext();
+                String text = "Vikailmoitus lähetetty";
+                Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
+                finish();
+            }
+            if(edProblemMessage == null || edProblemMessage.length() < 1) {
+                Context context = getApplicationContext();
+                String text = "Vikailmoituksen vikateksti puuttuu";
+                Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
+            }
+            if(edTitleProblem == null || edTitleProblem.length() < 1) {
+                Context context = getApplicationContext();
+                String text = "Vikailmoituksen otsikko puuttuu";
+                Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+            }
         }
     }
 

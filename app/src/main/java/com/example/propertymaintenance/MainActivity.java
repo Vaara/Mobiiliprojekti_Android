@@ -15,7 +15,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 public class MainActivity extends BaseActivity {
 
     GridView gridView;
@@ -65,25 +64,33 @@ public class MainActivity extends BaseActivity {
 
                 switch (position) {
                     case 0: // Omat taloyhtiöt
-                        //--
+                        hapticFeedback.vibrate(50);
+                        Intent intentHousing = new Intent(getBaseContext(), HousingCooperativeListActivity.class);
+                        startActivityForResult(intentHousing, HOUSING_ID);
                         break;
+
                     case 1: // Vikailmoitukset
                         hapticFeedback.vibrate(50);
                         Intent intentFix = new Intent(getBaseContext(), CustodianServiceAdviceActivity.class);
                         startActivityForResult(intentFix, FIX_ID);
                         break;
-                    case 2:
+
+                    case 2: // Ilmoitustaulu
+                        hapticFeedback.vibrate(50);
                         Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
                         startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
+
                     case 3: // Työvuorot
                         break;
+
                     default:
                         break;
                 }
             }
         });
     }
+
     private void gridviewTenant(){
         gridView.setAdapter(new ImageAdapter(this, BUTTONLABELSTENANT));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,8 +115,8 @@ public class MainActivity extends BaseActivity {
                         Intent intentBulletin = new Intent(getBaseContext(), BulletinBoardActivity.class);
                         startActivityForResult(intentBulletin, BULLETIN_ID);
                         break;
+
                     case 3:
-                        //Intent intentCalendar = new Intent(getBaseContext(), intentTest.class);
                         hapticFeedback.vibrate(50);
                         Intent intentCalendar = new Intent(getBaseContext(), OwnReservations.class);
                         startActivityForResult(intentCalendar, CALENDAR_ID);

@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
-public class PropertyMaintenanceContact extends AppCompatActivity {
+public class PropertyMaintenanceContact extends BaseActivity {
 
     TextView textView;
     TextView propMainName;
@@ -28,12 +28,22 @@ public class PropertyMaintenanceContact extends AppCompatActivity {
 
     String name, phoneNumber, eMail, homeAddress;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_property_maintenance_contact);
-        jSONParse();
+    }
 
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_property_maintenance_contact;
+    }
+
+    @Override
+    protected void doStuff() {
+        jSONParse();
     }
 
     private void jSONParse(){

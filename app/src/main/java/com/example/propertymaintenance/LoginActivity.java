@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         edUsername = findViewById(R.id.etUsername);
         edPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
