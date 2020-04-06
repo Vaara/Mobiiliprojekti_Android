@@ -29,6 +29,7 @@
 
     <EditText
         android:id="@+id/etUsername"
+        android:singleLine="true"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:hint="@string/et_login_username_hint_fi"
@@ -40,6 +41,8 @@
 
     <EditText
         android:id="@+id/etPassword"
+        android:singleLine="true"
+        android:inputType="textPassword"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:hint="@string/et_login_password_hint_fi"
@@ -73,7 +76,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="13dp"
         android:text="@string/tv_login_forgot_password_fi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@
     <string name="et_login_username_hint_fi">Käyttäjätunnus</string>
     <string name="et_login_password_hint_fi">Salasana</string>
     <string name="btn_login_fi">Kirjaudu</string>
-    <string name="tv_login_forgot_password_fi">Olen unohtanut salasanani</string>
+    <string name="tv_login_forgot_password_fi">Salasana unohtunut?</string>
     <string name="progress_dialog_logout_fi">Kirjaudutaan ulos...</string>
     <string name="toast_login_ok_fi">Tervetuloa</string>
     <string name="toast_login_failed_fi">Kirjautuminen epäonnistui</string>
