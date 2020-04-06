@@ -26,12 +26,12 @@ import java.util.HashMap;
 
 public class CustodianServiceAdviceActivity extends BaseActivity implements View.OnClickListener {
 
-    Button btnOpen;
-    Button btnDone;
-    ListView listView;
-    ProgressDialog progressDialog;
-    CustodianServiceAdviceAdapter adapterId;
-    CustodianServiceAdviceAdapter adapterName;
+    private Button btnOpen;
+    private Button btnDone;
+    private ListView listView;
+    private ProgressDialog progressDialog;
+    private CustodianServiceAdviceAdapter adapterId;
+    private CustodianServiceAdviceAdapter adapterName;
 
     static private ArrayList<String> messageTitles;
     static private ArrayList<String> housingCooperativeIds;
@@ -39,7 +39,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
     static private ArrayList<Integer> idServiceAdviceOpen = new ArrayList<>();
     static private ArrayList<Integer> idServiceAdviceClosed = new ArrayList<>();
 
-    static HashMap<Integer, String> housingCooperativeIdsNames;
+    static private HashMap<Integer, String> housingCooperativeIdsNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +87,9 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                 {
                     intent.putExtra("serviceID", idServiceAdviceClosed.get(position));
                 }
-
                 startActivity(intent);
             }
         });
-
-        //fetchData();
     }
 
     @Override
@@ -118,7 +115,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
     public void fetchData() {
         progressDialog.show();
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String urlBasePart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/serviceadvice/";
         String urlIdPart = SessionManagement.getUserPropertyMaintenanceIDFromSharedPrefs().toString();
@@ -138,7 +134,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                 housingCooperativeIds.add("");
                                 adapterId.notifyDataSetChanged();
                             }
-
                             else {
                                 for (int i=0; i<results.length(); i++) {
                                     JSONObject singleServiceAdvice = results.getJSONObject(i);
@@ -209,7 +204,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
                                 name = "Name not found";
                                 housingCooperativeIdsNames.put(id, name);
                             }
-
                             else {
                                 for (int i=0; i<results.length(); i++) {
                                     JSONObject singleHousingCooperative = results.getJSONObject(i);
@@ -243,7 +237,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
             try {
                 Integer id = Integer.parseInt(housingCooperativeIds.get(i));
                 String name = housingCooperativeIdsNames.get(id);
-
                 housingCooperativeNames.add(name);
             } catch (Exception e) {
                 Log.d("CustodianServiceAdvice", "updateIdsToNames(): catch");
