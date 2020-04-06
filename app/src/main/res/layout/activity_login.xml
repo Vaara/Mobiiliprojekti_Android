@@ -29,7 +29,8 @@
 
     <EditText
         android:id="@+id/etUsername"
-        android:singleLine="true"
+        android:maxLines="1"
+        android:inputType="textPassword"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:hint="@string/et_login_username_hint_fi"
@@ -41,7 +42,7 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:singleLine="true"
+        android:maxLines="1"
         android:inputType="textPassword"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
