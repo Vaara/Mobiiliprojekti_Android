@@ -213,7 +213,6 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                         Toast.makeText(CustodianServiceAdviceViewDetails.this,
                                 R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
                     }
-
                     else if (response.equalsIgnoreCase("500")){
                         Toast.makeText(CustodianServiceAdviceViewDetails.this,
                                 R.string.error_server_fi, Toast.LENGTH_LONG).show();
