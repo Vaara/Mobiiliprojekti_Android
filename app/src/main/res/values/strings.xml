@@ -18,6 +18,7 @@
     <string name="toast_login_ok_fi">Tervetuloa</string>
     <string name="toast_login_failed_fi">Kirjautuminen epäonnistui</string>
     <string name="toast_store_user_failed_fi">Käyttäjätietojen tallennus epäonnistui</string>
+    <string name="toast_login_incorrect_credentials_fi">Tarkista käyttäjänimi ja salasana</string>
 
     <!-- Logout titles/messages -->
     <string name="toast_logout_fi">Näkemiin</string>

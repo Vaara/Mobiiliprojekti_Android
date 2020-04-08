@@ -27,16 +27,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static Integer userHousingCooperativeIdResponse;
     private static Integer userPropertyMaintenanceIdResponse;
 
-    private EditText edUsername;
-    private EditText edPassword;
+    private EditText etUsername;
+    private EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        edUsername = findViewById(R.id.etUsername);
-        edPassword = findViewById(R.id.etPassword);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
         findViewById(R.id.btnLogin).setOnClickListener(this);
     }
 
@@ -76,8 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         JSONObject loginCredentials = new JSONObject();
         try {
-            loginCredentials.put("username", edUsername.getText().toString());
-            loginCredentials.put("password", edPassword.getText().toString());
+            loginCredentials.put("username", etUsername.getText().toString());
+            loginCredentials.put("password", etPassword.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -97,7 +97,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             login();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(LoginActivity.this, R.string.toast_login_failed_fi, Toast.LENGTH_LONG).show();
+                            etUsername.setText(null);
+                            etPassword.setText(null);
+                            Toast.makeText(LoginActivity.this, R.string.toast_login_incorrect_credentials_fi, Toast.LENGTH_LONG).show();
                             Log.d("Login", "catch in LoginRequestResponse");
                         }
                     }
@@ -106,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, R.string.toast_login_failed_fi, Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, R.string.error_server_fi, Toast.LENGTH_LONG).show();
                         Log.d("Login", "Error in LoginRequest");
                     }
                 }
