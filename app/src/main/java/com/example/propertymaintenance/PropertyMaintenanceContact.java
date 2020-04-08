@@ -21,11 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
-<<<<<<< HEAD
-public class PropertyMaintenanceContact extends BaseActivity {
-=======
-public class PropertyMaintenanceContact extends AppCompatActivity implements View.OnClickListener {
->>>>>>> emailandfeedback
+
+public class PropertyMaintenanceContact extends BaseActivity implements View.OnClickListener{
+
 
     TextView textView;
     TextView propMainName;
@@ -43,9 +41,7 @@ public class PropertyMaintenanceContact extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_property_maintenance_contact);
-        feedbackButton = findViewById(R.id.feedbackButton);
-        feedbackButton.setOnClickListener(this);
+
         jSONParse();
 
     }
@@ -56,7 +52,11 @@ public class PropertyMaintenanceContact extends AppCompatActivity implements Vie
 
     @Override
     protected void doStuff() {
+        setContentView(R.layout.activity_property_maintenance_contact);
+        feedbackButton = findViewById(R.id.feedbackButton);
+        feedbackButton.setOnClickListener((View.OnClickListener) this);
         jSONParse();
+        
     }
 
     private void jSONParse() {
