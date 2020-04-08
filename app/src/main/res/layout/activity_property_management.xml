@@ -6,11 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".PropertyManagement">
 
+    android:background="@color/activityBackground"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/includeToolbar"
+        layout="@layout/toolbar_main" />
+
+    <EditText
+        android:id="@+id/emailText"
+        android:layout_width="392dp"
+        android:layout_height="428dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="top"
+        android:hint="Kirjoita tähän viestisi"
+        android:maxLines="15"
+        android:minLines="1"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/sendButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/includeToolbar" />
+
     <TextView
+        android:id="@+id/emailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/property_maintenance_contact_information"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="269dp"
+        android:layout_marginBottom="24dp"
+        android:text="Viesti isännöitsijälle"
+        app:layout_constraintBottom_toTopOf="@+id/titleMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
+        app:layout_constraintVertical_bias="0.481" />
 
+    <EditText
+        android:id="@+id/titleMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/darker_gray"
+        android:hint="Aihe"
+        app:layout_constraintBottom_toTopOf="@+id/infoProblem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/infoMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="319dp"
+        android:layout_marginBottom="16dp"
+        android:text="Kirjoita viesti"
+        app:layout_constraintBottom_toTopOf="@+id/emailText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleMessage" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="145dp"
+        android:text="Lähetä viesti"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

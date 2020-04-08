@@ -75,21 +75,22 @@ public class HousingInfo extends BaseActivity {
                     Intent intent = new Intent(HousingInfo.this, HousingContact.class);
                     startActivity(intent);
 
-
                 }
                 else if (position == 3) {
                     Intent intent = new Intent(HousingInfo.this, PropertyMaintenanceContact.class);
                     startActivity(intent);
                 }
                 else if (position == 4) {
+                    Intent intent = new Intent(HousingInfo.this, PropertyManagement.class);
+                    startActivity(intent);
 
-                    Toast.makeText(HousingInfo.this, "Tästä voisit siirtyä isännöitsijän yhteystietoihin", Toast.LENGTH_SHORT).show();
                 }
                 else if (position == 5) {
                     Toast.makeText(HousingInfo.this, "Tästä voisit siirtyä jätehuollon yhteystietoihin", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        setToolbarTitle("Taloyhtiö info");
     }
 
 
