@@ -59,9 +59,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
     }
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_service_advices;
-    }
+    protected int getLayoutResource() { return R.layout.activity_service_advices; }
 
     @Override
     protected void doStuff() {
@@ -80,6 +78,7 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
         USER_ID = new SessionManagement(this).getUserIdFromSharedPrefs();
         USER_LEVEL = new SessionManagement(this).getUserLevelFromSharedPrefs();
         USER_HOUSING_COOPERATIVE_ID = new SessionManagement(this).getUserHousingCooperativeIdFromSharedPrefs();
+        setToolbarTitle("Vikailmoitus");
        // getUserAddress();
     }
 

@@ -31,6 +31,9 @@
         <activity android:name=".RescuePlan" />
         <activity android:name=".HousingInfo" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".PropertyManagement" />
+        <activity android:name=".PropertyMaintenanceFeedback" />
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
