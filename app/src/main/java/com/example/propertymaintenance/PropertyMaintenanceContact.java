@@ -56,7 +56,7 @@ public class PropertyMaintenanceContact extends BaseActivity implements View.OnC
         feedbackButton = findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener((View.OnClickListener) this);
         jSONParse();
-        
+
     }
 
     private void jSONParse() {

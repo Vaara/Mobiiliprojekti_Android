@@ -74,12 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="320dp"
         android:layout_marginBottom="2dp"
         android:text="Kuvaile vika*"
         app:layout_constraintBottom_toTopOf="@+id/problemMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,46 +109,45 @@
         android:id="@+id/callAndMakeAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="16dp"
         android:onClick="onCheckboxClicked"
         android:text="Soita ja sovi"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/additionalInfoMessage" />
+        app:layout_constraintStart_toEndOf="@+id/masterkeyAllowed"
+        app:layout_constraintTop_toBottomOf="@id/entryIntoHouse" />
 
     <CheckBox
         android:id="@+id/masterkeyAllowed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="16dp"
         android:onClick="onCheckboxClicked"
         android:text="Yleisavaimella"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additionalInfoMessage" />
+        app:layout_constraintTop_toBottomOf="@id/entryIntoHouse" />
 
     <ImageButton
         android:id="@+id/imageButtonCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/masterkeyAllowed" />
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="227dp"
+        android:layout_marginTop="16dp"
         android:text="Lähetä"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageButtonCamera"
+        app:layout_constraintTop_toBottomOf="@+id/callAndMakeAppointment" />
 
     <TextView
         android:id="@+id/infoTitle"
@@ -159,11 +155,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="346dp"
         android:layout_marginBottom="8dp"
         android:text="Otsikko*"
         app:layout_constraintBottom_toTopOf="@+id/titleProblem"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
