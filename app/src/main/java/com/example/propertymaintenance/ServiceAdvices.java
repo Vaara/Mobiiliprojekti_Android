@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -212,7 +214,8 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
             e.printStackTrace();
         }
     }
-        private void getUserAddress() {
+
+    private void getUserAddress() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String urlBasepart = "http://ec2-18-234-159-189.compute-1.amazonaws.com/resident/";
         String urlIdPart = SessionManagement.getUserIdFromSharedPrefs().toString();
