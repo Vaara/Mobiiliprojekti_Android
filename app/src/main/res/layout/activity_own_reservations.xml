@@ -9,6 +9,10 @@
     <include layout="@layout/toolbar_main"/>
 
     <CalendarView
+        android:layout_marginTop="@dimen/margin_sides"
+        android:layout_marginLeft="@dimen/margin_sides"
+        android:layout_marginRight="@dimen/margin_sides"
+
         android:id="@+id/reservationCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

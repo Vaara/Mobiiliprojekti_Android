@@ -144,7 +144,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                         //textView.setText(error.toString());
                     }
                 });
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         return getServiceAdvice;
     }
 
@@ -173,6 +173,8 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                             serviceResidentPhone.setText(phone);
                             serviceResidentAddress.setText(address);
 
+                            progressDialog.dismiss();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -182,6 +184,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                progressDialog.dismiss();
             }
         });
         queue.add(getResidentInfo);
@@ -213,7 +216,6 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                         Toast.makeText(CustodianServiceAdviceViewDetails.this,
                                 R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
                     }
-
                     else if (response.equalsIgnoreCase("500")){
                         Toast.makeText(CustodianServiceAdviceViewDetails.this,
                                 R.string.error_server_fi, Toast.LENGTH_LONG).show();

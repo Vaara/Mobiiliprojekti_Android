@@ -14,7 +14,8 @@
         android:id="@+id/llButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/padding_top"
+        android:paddingBottom="@dimen/padding_bottom"
         app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
         android:gravity="center_horizontal">
 
@@ -24,7 +25,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="@string/btn_custodian_service_advice_open_fi" />
+            android:text="@string/btn_custodian_service_advice_open_fi"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
         <Button
             android:id="@+id/btnCustodianServiceAdviceDone"
@@ -32,14 +34,16 @@
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="@string/btn_custodian_service_advice_done_fi" />
+            android:text="@string/btn_custodian_service_advice_done_fi"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/lvCustodianServiceAdvice"
         android:background="@color/activityBackground"
-        android:layout_margin="30dp"
+        android:layout_marginLeft="@dimen/margin_sides"
+        android:layout_marginRight="@dimen/margin_sides"
         android:dividerHeight="10dp"
         android:divider="@color/activityBackground"
         android:layout_width="match_parent"

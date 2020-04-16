@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@+id/label"
-            android:textSize="@dimen/grid_text_size"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@color/iconLabel">
         </TextView>
 

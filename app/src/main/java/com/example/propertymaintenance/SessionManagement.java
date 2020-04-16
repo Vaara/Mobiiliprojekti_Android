@@ -2,7 +2,6 @@ package com.example.propertymaintenance;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 public class SessionManagement {
     private static SharedPreferences sharedPreferences;
@@ -58,11 +57,9 @@ public class SessionManagement {
         if (userLevelResponse == 0) {
             editor.putInt(USER_HOUSING_COOPERATIVE_ID, userHousingCooperativeIdResponse);
         }
-
         else if (userLevelResponse == 1) {
             editor.putInt(USER_PROPERTY_MAINTENANCE_ID, userPropertyMaintenanceIdResponse);
         }
-
         editor.commit();
     }
 
@@ -75,7 +72,6 @@ public class SessionManagement {
         if (loggedInUserId == 0) {
             editor.remove(USER_HOUSING_COOPERATIVE_ID);
         }
-
         else if (loggedInUserId == 1) {
             editor.remove(USER_PROPERTY_MAINTENANCE_ID);
         }
@@ -87,7 +83,6 @@ public class SessionManagement {
 
     public  void clearSharedPrefs() {
         editor.clear();
-
         if (!editor.commit()) {
             // Unable to clear all data from SharedPreferences
         }
@@ -111,7 +106,6 @@ public class SessionManagement {
     public static Integer getUserHousingCooperativeIdFromSharedPrefs() {
         Integer userHousingCooperativeId = sharedPreferences.getInt(USER_HOUSING_COOPERATIVE_ID, -1);
         return userHousingCooperativeId;
-
     }
 
     public static Integer getUserPropertyMaintenanceIDFromSharedPrefs() {

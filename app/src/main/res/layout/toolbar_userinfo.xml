@@ -13,6 +13,7 @@
             android:layout_height="match_parent"
             android:text="@string/app_subtitle_asukas"
             android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/toolbar_user"
@@ -21,6 +22,7 @@
             android:layout_gravity="right"
             android:textAlignment="center"
             android:text="Matti Meikäläinen"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_weight="1"/>
 
 

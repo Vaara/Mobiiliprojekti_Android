@@ -15,87 +15,107 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/textfield_roundedbgnd">
-        <LinearLayout
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/margin_sides"
+        android:layout_marginLeft="@dimen/margin_sides"
+        android:layout_marginTop="@dimen/margin_top"
 
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+        android:paddingTop="@dimen/padding_top"
+        android:paddingBottom="@dimen/padding_bottom"
+        android:paddingLeft="@dimen/padding_sides"
+        android:paddingRight="@dimen/padding_sides"
+
+        android:background="@drawable/textfield_roundedbgnd">
+
+        <LinearLayout
             android:background="@color/textField"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/serviceUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Matti Meikäläinen"
-                android:textAlignment="center" />
+                android:text=""
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
             <TextView
                 android:id="@+id/serviceUserPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone"
-                android:textAlignment="center"/>
+                android:text=""
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
             <TextView
                 android:id="@+id/serviceUserAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Otokuja2 123456"
-                android:textAlignment="center"/>
+                android:text=""
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:paddingTop="@dimen/padding_top"
+        android:paddingRight="@dimen/padding_sides"
+        android:paddingLeft="@dimen/padding_sides"
         android:background="@drawable/textfield_roundedbgnd"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/margin_sides"
         android:orientation="vertical">
 
     <TextView
+        android:paddingTop="@dimen/padding_top"
+
         android:id="@+id/serviceHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Headline"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textStyle="bold"
         android:textAlignment="center"/>
 
     <TextView
+        android:paddingTop="@dimen/padding_top"
+        android:paddingLeft="@dimen/padding_sides"
+        android:paddingRight="@dimen/padding_sides"
+        android:layout_marginTop="@dimen/padding_top"
+
         android:enabled="false"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:id="@+id/serviceMessage"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:text="This is where the service advice-ticket body would appear at. scrollable message box."
         android:textColor="@color/textFieldText"
         android:background="@color/textField"
         android:textAlignment="textStart"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
     <TextView
+        android:paddingTop="@dimen/padding_top"
+        android:paddingLeft="@dimen/padding_sides"
+        android:paddingRight="@dimen/padding_sides"
+        android:layout_marginTop="@dimen/padding_top"
+
         android:enabled="false"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:id="@+id/serviceAdditionalInfo"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:textColor="@color/textFieldText"
         android:background="@color/textField"
         android:text="this is where the additional info would appear at."
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
         <LinearLayout
+            android:paddingTop="@dimen/padding_top"
+            android:paddingLeft="@dimen/padding_sides"
+            android:paddingRight="@dimen/padding_sides"
+            android:layout_marginTop="@dimen/padding_top"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -107,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Soittopyyntö"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:layout_weight="1"/>
 
             <CheckBox
@@ -117,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Yleisavain"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
