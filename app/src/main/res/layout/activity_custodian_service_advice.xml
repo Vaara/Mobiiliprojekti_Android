@@ -21,6 +21,7 @@
 
         <Button
             android:id="@+id/btnCustodianServiceAdviceOpen"
+            android:background="@drawable/icon_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
@@ -30,6 +31,7 @@
 
         <Button
             android:id="@+id/btnCustodianServiceAdviceDone"
+            android:background="@drawable/icon_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"

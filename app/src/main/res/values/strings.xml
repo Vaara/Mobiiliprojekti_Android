@@ -7,6 +7,8 @@
     <string name="app_subtitle_bulletin_board">Ilmoitustaulu</string>
     <string name="app_subtitle_reservations">Varaukset</string>
     <string name="app_subtitle_housing_cooperative_list">Omat taloyhtiöt</string>
+    <string name="app_subtitle_property_maintenance_contact">Kiinteistöhuolto</string>
+    <string name="app_subtitle_housing_contact">Taloyhtiö</string>
 
     <!-- Login titles/messages -->
     <string name="progress_dialog_login_fi">Kirjaudutaan sisään...</string>
@@ -33,6 +35,9 @@
     <!-- CustodianServiceAdviceReport -->
     <string name="progress_dialog_sending_fi">Lähetetään...</string>
     <string name="toast_report_sent_fi">Raportti lähetetty</string>
+    <string name="btn_service_advice_report_send_fi">Lähetä</string>
+    <string name="btn_service_advice_report_write_report_fi">Kirjaa raportti</string>
+    <string name="et_service_advice_report_hint_fi">Kirjoita lyhyt raportti vian korjauksesta (Mitä tehtiin, käytetyt osat jne)</string>
 
     <!-- Contact Information titles/messages -->
     <string name="property_maintenance_contact_information">Isannoinnin yhteystiedot</string>

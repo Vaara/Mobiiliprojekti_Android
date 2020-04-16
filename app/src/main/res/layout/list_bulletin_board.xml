@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Header1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="16dp"
             android:textStyle="bold" />
         <!-- Message -->
         <TextView
@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:text="Message1............................................................
             .............................................................................."
-            android:textSize="16dp"
+            android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp" />

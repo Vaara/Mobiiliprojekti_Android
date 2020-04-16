@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OwnReservations">
+    tools:context=".OwnReservations"
+    android:background="@color/activityBackground">
 
     <include layout="@layout/toolbar_main"/>
 
     <CalendarView
-        android:layout_marginTop="@dimen/margin_sides"
-        android:layout_marginLeft="@dimen/margin_sides"
-        android:layout_marginRight="@dimen/margin_sides"
-
         android:id="@+id/reservationCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
+
+        android:layout_marginLeft="@dimen/margin_sides"
+        android:layout_marginTop="@dimen/margin_sides"
+        android:layout_marginRight="@dimen/margin_sides"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/includeToolbar" />
 
     <TextView
         android:id="@+id/reservationInfoField"

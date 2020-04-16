@@ -51,6 +51,8 @@
         app:layout_constraintVertical_bias="0.481" />
 
     <EditText
+        android:paddingRight="@dimen/padding_sides"
+        android:paddingLeft="@dimen/padding_sides"
         android:id="@+id/titleMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,8 +60,7 @@
         android:layout_marginTop="96dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="8dp"
-        android:paddingLeft="@dimen/padding_sides"
-        android:paddingRight="@dimen/padding_sides"
+
         android:background="@android:color/darker_gray"
         android:hint="Aihe"
         app:layout_constraintBottom_toTopOf="@+id/infoProblem"
@@ -95,4 +96,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

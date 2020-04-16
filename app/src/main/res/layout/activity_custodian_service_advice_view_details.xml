@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/mainLayout"
     android:background="@color/activityBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -142,5 +143,44 @@
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <Button
+            android:id="@+id/btnWriteReport"
+            android:background="@drawable/icon_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:padding="6dp"
+            android:text="@string/btn_service_advice_report_write_report_fi" />
+
+        <EditText
+            android:id="@+id/etReport"
+            android:background="@android:color/darker_gray"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="start"
+            android:layout_marginBottom="5dp"
+            android:hint="@string/et_service_advice_report_hint_fi" />
+
+        <Button
+            android:id="@+id/btnSendReport"
+            android:background="@drawable/icon_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:padding="6dp"
+            android:text="@string/btn_service_advice_report_send_fi" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
