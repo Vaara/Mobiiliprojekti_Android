@@ -6,7 +6,10 @@
         android:id="@+id/toolbar_button1"
         android:title="Asetukset"
         ></item>
-
+    <item
+        android:id="@+id/toolbar_button3"
+        android:title="Ilmoita ongelmasta sovelluksessa"
+        ></item>
     <item
         android:id="@+id/toolbar_button2"
         android:title="Kirjaudu ulos"></item>
