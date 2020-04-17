@@ -13,9 +13,9 @@
     android:fitsSystemWindows="true">
 
     <include layout="@layout/toolbar_main" />
-
+    
     <GridView
-        android:paddingTop="@dimen/top_spacer"
+        android:paddingTop="@dimen/margin_top"
         android:id="@+id/gridview1"
 
         android:gravity="center"

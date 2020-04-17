@@ -11,6 +11,7 @@
     <include layout="@layout/toolbar_main" />
 
     <ListView
+        android:paddingTop="@dimen/margin_top"
         android:id="@+id/listViewBulletinBoard"
         android:layout_width="match_parent"
         android:layout_height="0dp"

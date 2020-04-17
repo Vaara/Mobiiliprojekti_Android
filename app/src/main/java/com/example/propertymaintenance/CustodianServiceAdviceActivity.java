@@ -79,13 +79,16 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), CustodianServiceAdviceViewDetails.class);
+
                 if(!btnOpen.isEnabled())
                 {
                     intent.putExtra("serviceID", idServiceAdviceOpen.get(position));
+                    intent.putExtra("done", 0);
                 }
                 else
                 {
                     intent.putExtra("serviceID", idServiceAdviceClosed.get(position));
+                    intent.putExtra("done", 1);
                 }
                 startActivity(intent);
             }
@@ -146,7 +149,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
                                     // Open ServiceAdvices selected
                                     if (!btnOpen.isEnabled()) {
-
                                         if (done == 0) {
                                             messageTitles.add(title);
                                             housingCooperativeIds.add(nameId);
@@ -156,7 +158,6 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
 
                                     // Done ServiceAdvices selected
                                     else if (!btnDone.isEnabled()) {
-
                                         if (done == 1) {
                                             messageTitles.add(title);
                                             housingCooperativeIds.add(nameId);

@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/listview_margin"
-        android:layout_marginRight="@dimen/listview_margin"
+        android:background="@color/activityBackground"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

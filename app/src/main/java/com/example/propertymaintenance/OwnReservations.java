@@ -18,6 +18,6 @@ public class OwnReservations extends BaseActivity {
 
     @Override
     protected void doStuff() {
-
+        setToolbarTitle(getString(R.string.app_subtitle_reservations));
     }
 }
