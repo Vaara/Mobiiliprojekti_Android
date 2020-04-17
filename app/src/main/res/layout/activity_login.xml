@@ -32,7 +32,7 @@
         android:drawableLeft="@drawable/ic_icon_login_user"
         android:drawablePadding="10dp"
         android:maxLines="1"
-
+        android:inputType="text"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:hint="@string/et_login_username_hint_fi"
