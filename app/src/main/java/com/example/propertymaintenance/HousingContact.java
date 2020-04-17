@@ -37,6 +37,7 @@ public class HousingContact extends BaseActivity {
 
     @Override
     protected void doStuff() {
+        setToolbarTitle(getString(R.string.app_subtitle_housing_contact));
         jSonParse();
     }
 

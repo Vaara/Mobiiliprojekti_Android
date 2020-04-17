@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +30,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class CustodianServiceAdviceViewDetails extends BaseActivity {
+public class CustodianServiceAdviceViewDetails extends BaseActivity implements View.OnClickListener {
     private TextView serviceHeader, serviceMessage, serviceAdditional, serviceResidentName, serviceResidentPhone, serviceResidentAddress;
     private CheckBox checkBoxContactRequest, checkBoxMasterKeyAllowed;
 
@@ -35,6 +38,10 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
     private static int residentId;
 
     ProgressDialog progressDialog;
+
+    private EditText etReport;
+    private Button btnWriteReport;
+    private Button btnSendReport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +78,39 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
 
         Intent getID = getIntent();
         serviceID = getID.getIntExtra("serviceID", -999);
-
         queue.add(serviceAdvice(urlServiceAdvice));
 
-        //sendReport();
+        btnWriteReport = findViewById(R.id.btnWriteReport);
+        btnWriteReport.setOnClickListener(this);
+        btnSendReport = findViewById(R.id.btnSendReport);
+        btnSendReport.setOnClickListener(this);
+        etReport = findViewById(R.id.etReport);
+        etReport.setMovementMethod(new ScrollingMovementMethod());
+
+        if (getID.getIntExtra("done", -1) == 0) {
+            etReport.setVisibility(View.GONE);
+            btnSendReport.setVisibility(View.GONE);
+        }
+        else {
+            btnWriteReport.setVisibility(View.GONE);
+            etReport.setVisibility(View.GONE);
+            btnSendReport.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btnWriteReport) {
+            btnWriteReport.setVisibility(View.GONE);
+            etReport.setVisibility(View.VISIBLE);
+            btnSendReport.setVisibility(View.VISIBLE);
+        }
+
+        else if (v.getId() == R.id.btnSendReport) {
+            if (etReport != null && etReport.length() > 0) {
+                sendReport();
+            }
+        }
     }
 
     private JsonObjectRequest serviceAdvice(String url) {
@@ -144,7 +180,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                         //textView.setText(error.toString());
                     }
                 });
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         return getServiceAdvice;
     }
 
@@ -173,6 +209,8 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                             serviceResidentPhone.setText(phone);
                             serviceResidentAddress.setText(address);
 
+                            progressDialog.dismiss();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -182,6 +220,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                progressDialog.dismiss();
             }
         });
         queue.add(getResidentInfo);
@@ -198,8 +237,8 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
         JSONObject reportBody = new JSONObject();
         try {
             reportBody.put("idServiceAdvices", serviceID);
-            reportBody.put("idCustodian", SessionManagement.getUserIdFromSharedPrefs());
-            reportBody.put("CustodianReport", "Ovi korjattu");
+            reportBody.put("idCustodians", SessionManagement.getUserIdFromSharedPrefs());
+            reportBody.put("CustodianReport", etReport.getText().toString());
 
             final String requestBody = reportBody.toString();
 
@@ -212,6 +251,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity {
                     if (response.equalsIgnoreCase("201")) {
                         Toast.makeText(CustodianServiceAdviceViewDetails.this,
                                 R.string.toast_report_sent_fi, Toast.LENGTH_LONG).show();
+                        CustodianServiceAdviceViewDetails.this.finish();
                     }
                     else if (response.equalsIgnoreCase("500")){
                         Toast.makeText(CustodianServiceAdviceViewDetails.this,

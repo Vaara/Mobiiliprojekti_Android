@@ -12,6 +12,9 @@
     <include layout="@layout/toolbar_main" />
 
     <ListView
+        android:paddingTop="@dimen/margin_top"
+        android:layout_marginRight="@dimen/margin_sides"
+        android:layout_marginLeft="@dimen/margin_sides"
         android:id="@+id/listViewHousingList"
         android:layout_width="match_parent"
         android:layout_height="0dp"

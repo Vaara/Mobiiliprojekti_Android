@@ -39,12 +39,8 @@ public class PropertyMaintenanceContact extends BaseActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-        jSONParse();
-
     }
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_property_maintenance_contact;
@@ -52,11 +48,12 @@ public class PropertyMaintenanceContact extends BaseActivity implements View.OnC
 
     @Override
     protected void doStuff() {
-        setContentView(R.layout.activity_property_maintenance_contact);
+        //setContentView(R.layout.activity_property_maintenance_contact);  <<< -- poistetaan
+
+        setToolbarTitle(getString(R.string.app_subtitle_property_maintenance_contact));
         feedbackButton = findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener((View.OnClickListener) this);
         jSONParse();
-
     }
 
     private void jSONParse() {

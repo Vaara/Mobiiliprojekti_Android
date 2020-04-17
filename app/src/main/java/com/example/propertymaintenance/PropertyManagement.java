@@ -34,7 +34,7 @@ public class PropertyManagement extends BaseActivity implements View.OnClickList
         sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setToolbarTitle("Isännöinnöin yhteystiedot");
+        setToolbarTitle("Isännöinti");
 
     }
 

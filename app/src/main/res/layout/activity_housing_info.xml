@@ -12,6 +12,9 @@
 
 
     <ListView
+        android:paddingTop="@dimen/margin_top"
+        android:paddingLeft="@dimen/margin_sides"
+        android:paddingRight="@dimen/margin_sides"
         android:id="@+id/housingInfoList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

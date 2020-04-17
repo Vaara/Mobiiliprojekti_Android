@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/tvCustodianServiceAdviceMessageTitle"
-            android:textSize="@dimen/list_view_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/tvCustodianServiceAdviceHousingCooperativeName"
-            android:textSize="@dimen/list_view_body"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/tvCustodianServiceAdviceMessageTitle"
