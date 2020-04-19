@@ -80,13 +80,11 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), CustodianServiceAdviceViewDetails.class);
 
-                if(!btnOpen.isEnabled())
-                {
+                if(!btnOpen.isEnabled()) {
                     intent.putExtra("serviceID", idServiceAdviceOpen.get(position));
                     intent.putExtra("done", 0);
                 }
-                else
-                {
+                else {
                     intent.putExtra("serviceID", idServiceAdviceClosed.get(position));
                     intent.putExtra("done", 1);
                 }
