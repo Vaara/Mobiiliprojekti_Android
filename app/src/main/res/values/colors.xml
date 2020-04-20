@@ -14,6 +14,7 @@
     <color name="textField">#66FFFFFF</color>
     <color name="textFieldText">#000000</color>
     <color name="Shadow">#33000000</color>
+    <color name="ServiceAdvicesBackground">#C1CFEF</color>
 
     <!-- GRIDVIEW -->
 

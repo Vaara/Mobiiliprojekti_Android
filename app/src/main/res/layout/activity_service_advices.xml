@@ -12,19 +12,20 @@
     <include layout="@layout/toolbar_main" />
 
     <EditText
-        android:paddingRight="@dimen/padding_sides"
-        android:paddingLeft="@dimen/padding_sides"
         android:id="@+id/titleProblem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:hint="Otsikko (pakollinen)"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/ServiceAdvicesBackground"
+        android:hint="Otsikko (pakollinen)"
         android:inputType="text"
         android:maxLines="1"
-        android:background="@android:color/darker_gray"
+        android:paddingLeft="@dimen/padding_sides"
+        android:paddingRight="@dimen/padding_sides"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/infoProblem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"
@@ -33,20 +34,21 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:paddingRight="@dimen/padding_sides"
-        android:paddingLeft="@dimen/padding_sides"
         android:id="@+id/additionalInfoMessage"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
-        android:background="@android:color/darker_gray"
+        android:layout_marginRight="15dp"
+        android:background="#C1CFEF"
         android:gravity="top"
         android:hint="Kotieläimet, turvalukot, yms.."
         android:inputType="textMultiLine"
         android:maxLines="3"
+        android:paddingLeft="@dimen/padding_sides"
+        android:paddingRight="@dimen/padding_sides"
         android:scrollbars="vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/entryIntoHouse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -54,20 +56,21 @@
         app:layout_constraintTop_toBottomOf="@+id/additionalInfoTitle" />
 
     <EditText
-        android:paddingRight="@dimen/padding_sides"
-        android:paddingLeft="@dimen/padding_sides"
         android:id="@+id/problemMessage"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
-        android:background="@android:color/darker_gray"
+        android:layout_marginRight="15dp"
+        android:background="#C1CFEF"
         android:gravity="top"
         android:hint="Vian sijainti ja tarkempi kuvaus (pakollinen)"
         android:inputType="textMultiLine"
         android:maxLines="3"
+        android:paddingLeft="@dimen/padding_sides"
+        android:paddingRight="@dimen/padding_sides"
         android:scrollbars="vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/additionalInfoTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
@@ -78,24 +81,26 @@
         android:id="@+id/infoProblem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="120dp"
-
-        android:text="Kuvaile vika*"
+        android:layout_marginLeft="15dp"
+        android:text="Kuvaile vika"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toTopOf="@+id/problemMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/entryIntoHouse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="207dp"
+        android:layout_marginLeft="15dp"
         android:text="Sisäänpääsy asuntoon:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,9 +110,11 @@
         android:id="@+id/additionalInfoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
         android:text="Lisätiedot"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toTopOf="@+id/additionalInfoMessage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/problemMessage" />
@@ -120,6 +127,7 @@
         android:layout_marginTop="8dp"
         android:onClick="onCheckboxClicked"
         android:text="Soita ja sovi"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toEndOf="@+id/masterkeyAllowed"
         app:layout_constraintTop_toBottomOf="@id/entryIntoHouse" />
 
@@ -127,10 +135,12 @@
         android:id="@+id/masterkeyAllowed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
         android:onClick="onCheckboxClicked"
         android:text="Yleisavaimella"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/entryIntoHouse" />
 
@@ -139,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,6 +163,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="Lähetä"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/callAndMakeAppointment" />
 
@@ -160,12 +171,15 @@
         android:id="@+id/infoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
 
         android:layout_marginBottom="8dp"
-        android:text="Otsikko*"
+        android:text="Otsikko"
+        android:layout_marginLeft="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toTopOf="@+id/titleProblem"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
 
