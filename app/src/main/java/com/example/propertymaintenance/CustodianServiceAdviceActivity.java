@@ -251,5 +251,7 @@ public class CustodianServiceAdviceActivity extends BaseActivity implements View
         housingCooperativeIds.clear();
         housingCooperativeNames.clear();
         housingCooperativeIdsNames.clear();
+        idServiceAdviceOpen.clear();
+        idServiceAdviceClosed.clear();
     }
 }
