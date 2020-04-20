@@ -1,10 +1,12 @@
 package com.example.propertymaintenance;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -53,6 +55,7 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity implements V
         return R.layout.activity_custodian_service_advice_view_details;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void doStuff() {
         setToolbarTitle("Vikailmoitukset");
@@ -96,6 +99,23 @@ public class CustodianServiceAdviceViewDetails extends BaseActivity implements V
             etReport.setVisibility(View.GONE);
             btnSendReport.setVisibility(View.GONE);
         }
+
+        // Make etReport scrollable inside ScrollView
+        final EditText etReport = findViewById(R.id.etReport);
+        etReport.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if (etReport.hasFocus()) {
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction() & MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_SCROLL:
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                            return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
