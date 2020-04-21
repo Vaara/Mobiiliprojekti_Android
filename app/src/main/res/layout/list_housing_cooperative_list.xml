@@ -3,18 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:paddingBottom="@dimen/padding_bottom">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/icon_normal">
         <!-- Name -->
         <TextView
@@ -23,8 +17,9 @@
             android:layout_height="match_parent"
             android:text="Name"
             android:textAppearance="@style/ListTitle"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
+            android:paddingTop="@dimen/padding_top"
+            android:paddingLeft="@dimen/padding_sides"
+            android:paddingRight="@dimen/padding_sides" />
         <!-- Address -->
         <TextView
             android:id="@+id/textViewHousingListAddress"
@@ -32,9 +27,10 @@
             android:layout_height="match_parent"
             android:text="Address"
             android:textAppearance="@style/ListBody"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
+            android:paddingTop="@dimen/padding_top"
+            android:paddingLeft="@dimen/padding_sides"
+            android:paddingRight="@dimen/padding_sides"
+            android:paddingBottom="@dimen/padding_bottom"/>
     </LinearLayout>
 
 
