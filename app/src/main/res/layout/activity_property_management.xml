@@ -89,6 +89,9 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
+        android:paddingLeft="@dimen/margin_sides"
+        android:paddingRight="@dimen/padding_sides"
+        android:background="@drawable/icon_background"
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
