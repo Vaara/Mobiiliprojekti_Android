@@ -123,12 +123,13 @@
         android:id="@+id/callAndMakeAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="15dp"
         android:onClick="onCheckboxClicked"
         android:text="Soita ja sovi"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintStart_toEndOf="@+id/masterkeyAllowed"
+        app:layout_constraintEnd_toEndOf="@id/additionalInfoMessage"
+        app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/entryIntoHouse" />
 
     <CheckBox
@@ -149,11 +150,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"
         android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintRight_toLeftOf="@id/sendButton"
+        android:layout_marginLeft="@dimen/margin_sides"
+        app:layout_constraintTop_toBottomOf="@id/masterkeyAllowed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/masterkeyAllowed" />
+        />
 
     <Button
         android:id="@+id/sendButton"
@@ -161,11 +163,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:text="Lähetä"
+        app:layout_constraintEnd_toEndOf="@id/callAndMakeAppointment"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/callAndMakeAppointment" />
+        app:layout_constraintBottom_toBottomOf="@id/imageButtonCamera"
+        tools:layout_editor_absoluteX="598dp" />
 
     <TextView
         android:id="@+id/infoTitle"
