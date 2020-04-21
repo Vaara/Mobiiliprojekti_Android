@@ -150,6 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintRight_toLeftOf="@id/sendButton"
         android:layout_marginLeft="@dimen/margin_sides"
