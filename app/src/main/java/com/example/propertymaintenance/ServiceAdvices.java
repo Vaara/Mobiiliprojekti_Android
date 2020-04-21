@@ -135,18 +135,18 @@ public class ServiceAdvices extends BaseActivity implements View.OnClickListener
                 progressDialog.show();
                 Context context = getApplicationContext();
                 String text = "Vikailmoitus lähetetty";
-                Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
+                Toast.makeText(context, text ,Toast.LENGTH_SHORT).show();
                 finish();
             }
             if(edProblemMessage == null || edProblemMessage.length() < 1) {
                 Context context = getApplicationContext();
                 String text = "Vikailmoituksen vikateksti puuttuu";
-                Toast.makeText(context, text ,Toast.LENGTH_LONG).show();
+                Toast.makeText(context, text ,Toast.LENGTH_SHORT).show();
             }
             if(edTitleProblem == null || edTitleProblem.length() < 1) {
                 Context context = getApplicationContext();
                 String text = "Vikailmoituksen otsikko puuttuu";
-                Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
             }
         }
     }
