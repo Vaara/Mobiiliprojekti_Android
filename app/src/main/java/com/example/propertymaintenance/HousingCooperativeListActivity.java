@@ -94,7 +94,7 @@ public class HousingCooperativeListActivity extends BaseActivity {
 
                 createPopupWindow(textViewIDs, textTitles, textFields);
                 popupWindow.dismiss();
-                popupWindow.showAsDropDown(view, 0, -175);
+                popupWindow.showAsDropDown(view, 0, -275);
             }
         });
     }
